@@ -189,7 +189,7 @@ export const MainPage = () => {
 
     const openAnotherBot = () => {
         const tg = window.Telegram.WebApp;
-        tg.openTelegramLink('https://t.me/bytecoindev_bot');
+        tg.openTelegramLink('https://t.me/bytecoindev_bot?start=some_data');
       };
 
     return (
