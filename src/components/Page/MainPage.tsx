@@ -249,7 +249,7 @@ export const MainPage = () => {
                 </TasksBlock>
             </Link>
 
-            <a href="t.me/<bytecoindev_bot>?start=<parameter>"
+            <a href="t.me/<https://t.me/bytecoindev_bot>?start=<parameter>"
                 style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
                 <TasksBlock>
                     <Logoblock>
