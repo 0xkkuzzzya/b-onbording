@@ -16,7 +16,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 30px;
+    padding-bottom: 30px;
 `
 
 const HeaderBlock = styled.div`
