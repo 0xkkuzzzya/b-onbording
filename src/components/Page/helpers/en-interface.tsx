@@ -12,7 +12,6 @@ import Copy from '../../../assets/Copy.png'
 
 const Container = styled.div`
     width: 80%;
-	height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
