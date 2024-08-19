@@ -198,7 +198,7 @@ export const MainPageEN = () => {
     return (
         <Container>
             <HeaderBlock>
-                <HeaderMainText>Bytecoin onbording</HeaderMainText>
+                <HeaderMainText>Bytecoin Onboarding</HeaderMainText>
                 <HeaderDescriptionText>Learn about Bytecoin & earn 10 <TicketLogo src={Ticket} /></HeaderDescriptionText>
             </HeaderBlock>
 

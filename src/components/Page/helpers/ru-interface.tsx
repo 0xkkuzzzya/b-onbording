@@ -105,6 +105,7 @@ const TasksBlock = styled.div`
     display: flex;
     align-items: center;
     margin-top: 10px;
+    cursor: pointer;
 `
 
 const TasksDescription = styled.a`
@@ -123,7 +124,6 @@ const ReferalBlock = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
 `
 
 const CopiedBlock = styled.div`
@@ -172,7 +172,6 @@ const Text = styled.a`
 export const MainPageRU = () => {
 
     const [referal, setReferal] = useState()
-    const [geoposition, setGeoposition] = useState("")
 
     const referalText = "https://t.me/+5435hadsaAHFSssdf"
 
@@ -198,15 +197,14 @@ export const MainPageRU = () => {
     return (
         <Container>
             <HeaderBlock>
-                <HeaderMainText>Bytecoin onbording</HeaderMainText>
+                <HeaderMainText>Bytecoin Onboarding</HeaderMainText>
                 <HeaderDescriptionText>Узнайте о Bytecoin и заработайте 10 <TicketLogo src={Ticket} /></HeaderDescriptionText>
             </HeaderBlock>
 
             <div style={{ width: "100%", marginTop: "20px" }}>
-                <SectionText>Intro2</SectionText>
+                <SectionText>Введение</SectionText>
             </div>
-            <Link to="/Stories"
-                style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
+            <Link to="/Stories" style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
                 <IntroBlock>
                     <Logoblock>
                         <IntroLogoGradient>
@@ -227,8 +225,7 @@ export const MainPageRU = () => {
                 <TextinsideBlock>Время теста</TextinsideBlock>
             </TasksBlock>
 
-            <Link to="https://t.me/bytecoin_news"
-                style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
+            <Link to="https://t.me/bytecoin_news" style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
                 <TasksBlock>
                     <Logoblock>
                         <IntroLogo src={Megaphone} />
@@ -237,8 +234,7 @@ export const MainPageRU = () => {
                 </TasksBlock>
             </Link>
 
-            <Link to="https://t.me/bytecoin_forum"
-                style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
+            <Link to="https://t.me/bytecoin_forum" style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
                 <TasksBlock>
                     <Logoblock>
                         <IntroLogo src={Speacker} />
@@ -247,8 +243,7 @@ export const MainPageRU = () => {
                 </TasksBlock>
             </Link>
 
-            <Link to=""
-                style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
+            <Link to="" style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
                 <TasksBlock>
                     <Logoblock style={{ background: "#000" }}>
                         <IntroLogo src={Twitter} />
