@@ -249,7 +249,7 @@ export const MainPage = () => {
                 </TasksBlock>
             </Link>
 
-            <Link to="t.me/<bytecoindev_bot>?start=<parameter>"
+            <a href="t.me/<bytecoindev_bot>?start=<parameter>"
                 style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
                 <TasksBlock>
                     <Logoblock>
@@ -260,7 +260,7 @@ export const MainPage = () => {
                         <TasksDescription>Mine Bytecoin in TON testnet</TasksDescription>
                     </div>
                 </TasksBlock>
-            </Link>
+            </a>
 
             <div style={{ width: "100%", marginTop: "20px" }}>
                 <SectionText>Your referal link</SectionText>
