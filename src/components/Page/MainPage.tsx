@@ -187,6 +187,11 @@ export const MainPage = () => {
         }
     };
 
+    const openAnotherBot = () => {
+        const tg = window.Telegram.WebApp;
+        tg.openTelegramLink('https://t.me/bytecoindev_bot');
+      };
+
     return (
         <Container>
             <HeaderBlock>
@@ -249,9 +254,7 @@ export const MainPage = () => {
                 </TasksBlock>
             </Link>
 
-            <a href="t.me/<https://t.me/bytecoindev_bot>?start=<parameter>"
-                style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
-                <TasksBlock>
+                <TasksBlock onClick={openAnotherBot}>
                     <Logoblock>
                         <IntroLogo src={Diamond} />
                     </Logoblock>
@@ -260,7 +263,6 @@ export const MainPage = () => {
                         <TasksDescription>Mine Bytecoin in TON testnet</TasksDescription>
                     </div>
                 </TasksBlock>
-            </a>
 
             <div style={{ width: "100%", marginTop: "20px" }}>
                 <SectionText>Your referal link</SectionText>
