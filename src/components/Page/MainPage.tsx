@@ -175,6 +175,10 @@ export const MainPage = () => {
 
     const referalText = "https://t.me/+5435hadsaAHFSssdf"
 
+    useEffect(() => {
+        window.Telegram.WebApp.BackButton.hide()
+    }, [])
+
     const copyTextToClipboard = async (referalLink: string) => {
         try {
             await navigator.clipboard.writeText(referalLink);
@@ -245,7 +249,7 @@ export const MainPage = () => {
                 </TasksBlock>
             </Link>
 
-            <Link to="https://t.me/bytecoindev_bot"
+            <Link to="t.me/<bytecoindev_bot>?start=<parameter>"
                 style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
                 <TasksBlock>
                     <Logoblock>
