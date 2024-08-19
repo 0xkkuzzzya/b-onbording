@@ -19,7 +19,7 @@ export const StoriesPage = () => {
 
 	const stories = [
 		{
-			url: "https://www.develer.com/wp-content/uploads/2019/09/React-TS_sito-1.png",
+			url: BytecoinLogo,
 			duration: 5000,
 		},
 		{
