@@ -12,7 +12,7 @@ export const MainPage = () => {
 
     return (
         <>
-            {geoposition.country == "RU" || geoposition.country == "KZ" || geoposition.country == "BY" ? <MainPageRU /> : <MainPageEN /> }
+            {geoposition.country == "ru" || geoposition.country == "kz" || geoposition.country == "by" ? <MainPageRU /> : <MainPageEN /> }
         </>
     )
 }
