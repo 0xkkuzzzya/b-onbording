@@ -28,8 +28,6 @@ function App() {
 
 		let countryCode = initDataUnsafe.user?.country || initDataUnsafe.user?.language_code;
 
-		alert(countryCode)
-
 		if(countryCode != undefined && countryCode != "") {
 			setGeoposition({country: countryCode!})
 		} else {
