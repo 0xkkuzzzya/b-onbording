@@ -11,6 +11,7 @@ const Container = styled.div`
 interface User {
 	language_code: string;
 	country: string;
+	id: number;
 }
 
 interface InitDataUnsafe {
@@ -29,8 +30,12 @@ function App() {
 
 		let countryCode = initDataUnsafe.user?.country || initDataUnsafe.user?.language_code;
 
+		let userId = initDataUnsafe.user?.id;
+		alert(userId); 
+
 		if(countryCode != undefined && countryCode != "") {
 			setGeoposition({country: countryCode!})
+			
 		} else {
 			setGeoposition({country: ""})
 		}
