@@ -30,8 +30,6 @@ function App() {
 
 		let countryCode = initDataUnsafe.user?.country || initDataUnsafe.user?.language_code;
 
-		let userId = initDataUnsafe.user?.id;
-
 		if(countryCode != undefined && countryCode != "") {
 			setGeoposition({country: countryCode!})
 		} else {
