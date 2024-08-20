@@ -99,12 +99,13 @@ const TasksBlock = styled.div`
     width: 100%;
     height: 60px;
     border: 1px solid #353537;
-    background: transparent;
     border-radius: 12px;
     display: flex;
     align-items: center;
     margin-top: 10px;
     cursor: pointer;
+    background: transparent;
+    transition: all .2s ease-in-out;
     &:hover {
         background: #333;
     }

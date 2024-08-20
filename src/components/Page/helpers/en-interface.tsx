@@ -265,7 +265,7 @@ export const MainPageEN = () => {
                 </TasksBlock>
             </Link>
 
-            <TasksBlock onClick={openAnotherBot}>
+            <TasksBlock style={{marginTop: "20px"}} onClick={openAnotherBot}>
                 <Logoblock>
                     <IntroLogo src={Diamond} />
                 </Logoblock>
