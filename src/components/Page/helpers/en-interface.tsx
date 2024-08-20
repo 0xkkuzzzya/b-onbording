@@ -54,6 +54,11 @@ const IntroBlock = styled.div`
     display: flex;
     align-items: center;
     margin-top: 10px;
+    background: transparent;
+    transition: all .2s ease-in-out;
+    &:hover {
+        background: #222;
+    }
 `
 
 const Logoblock = styled.div`
@@ -103,6 +108,11 @@ const TasksBlock = styled.div`
     display: flex;
     align-items: center;
     margin-top: 10px;
+    background: transparent;
+    transition: all .2s ease-in-out;
+    &:hover {
+        background: #222;
+    }
 `
 
 const TasksDescription = styled.a`
