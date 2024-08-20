@@ -16,6 +16,7 @@
 <script>
   let tg = window.Telegram.WebApp;
   tg.expand();
+  window.Telegram.WebApp.setBackgroundColor("#151314")
   window.Telegram.WebApp.setHeaderColor("#151314")
 </script>
 
@@ -26,7 +27,7 @@
       margin: 0;
       font-family: "Public Sans", sans-serif;
       background: #151314;
-      overflow: hidden;
+      overflow-x: hidden;
       height: var(--tg-viewport-stable-height);
       -webkit-tap-highlight-color: transparent;
     }
