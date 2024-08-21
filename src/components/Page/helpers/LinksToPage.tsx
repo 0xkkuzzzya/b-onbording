@@ -15,11 +15,13 @@ const Container = styled.div`
     justify-content: space-evenly;
 `
 
-const LogoBlock = styled.div`
+const LinkBlock = Link;
+const LogoBlock = styled(LinkBlock)`
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 120px;
+    text-decoration: none;
 `
 
 const Logo = styled.img`
@@ -38,24 +40,18 @@ const Name = styled.a`
 export const LinksToPage = () => {
     return (
         <Container>
-            <Link to="/" style={{width: "100%", textDecoration: "none"}}>
-                <LogoBlock>
-                    <Logo src={Onboarding} />
-                    <Name>Onboarding</Name>
-                </LogoBlock>
-            </Link>
-            <Link to="/buyminer" style={{width: "100%", textDecoration: "none"}}>
-                <LogoBlock>
-                    <Logo src={BuyMiner} />
-                    <Name>Buy Miner</Name>
-                </LogoBlock>
-            </Link>
-            <Link to="/leaderboard" style={{width: "100%", textDecoration: "none"}}>
-                <LogoBlock>
-                    <Logo src={Leaderboard} />
-                    <Name>Leaderboard</Name>
-                </LogoBlock>
-            </Link>
+            <LogoBlock to="/">
+                <Logo src={Onboarding} />
+                <Name>Onboarding</Name>
+            </LogoBlock>
+            <LogoBlock to="/buyminer">
+                <Logo src={BuyMiner} />
+                <Name>Buy Miner</Name>
+            </LogoBlock>
+            <LogoBlock to="/leaderboard">
+                <Logo src={Leaderboard} />
+                <Name>Leaderboard</Name>
+            </LogoBlock>
         </Container>
     )
 }

@@ -8,6 +8,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 20px;
 `
 
 const Header = styled.div`
@@ -31,17 +32,20 @@ const LeadersBlock = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
+    margin-top: 20px;
 `
 
 const LeadersLogo = styled.img`
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
 `
 
 const Top1LeaderLogo = styled.img`
-    width: 50px;
-    height: 50px;
-    margin-bottom: 20px;
+    width: 70px;
+    height: 70px;
+    margin-bottom: 10px;
 `
 
 const LeaderBlock = styled.div`
@@ -64,7 +68,46 @@ const TicketLogo = styled.img`
 const TicketAmount = styled.a`
     color: #a9a9a9;
     font-weight: 400;
-    font-size: 15px;
+    font-size: 13px;
+`
+
+const InfoContainer = styled.div`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 20px;
+`
+
+const InfoBlocks = styled.div`
+    width: 110px;
+    height: 60px;
+    background: #232323;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+`
+
+const InfoText = styled.a`
+    font-size: 19px;
+    font-weight: 500;
+    color: #fff;
+    display: flex;
+    align-items: center;
+`
+
+const YourTicketLogo = styled.img`
+    width: 25px;
+    height: 25px;
+`
+
+const InfoDescription= styled.a`
+    font-size: 11px;
+    font-weight: 500;
+    color: #9da09f;
+    margin-top: 3px;
 `
 
 
@@ -79,15 +122,15 @@ export const LeaderBoard = () => {
                 <LeaderBlock>
                     <LeadersLogo src={TempLeaderLogo}/>
                     <LeaderName>U1</LeaderName>
-                    <div>
+                    <div style={{display: "flex", alignItems: "center", marginTop: "5px"}}>
                         <TicketLogo src={Tikcet}/>
                         <TicketAmount>777</TicketAmount>
                     </div>
                 </LeaderBlock>
-                <LeaderBlock>
-                    <LeadersLogo src={TempLeaderLogo}/>
+                <LeaderBlock style={{marginBottom: "35px"}}>
+                    <Top1LeaderLogo src={TempLeaderLogo}/>
                     <LeaderName>U2</LeaderName>
-                    <div>
+                    <div style={{display: "flex", alignItems: "center", marginTop: "5px"}}>
                         <TicketLogo src={Tikcet}/>
                         <TicketAmount>122</TicketAmount>
                     </div>
@@ -95,12 +138,29 @@ export const LeaderBoard = () => {
                 <LeaderBlock>
                     <LeadersLogo src={TempLeaderLogo}/>
                     <LeaderName>U3</LeaderName>
-                    <div>
+                    <div style={{display: "flex", alignItems: "center", marginTop: "5px"}}>
                         <TicketLogo src={Tikcet}/>
                         <TicketAmount>331</TicketAmount>
                     </div>
                 </LeaderBlock>   
             </LeadersBlock>
+
+            <InfoContainer>
+                <InfoBlocks>
+                    <div>
+                        <InfoText>10 <YourTicketLogo src={Tikcet}/></InfoText>
+                    </div>
+                    <InfoDescription>Your Ticket</InfoDescription>
+                </InfoBlocks>
+                <InfoBlocks>
+                    <InfoText>#1K</InfoText>
+                    <InfoDescription>Your rank</InfoDescription>
+                </InfoBlocks>
+                <InfoBlocks>
+                    <InfoText>0</InfoText>
+                    <InfoDescription>Frens invited</InfoDescription>
+                </InfoBlocks>
+            </InfoContainer>
             
             <LinksToPage/>
         </Container>
