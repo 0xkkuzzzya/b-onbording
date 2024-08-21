@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Tikcet from '../../../assets/Ticket.webp'
 import TempLeaderLogo from '../../../assets/BytecoinLogo.webp'
+import { LinksToPage } from "../helpers/LinksToPage";
 
 const Container = styled.div`
     width: 100%;
@@ -87,6 +88,8 @@ export const LeaderBoard = () => {
                 <Top1LeaderLogo src={TempLeaderLogo}/>
                 <LeadersLogo src={TempLeaderLogo}/>
             </LeadersBlock>
+            
+            <LinksToPage/>
         </Container>
     )
 }
