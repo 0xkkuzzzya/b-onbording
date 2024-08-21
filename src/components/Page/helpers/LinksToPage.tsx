@@ -5,7 +5,6 @@ const Container = styled.div`
     height: 100px;
     position: fixed;
     background: #171717;
-    top: 1;
     bottom: 0;
 `
 
