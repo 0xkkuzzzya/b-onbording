@@ -78,15 +78,28 @@ export const LeaderBoard = () => {
             <LeadersBlock>
                 <LeaderBlock>
                     <LeadersLogo src={TempLeaderLogo}/>
-                    <LeaderName>deputy_mm</LeaderName>
+                    <LeaderName>U1</LeaderName>
                     <div>
                         <TicketLogo src={Tikcet}/>
                         <TicketAmount>777</TicketAmount>
                     </div>
-                </LeaderBlock>  
-                
-                <Top1LeaderLogo src={TempLeaderLogo}/>
-                <LeadersLogo src={TempLeaderLogo}/>
+                </LeaderBlock>
+                <LeaderBlock>
+                    <LeadersLogo src={TempLeaderLogo}/>
+                    <LeaderName>U2</LeaderName>
+                    <div>
+                        <TicketLogo src={Tikcet}/>
+                        <TicketAmount>122</TicketAmount>
+                    </div>
+                </LeaderBlock> 
+                <LeaderBlock>
+                    <LeadersLogo src={TempLeaderLogo}/>
+                    <LeaderName>U3</LeaderName>
+                    <div>
+                        <TicketLogo src={Tikcet}/>
+                        <TicketAmount>331</TicketAmount>
+                    </div>
+                </LeaderBlock>   
             </LeadersBlock>
             
             <LinksToPage/>
