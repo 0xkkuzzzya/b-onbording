@@ -6,6 +6,7 @@ import { useGetGeoposition } from './components/store/geoposition';
 const Container = styled.div`
 	max-width: 100%;
 	height: var(--tg-viewport-stable-height);
+	overflow-y: auto;
 `
 
 interface User {
