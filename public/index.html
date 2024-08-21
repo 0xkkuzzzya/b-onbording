@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -30,6 +30,7 @@
       overflow-x: hidden;
       height: var(--tg-viewport-stable-height);
       -webkit-tap-highlight-color: transparent;
+      padding-bottom: env(safe-area-inset-bottom);
     }
     button, input {
       border: none;
