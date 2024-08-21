@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
-const Container = styled.footer`
+const Container = styled.div`
     width: 100%;
-    height: 100px;
+    height: 80px;
     background: #171717;
-    bottom: -20px;
+    position: fixed;
+    bottom: 0px;
 `
 
 
