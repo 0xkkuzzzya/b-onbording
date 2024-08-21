@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router";
 import styled from "styled-components";
-import { MainPage } from "./Page/MainPage";
-import { StoriesPage } from "./Page/MainPageStories";
+import { MainPage } from "./Page/MainPage/MainPage";
+import { StoriesPage } from "./Page/MainPage/MainPageStories";
 
 const Container = styled.div`
     width: 100%;
@@ -13,6 +13,7 @@ const Container = styled.div`
 const routes = [
     { path: '/', name: 'MainPage', element: <MainPage /> },
     { path: '/Stories', name: 'Stories', element: <StoriesPage /> },
+    { path: '/leadeboard', name: 'leadeboard', element: <StoriesPage /> },
 ]
 
 

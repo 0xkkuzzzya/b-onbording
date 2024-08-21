@@ -1,6 +1,7 @@
-import { useGetGeoposition } from "../store/geoposition"
-import { MainPageEN } from "./helpers/en-interface"
-import { MainPageRU } from "./helpers/ru-interface"
+import { useGetGeoposition } from "../../store/geoposition"
+import { LinksToPage } from "../helpers/LinksToPage"
+import { MainPageEN } from "../helpers/en-interface"
+import { MainPageRU } from "../helpers/ru-interface"
 
 
 
@@ -11,6 +12,7 @@ export const MainPage = () => {
     return (
         <>
             {geoposition.country == "ru" || geoposition.country == "kz" || geoposition.country == "by" ? <MainPageRU /> : <MainPageEN /> }
+            <LinksToPage/>
         </>
     )
 }

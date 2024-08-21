@@ -1,9 +1,6 @@
 import styled from "styled-components";
 import Stories from 'react-insta-stories';
-import BytecoinLogo from '../../assets/BytecoinLogo.webp'
-import Teaher from '../../assets/Teacher.webp'
-import Speacker from '../../assets/Speacker.webp'
-import Megaphone from '../../assets/Megaphone.webp'
+import BytecoinLogo from '../../../assets/BytecoinLogo.webp'
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
