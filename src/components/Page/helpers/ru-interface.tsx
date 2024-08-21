@@ -215,7 +215,7 @@ export const MainPageRU = () => {
                             <IntroLogo src={BytecoinLogo} />
                         </IntroLogoGradient>
                     </Logoblock>
-                    <TextinsideBlock>Что такое Bytecoin</TextinsideBlock>
+                    <TextinsideBlock>Что такое Bytecoin?</TextinsideBlock>
                 </IntroBlock>
             </Link>
 

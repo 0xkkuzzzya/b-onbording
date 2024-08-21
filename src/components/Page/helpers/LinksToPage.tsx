@@ -50,7 +50,7 @@ export const LinksToPage = () => {
                     <Name>Buy Miner</Name>
                 </LogoBlock>
             </Link>
-            <Link to="/leadeboard" style={{width: "100%", textDecoration: "none"}}>
+            <Link to="/leaderboard" style={{width: "100%", textDecoration: "none"}}>
                 <LogoBlock>
                     <Logo src={Leaderboard} />
                     <Name>Leaderboard</Name>

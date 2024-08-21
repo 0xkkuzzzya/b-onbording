@@ -14,7 +14,7 @@ const Container = styled.div`
 const routes = [
     { path: '/', name: 'MainPage', element: <MainPage /> },
     { path: '/Stories', name: 'Stories', element: <StoriesPage /> },
-    { path: '/leadeboard', name: 'leadeboard', element: <LeaderBoard /> },
+    { path: '/leaderboard', name: 'leaderboard', element: <LeaderBoard /> },
 ]
 
 

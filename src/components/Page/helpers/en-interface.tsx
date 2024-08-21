@@ -222,7 +222,7 @@ export const MainPageEN = () => {
                             <IntroLogo src={BytecoinLogo} />
                         </IntroLogoGradient>
                     </Logoblock>
-                    <TextinsideBlock>Whats is Bytecoin</TextinsideBlock>
+                    <TextinsideBlock>Whats is Bytecoin?</TextinsideBlock>
                 </IntroBlock>
             </Link>
 
@@ -262,7 +262,7 @@ export const MainPageEN = () => {
                     <Logoblock style={{ background: "#000" }}>
                         <IntroLogo src={Twitter} />
                     </Logoblock>
-                    <TextinsideBlock>Folow our X</TextinsideBlock>
+                    <TextinsideBlock>Follow our X</TextinsideBlock>
                 </TasksBlock>
             </Link>
 
@@ -277,7 +277,7 @@ export const MainPageEN = () => {
             </TasksBlock>
 
             <div style={{ width: "100%", marginTop: "20px" }}>
-                <SectionText>Your referal link</SectionText>
+                <SectionText>Your referral link</SectionText>
             </div>
             <ReferalBlock>
                 <ReferalText>{referalText}</ReferalText>

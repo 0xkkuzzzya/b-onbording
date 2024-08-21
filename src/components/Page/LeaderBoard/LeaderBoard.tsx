@@ -72,7 +72,7 @@ export const LeaderBoard = () => {
     return (
         <Container>
             <Header>
-                <HeaderText>Leadebord</HeaderText>
+                <HeaderText>LeaderBoard</HeaderText>
             </Header>
 
             <LeadersBlock>
