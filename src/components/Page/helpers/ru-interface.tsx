@@ -15,6 +15,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 15px;
 `
 
 const HeaderBlock = styled.div`
@@ -228,7 +229,7 @@ export const MainPageRU = () => {
                 <TextinsideBlock>Время теста</TextinsideBlock>
             </TasksBlock>
 
-            <Link to="https://t.me/bytecoin_news" style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
+            <Link to="https://t.me/bytecoin_ru" style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
                 <TasksBlock>
                     <Logoblock>
                         <IntroLogo src={Megaphone} />
@@ -246,7 +247,7 @@ export const MainPageRU = () => {
                 </TasksBlock>
             </Link>
 
-            <Link to="" style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
+            <Link to="https://x.com/bytecoin_ton" style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
                 <TasksBlock>
                     <Logoblock style={{ background: "#000" }}>
                         <IntroLogo src={Twitter} />

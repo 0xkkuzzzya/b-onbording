@@ -8,8 +8,6 @@ export const MainPage = () => {
     
     const [geoposition, setGeoposition] = useGetGeoposition()
 
-    console.log(geoposition)
-
     return (
         <>
             {geoposition.country == "ru" || geoposition.country == "kz" || geoposition.country == "by" ? <MainPageRU /> : <MainPageEN /> }
