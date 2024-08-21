@@ -278,7 +278,7 @@ export const MainPageRU = () => {
                 <ShareButton>Поделиться</ShareButton>
             </a>
             <div style={{ width: "100%" }}>
-                <Text>Вы заработаете 5<TicketLogo style={{marginLeft: "0px"}} src={Ticket} /> для премиум-пользователя.</Text>
+                <Text>Вы заработаете 5<TicketLogo style={{marginLeft: "0px"}} src={Ticket} /> за премиум-пользователя.</Text>
             </div>
         </Container>
     )
