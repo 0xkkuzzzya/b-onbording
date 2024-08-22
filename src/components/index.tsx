@@ -4,7 +4,6 @@ import { MainPage } from "./Page/MainPage/MainPage";
 import { StoriesPage } from "./Page/MainPage/MainPageStories";
 import { LeaderBoard } from "./Page/LeaderBoard/LeaderBoard";
 import { LinksToPage } from "./Page/helpers/LinksToPage";
-import ScrollTop from "./Page/helpers/ScrollToTop";
 
 const Container = styled.div`
     width: 100%;
@@ -21,9 +20,8 @@ const routes = [
 
 
 export const MainIndex = () => {
-    return(
+    return (
         <Container>
-            <ScrollTop />
             <Routes>
                 {routes.map(({ path, element }) =>
                     <Route key={path} path={path} element={element} />
