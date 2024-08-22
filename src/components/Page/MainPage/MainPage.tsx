@@ -1,7 +1,7 @@
 import { useGetGeoposition } from "../../store/geoposition"
 import { LinksToPage } from "../helpers/LinksToPage"
-import { MainPageEN } from "../helpers/en-interface"
-import { MainPageRU } from "../helpers/ru-interface"
+import { MainPageEN } from "./MainPageEN"
+import { MainPageRU } from "./MainPageRU"
 
 
 

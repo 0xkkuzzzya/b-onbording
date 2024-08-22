@@ -1,10 +1,10 @@
 import { Route, Routes } from "react-router";
 import styled from "styled-components";
 import { MainPage } from "./Page/MainPage/MainPage";
-import { StoriesPageEN } from "./Page/MainPage/MainPageStoriesEN";
+import { StoriesPageEN } from "./Page/MainPage/StoriesEN";
 import { LeaderBoard } from "./Page/LeaderBoard/LeaderBoard";
 import { LinksToPage } from "./Page/helpers/LinksToPage";
-import { StoriesPageRU } from "./Page/MainPage/MainPageStoriesRU";
+import { StoriesPageRU } from "./Page/MainPage/StoriesRU";
 
 const Container = styled.div`
     width: 100%;
