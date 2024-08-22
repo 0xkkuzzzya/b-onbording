@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { MainPage } from "./Page/MainPage/MainPage";
 import { StoriesPage } from "./Page/MainPage/MainPageStories";
 import { LeaderBoard } from "./Page/LeaderBoard/LeaderBoard";
+import { LinksToPage } from "./Page/helpers/LinksToPage";
 
 const Container = styled.div`
     width: 100%;
@@ -26,6 +27,7 @@ export const MainIndex = () => {
                     <Route key={path} path={path} element={element} />
                 )}
             </Routes>
+            <LinksToPage />
         </Container>
     )
 }

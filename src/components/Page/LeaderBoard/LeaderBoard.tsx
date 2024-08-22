@@ -1,14 +1,15 @@
 import styled from "styled-components";
 import Tikcet from '../../../assets/Ticket.webp'
 import TempLeaderLogo from '../../../assets/BytecoinLogo.webp'
-import { LinksToPage } from "../helpers/LinksToPage";
+import Cup from '../../../assets/Cup.webp'
 
 const Container = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 11px;
+    margin-bottom: 80px;
 `
 
 const Header = styled.div`
@@ -21,11 +22,14 @@ const HeaderText = styled.a`
     font-size: 20px;
     font-weight: 500;
     color: #fff;
+    display: flex;
+    align-items: center;
 `
 
 const HedaerLogo = styled.img`
-    width: 15px;
-    height: 15px;
+    width: 20px;
+    height: 20px;
+    margin-right: 3px;
 `
 
 const LeadersBlock = styled.div`
@@ -37,14 +41,14 @@ const LeadersBlock = styled.div`
 `
 
 const LeadersLogo = styled.img`
-    width: 50px;
-    height: 50px;
+    width: 65px;
+    height: 65px;
     margin-bottom: 10px;
 `
 
 const Top1LeaderLogo = styled.img`
-    width: 70px;
-    height: 70px;
+    width: 75px;
+    height: 75px;
     margin-bottom: 10px;
 `
 
@@ -63,6 +67,7 @@ const LeaderName = styled.a`
 const TicketLogo = styled.img`
     width: 15px;
     height: 15px;
+    margin: 0px 3px;
 `
 
 const TicketAmount = styled.a`
@@ -101,54 +106,215 @@ const InfoText = styled.a`
 const YourTicketLogo = styled.img`
     width: 25px;
     height: 25px;
+    margin: 0px 3px;
 `
 
-const InfoDescription= styled.a`
+const InfoDescription = styled.a`
     font-size: 11px;
     font-weight: 500;
     color: #9da09f;
     margin-top: 3px;
 `
 
+const CopyBlock = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform .1s ease-in-out;
+    &:active {
+         transform: scale(0.98);
+    }
+`
+
+const CopyReferalButton = styled.button`
+    width: 80%;
+    height: 45px;
+    background: #4ab7ef;
+    border-radius: 15px;
+    margin-top: 30px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 15px;
+`
+
+const CopyText = styled.a`
+    color: #686667;
+    font-weight: 500;
+    font-size: 12px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+`
+
+const YourPlace = styled.div`
+    width: 100%;
+    height: 55px;
+    background: #232323;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    bottom: 80px;
+`
+
+const ListLeadersContaier = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+`
+
+const FieldsOtherLeaders = styled.div`
+    width: 100%;
+    height: 55px;
+    background: #232323;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #2e2e2e;
+`
+
+const FiledLeaderLogo = styled.img`
+    width: 35px;
+    height: 35px;
+    margin-left: 20px;
+`
+
+const NameBlock = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 15px;
+`
+
+const FieldLeaderName = styled.a`
+    color: #fff;
+    font-weight: 500;
+    font-size: 15px;
+`
+const OtherLeaderTicketAmount = styled.a`
+    color: #858585;
+    font-weight: 500;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+`
+
+const PlaceinField = styled.a`
+    color: #858585;
+    font-weight: 500;
+    font-size: 18px;
+    margin-left: auto;
+    margin-right: 15px;
+`
+
+const FiestPlace = styled.div`
+    width: 18px;
+    height: 18px;
+    border-radius: 50px;
+    background: #f2bb2d;
+    font-size: 10px;
+    font-weight: 500;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    margin-top: -27px;
+    margin-left: 29px;
+`
+
+const SecondPlace = styled.div`
+    width: 18px;
+    height: 18px;
+    border-radius: 50px;
+    background: #8d9eae;
+    font-size: 10px;
+    font-weight: 500;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    margin-top: 52px;
+    margin-left: 24px;
+`
+
+const ThirdPlace = styled.div`
+    width: 18px;
+    height: 18px;
+    border-radius: 50px;
+    background: #de7b04;
+    font-size: 10px;
+    font-weight: 500;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    margin-top: 52px;
+    margin-left: 24px;
+`
+
 
 export const LeaderBoard = () => {
+
+    const referalText = "https://t.me/+5435hadsaAHFSssdf"
+
+    const copyTextToClipboard = async (referalLink: string) => {
+        try {
+            await navigator.clipboard.writeText(referalLink);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
     return (
         <Container>
             <Header>
-                <HeaderText>LeaderBoard</HeaderText>
+                <HeaderText><HedaerLogo src={Cup} />Leaderboard</HeaderText>
             </Header>
 
             <LeadersBlock>
                 <LeaderBlock>
-                    <LeadersLogo src={TempLeaderLogo}/>
-                    <LeaderName>U1</LeaderName>
-                    <div style={{display: "flex", alignItems: "center", marginTop: "5px"}}>
-                        <TicketLogo src={Tikcet}/>
+                    <div style={{ display: "flex", position: 'relative' }}>
+                        <LeadersLogo src={TempLeaderLogo} />
+                        <SecondPlace>2</SecondPlace>
+                    </div>
+                    <LeaderName>User 1</LeaderName>
+                    <div style={{ display: "flex", alignItems: "center", marginTop: "5px" }}>
+                        <TicketLogo src={Tikcet} />
                         <TicketAmount>777</TicketAmount>
                     </div>
                 </LeaderBlock>
-                <LeaderBlock style={{marginBottom: "35px"}}>
-                    <Top1LeaderLogo src={TempLeaderLogo}/>
-                    <LeaderName>U2</LeaderName>
-                    <div style={{display: "flex", alignItems: "center", marginTop: "5px"}}>
-                        <TicketLogo src={Tikcet}/>
+                <LeaderBlock style={{ marginBottom: "35px", position: 'relative' }}>
+                    <div>
+                        <Top1LeaderLogo src={TempLeaderLogo} />
+                        <FiestPlace>1</FiestPlace>
+                    </div>
+                    <LeaderName>User 2</LeaderName>
+                    <div style={{ display: "flex", alignItems: "center", marginTop: "5px" }}>
+                        <TicketLogo src={Tikcet} />
                         <TicketAmount>122</TicketAmount>
                     </div>
-                </LeaderBlock> 
+                </LeaderBlock>
                 <LeaderBlock>
-                    <LeadersLogo src={TempLeaderLogo}/>
-                    <LeaderName>U3</LeaderName>
-                    <div style={{display: "flex", alignItems: "center", marginTop: "5px"}}>
-                        <TicketLogo src={Tikcet}/>
+                    <div style={{ display: "flex", position: 'relative'}}>
+                        <LeadersLogo src={TempLeaderLogo} />
+                        <ThirdPlace>3</ThirdPlace>
+                    </div>
+                    <LeaderName>User 3</LeaderName>
+                    <div style={{ display: "flex", alignItems: "center", marginTop: "5px" }}>
+                        <TicketLogo src={Tikcet} />
                         <TicketAmount>331</TicketAmount>
                     </div>
-                </LeaderBlock>   
+                </LeaderBlock>
             </LeadersBlock>
 
             <InfoContainer>
                 <InfoBlocks>
                     <div>
-                        <InfoText>10 <YourTicketLogo src={Tikcet}/></InfoText>
+                        <InfoText>10 <YourTicketLogo src={Tikcet} /></InfoText>
                     </div>
                     <InfoDescription>Your Ticket</InfoDescription>
                 </InfoBlocks>
@@ -161,8 +327,60 @@ export const LeaderBoard = () => {
                     <InfoDescription>Frens invited</InfoDescription>
                 </InfoBlocks>
             </InfoContainer>
-            
-            <LinksToPage/>
+
+            <CopyBlock>
+                <CopyReferalButton onClick={() => copyTextToClipboard(referalText)}>Copy your referral link</CopyReferalButton>
+                <CopyText>Invite premium frens to earn <TicketLogo src={Tikcet} /></CopyText>
+            </CopyBlock>
+
+            <YourPlace>
+                <FiledLeaderLogo src={TempLeaderLogo} />
+                <NameBlock>
+                    <FieldLeaderName>User 1000</FieldLeaderName>
+                    <OtherLeaderTicketAmount>11 <TicketLogo src={Tikcet} /></OtherLeaderTicketAmount>
+                </NameBlock>
+                <PlaceinField>1K</PlaceinField>
+            </YourPlace>
+
+            <ListLeadersContaier>
+                <FieldsOtherLeaders>
+                    <FiledLeaderLogo src={TempLeaderLogo} />
+                    <NameBlock>
+                        <FieldLeaderName>User 4</FieldLeaderName>
+                        <OtherLeaderTicketAmount>114 <TicketLogo src={Tikcet} /></OtherLeaderTicketAmount>
+                    </NameBlock>
+                    <PlaceinField>4</PlaceinField>
+                </FieldsOtherLeaders>
+                <FieldsOtherLeaders>
+                    <FiledLeaderLogo src={TempLeaderLogo} />
+                    <NameBlock>
+                        <FieldLeaderName>User 5</FieldLeaderName>
+                        <OtherLeaderTicketAmount>89 <TicketLogo src={Tikcet} /></OtherLeaderTicketAmount>
+                    </NameBlock>
+                    <PlaceinField>5</PlaceinField>
+                </FieldsOtherLeaders>
+                <FieldsOtherLeaders>
+                    <FiledLeaderLogo src={TempLeaderLogo} />
+                    <NameBlock>
+                        <FieldLeaderName>User 6</FieldLeaderName>
+                        <OtherLeaderTicketAmount>65 <TicketLogo src={Tikcet} /></OtherLeaderTicketAmount>
+                    </NameBlock>
+                    <PlaceinField>6</PlaceinField>
+                </FieldsOtherLeaders>
+                <FieldsOtherLeaders></FieldsOtherLeaders>
+                <FieldsOtherLeaders></FieldsOtherLeaders>
+                <FieldsOtherLeaders></FieldsOtherLeaders>
+                <FieldsOtherLeaders></FieldsOtherLeaders>
+                <FieldsOtherLeaders></FieldsOtherLeaders>
+                <FieldsOtherLeaders></FieldsOtherLeaders>
+                <FieldsOtherLeaders></FieldsOtherLeaders>
+                <FieldsOtherLeaders></FieldsOtherLeaders>
+                <FieldsOtherLeaders></FieldsOtherLeaders>
+                <FieldsOtherLeaders></FieldsOtherLeaders>
+                <FieldsOtherLeaders></FieldsOtherLeaders>
+                <FieldsOtherLeaders></FieldsOtherLeaders>
+                <FieldsOtherLeaders></FieldsOtherLeaders>
+            </ListLeadersContaier>
         </Container>
     )
 }

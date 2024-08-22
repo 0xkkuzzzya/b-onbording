@@ -12,7 +12,6 @@ export const MainPage = () => {
     return (
         <>
             {geoposition.country == "ru" || geoposition.country == "kz" || geoposition.country == "by" ? <MainPageRU /> : <MainPageEN /> }
-            <LinksToPage/>
         </>
     )
 }
