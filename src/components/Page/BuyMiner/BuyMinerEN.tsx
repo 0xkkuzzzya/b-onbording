@@ -48,7 +48,6 @@ const FollowButton = styled.button`
     height: 40px;
     background: #211d1f;
     border-radius: 10px;
-    margin-top: 20px;
     font-size: 15px;
     font-weight: 500;
     color: #fff;
@@ -88,7 +87,7 @@ export const BuyMinerEN = () => {
             <Description>Join waitlist and be ready to be among the first Bitcoin miners, aka Bitcoin on TON.</Description>
             <JoinWaitlistButton>Join waitlist</JoinWaitlistButton>
             <Link to="https://t.me/bytecoin_news"
-                style={{ width: "100%", textDecoration: "none", display: "flex", justifyContent: "center" }}>
+                style={{ width: "100%", textDecoration: "none", display: "flex", justifyContent: "center", marginTop: "20px" }}>
                 <FollowButton><LogoinButton src={TelegamLogo} />Follow Bytecoin news</FollowButton>
             </Link>
             <InfoBlock>
