@@ -1,5 +1,5 @@
 import { useGetGeoposition } from "../../store/geoposition"
-import { LinksToPage } from "../helpers/LinksToPage"
+import { LinksToPage } from "../Footer/LinksToPage"
 import { MainPageEN } from "./MainPageEN"
 import { MainPageRU } from "./MainPageRU"
 

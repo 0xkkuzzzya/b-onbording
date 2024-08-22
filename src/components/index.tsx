@@ -3,8 +3,9 @@ import styled from "styled-components";
 import { MainPage } from "./Page/MainPage/MainPage";
 import { StoriesPageEN } from "./Page/MainPage/StoriesEN";
 import { LeaderBoard } from "./Page/LeaderBoard/LeaderBoard";
-import { LinksToPage } from "./Page/helpers/LinksToPage";
+import { LinksToPage } from "./Page/Footer/LinksToPage";
 import { StoriesPageRU } from "./Page/MainPage/StoriesRU";
+import { BuyMiner } from "./Page/BuyMiner/BuyMiner";
 
 const Container = styled.div`
     width: 100%;
@@ -18,6 +19,7 @@ const routes = [
     { path: '/StoriesEN', name: 'Stories', element: <StoriesPageEN /> },
     { path: '/StoriesRU', name: 'Stories', element: <StoriesPageRU /> },
     { path: '/leaderboard', name: 'leaderboard', element: <LeaderBoard /> },
+    { path: '/buyminer', name: 'buyminer', element: <BuyMiner /> },
 ]
 
 
