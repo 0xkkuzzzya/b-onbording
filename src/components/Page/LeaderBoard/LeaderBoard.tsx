@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Tikcet from '../../../assets/Ticket.webp'
 import TempLeaderLogo from '../../../assets/BytecoinLogo.webp'
 import Cup from '../../../assets/Cup.webp'
+import { LinksToPage } from "../helpers/LinksToPage";
 
 const Container = styled.div`
     width: 100%;
@@ -403,6 +404,7 @@ export const LeaderBoard = () => {
                 <FieldsOtherLeaders></FieldsOtherLeaders>
                 <FieldsOtherLeaders></FieldsOtherLeaders>
             </ListLeadersContaier>
+            <LinksToPage />
         </Container>
     )
 }

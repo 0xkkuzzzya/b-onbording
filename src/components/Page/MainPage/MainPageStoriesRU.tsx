@@ -1,22 +1,23 @@
 import styled from "styled-components";
 import Stories from 'react-insta-stories';
-import BytecoinLogo from '../../../assets/BytecoinLogo.webp'
+import firstStories from '../../../assets/Stories/FirstStoriesRU.png'
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
 
-export const StoriesPage = () => {
+export const StoriesPageEN = () => {
 
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		window.Telegram.WebApp.BackButton.show()
+        window.Telegram.WebApp.MainButton.show()
         window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
 	}, [])
 
 	const stories = [
 		{
-			url: BytecoinLogo,
+			url: firstStories,
 			duration: 5000,
 		},
 		{

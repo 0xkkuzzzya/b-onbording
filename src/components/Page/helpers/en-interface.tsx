@@ -6,7 +6,7 @@ import BytecoinLogo from '../../../assets/BytecoinLogo.webp'
 import Teaher from '../../../assets/Teacher.webp'
 import Speacker from '../../../assets/Speacker.webp'
 import Megaphone from '../../../assets/Megaphone.webp'
-import Twitter from '../../../assets/X.svg'
+import Twitter from '../../../assets/X.webp'
 import Diamond from '../../../assets/Diamond.png'
 import Copy from '../../../assets/Copy.png'
 
@@ -215,7 +215,7 @@ export const MainPageEN = () => {
             <div style={{ width: "100%", marginTop: "20px" }}>
                 <SectionText>Intro</SectionText>
             </div>
-            <Link to="/Stories"
+            <Link to="/StoriesEN"
                 style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
                 <IntroBlock>
                     <Logoblock>
