@@ -189,6 +189,7 @@ export const MainPageEN = () => {
     useEffect(() => {
         window.Telegram.WebApp.BackButton.hide()
         window.Telegram.WebApp.MainButton.hide()
+        window.Telegram.WebApp.MainButton.onClick(() => {})
     }, [])
 
     const copyTextToClipboard = async (referalLink: string) => {

@@ -33,6 +33,7 @@ export const StoriesPageRU = () => {
 
 	const handleNext = () => {
 		setCurrentIndex((prevIndex) => (prevIndex < stories.length - 1 ? prevIndex + 1 : prevIndex));
+        console.log(currentIndex)
 	};
 
 
