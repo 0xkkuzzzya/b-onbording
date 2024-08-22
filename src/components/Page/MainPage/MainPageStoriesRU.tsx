@@ -21,31 +21,15 @@ export const StoriesPageRU = () => {
 
 	useEffect(() => {
 		window.Telegram.WebApp.BackButton.show()
-		window.Telegram.WebApp.MainButton.show()
+		window.Telegram.WebApp.MainButton.hide()
 		window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
 	}, [])
-
-    if (currentIndex == stories.length - 1) {
-        window.Telegram.WebApp.MainButton.onClick(() => {navigate(-1); setCurrentIndex(0)}) 
-    } else  {
-        window.Telegram.WebApp.MainButton.onClick(() => handleNext())
-    }
-
-	const handleNext = () => {
-		setCurrentIndex((prevIndex) => (prevIndex < stories.length - 1 ? prevIndex + 1 : prevIndex));
-        console.log(currentIndex)
-	};
 
 
     return (
         <Stories
             stories={stories}
             currentIndex={currentIndex}
-            onStoryEnd={(index: number, story: any) => {
-                if (index < stories.length - 1) {
-                    setCurrentIndex(index + 1);
-                }
-            }}
             onAllStoriesEnd={() => navigate(-1)}
             width="100%"
             height="100vh"
