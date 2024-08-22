@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router";
 
 
-export const StoriesPageEN = () => {
+export const StoriesPageRU = () => {
 
 	const navigate = useNavigate();
 

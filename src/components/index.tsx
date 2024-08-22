@@ -4,6 +4,7 @@ import { MainPage } from "./Page/MainPage/MainPage";
 import { StoriesPageEN } from "./Page/MainPage/MainPageStoriesEN";
 import { LeaderBoard } from "./Page/LeaderBoard/LeaderBoard";
 import { LinksToPage } from "./Page/helpers/LinksToPage";
+import { StoriesPageRU } from "./Page/MainPage/MainPageStoriesRU";
 
 const Container = styled.div`
     width: 100%;
@@ -15,6 +16,7 @@ const Container = styled.div`
 const routes = [
     { path: '/', name: 'MainPage', element: <MainPage /> },
     { path: '/StoriesEN', name: 'Stories', element: <StoriesPageEN /> },
+    { path: '/StoriesRU', name: 'Stories', element: <StoriesPageRU /> },
     { path: '/leaderboard', name: 'leaderboard', element: <LeaderBoard /> },
 ]
 
