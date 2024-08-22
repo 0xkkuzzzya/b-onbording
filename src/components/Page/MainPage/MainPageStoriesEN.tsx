@@ -26,7 +26,7 @@ export const StoriesPageEN = () => {
 	}, [])
 
 	if (currentIndex == stories.length - 1) {
-		window.Telegram.WebApp.MainButton.onClick(() => navigate(-1)) 
+		window.Telegram.WebApp.MainButton.onClick(() => {navigate(-1); setCurrentIndex(0)}) 
 	} else  {
 		window.Telegram.WebApp.MainButton.onClick(() => handleNext())
 	}
