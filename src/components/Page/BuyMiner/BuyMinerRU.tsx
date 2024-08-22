@@ -83,6 +83,7 @@ const InfoText = styled.a`
 export const BuyMinerRU = () => {
     return (
         <Container>
+            <Logo src={Gif} />
             <MainText>Продажа Bytecoin NFT Miners начнется в ближайшее время.</MainText>
             <Description>Присоединяйтесь к списку ожидания и будьте готовы стать одним из первых майнеров Bitcoin, он же Bitcoin on TON.</Description>
             <JoinWaitlistButton>Присоединиться к списку ожидания</JoinWaitlistButton>
