@@ -81,7 +81,6 @@ const InfoContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    margin-top: 20px;
 `
 
 const InfoBlocks = styled.div`
@@ -121,10 +120,6 @@ const CopyBlock = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: transform .1s ease-in-out;
-    &:active {
-         transform: scale(0.98);
-    }
 `
 
 const CopyReferalButton = styled.button`
@@ -136,6 +131,10 @@ const CopyReferalButton = styled.button`
     color: #fff;
     font-weight: 500;
     font-size: 15px;
+    transition: transform .1s ease-in-out;
+    &:active {
+         transform: scale(0.97);
+    }
 `
 
 const CopyText = styled.a`
@@ -155,6 +154,7 @@ const YourPlace = styled.div`
     align-items: center;
     position: fixed;
     bottom: 80px;
+    border-top: 1px solid #2e2e2e;
 `
 
 const ListLeadersContaier = styled.div`
