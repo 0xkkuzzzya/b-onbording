@@ -26,12 +26,14 @@ export const StoriesPageEN = () => {
 	}, [])
 
 	return (
-		<Stories
-			stories={stories}
-			currentIndex={currentIndex}
-			onAllStoriesEnd={() => navigate(-1)}
-			width="100%"
-			height="100vh"
-		/>
+		<div style={{ overflow: "hidden" }}>
+			<Stories
+				stories={stories}
+				currentIndex={currentIndex}
+				onAllStoriesEnd={() => navigate(-1)}
+				width="100%"
+				height="100vh"
+			/>
+		</div>
 	);
 } 

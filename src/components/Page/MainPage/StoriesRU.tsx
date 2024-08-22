@@ -7,7 +7,7 @@ import { useNavigate } from "react-router";
 
 export const StoriesPageRU = () => {
 
-    const [currentIndex, setCurrentIndex] = useState(0);
+	const [currentIndex, setCurrentIndex] = useState(0);
 	const navigate = useNavigate();
 
 	const stories = [
@@ -26,13 +26,15 @@ export const StoriesPageRU = () => {
 	}, [])
 
 
-    return (
-        <Stories
-            stories={stories}
-            currentIndex={currentIndex}
-            onAllStoriesEnd={() => navigate(-1)}
-            width="100%"
-            height="100vh"
-        />
-    );
+	return (
+		<div style={{ overflow: "hidden" }}>
+			<Stories
+				stories={stories}
+				currentIndex={currentIndex}
+				onAllStoriesEnd={() => navigate(-1)}
+				width="100%"
+				height="100vh"
+			/>
+		</div>
+	);
 } 
