@@ -39,7 +39,7 @@ export const StoriesPageRU = () => {
         <Stories
             stories={stories}
             currentIndex={currentIndex}
-            onStoryEnd={(index: number, story: any) => {
+            onStoryStart={(index: number, story: any) => {
                 if (index < stories.length - 1) {
                     setCurrentIndex(index + 1);
                 }
