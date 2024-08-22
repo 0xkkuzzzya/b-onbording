@@ -41,14 +41,14 @@ const LeadersBlock = styled.div`
 `
 
 const LeadersLogo = styled.img`
-    width: 65px;
-    height: 65px;
+    width: 70px;
+    height: 70px;
     margin-bottom: 10px;
 `
 
 const Top1LeaderLogo = styled.img`
-    width: 75px;
-    height: 75px;
+    width: 80px;
+    height: 80px;
     margin-bottom: 10px;
 `
 
@@ -223,8 +223,8 @@ const FiestPlace = styled.div`
     align-items: center;
     justify-content: center;
     position: absolute;
-    margin-top: -27px;
-    margin-left: 29px;
+    margin-top: -25px;
+    margin-left: 31px;
 `
 
 const SecondPlace = styled.div`
@@ -239,8 +239,8 @@ const SecondPlace = styled.div`
     align-items: center;
     justify-content: center;
     position: absolute;
-    margin-top: 52px;
-    margin-left: 24px;
+    margin-top: 58px;
+    margin-left: 26px;
 `
 
 const ThirdPlace = styled.div`
@@ -255,8 +255,8 @@ const ThirdPlace = styled.div`
     align-items: center;
     justify-content: center;
     position: absolute;
-    margin-top: 52px;
-    margin-left: 24px;
+    margin-top: 58px;
+    margin-left: 27px;
 `
 
 const YourTeg = styled.div`
@@ -274,7 +274,7 @@ const YourTegText = styled.a`
     font-size: 10px;
     font-weight: 500;
     color: #fff;
-    margin-right: 1px;
+    margin-right: 0px;
     margin-top: 0px;
 `
 

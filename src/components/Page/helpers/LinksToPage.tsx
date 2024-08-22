@@ -13,6 +13,7 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    border-top: 1px solid #2e2e2e;
 `
 
 const LinkBlock = Link;
