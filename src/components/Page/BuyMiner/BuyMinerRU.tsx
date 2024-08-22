@@ -2,9 +2,10 @@ import styled from "styled-components";
 import TelegamLogo from '../../../assets/TelegramLogo.png'
 import Gif from '../../../assets/BuyMinerGif.gif'
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const Container = styled.div`
-    width: 80%;
+    width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -80,6 +81,12 @@ const InfoText = styled.a`
 
 
 export const BuyMinerRU = () => {
+
+    useEffect(() => {
+        window.Telegram.WebApp.BackButton.hide()
+        window.Telegram.WebApp.MainButton.hide()
+    }, [])
+
     return (
         <Container>
             <Logo src={Gif} />

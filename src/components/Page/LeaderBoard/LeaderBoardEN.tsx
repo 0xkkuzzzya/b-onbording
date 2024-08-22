@@ -286,7 +286,7 @@ export const LeaderBoardEN = () => {
     const referalText = "https://t.me/+5435hadsaAHFSssdf"
 
     useEffect(() => {
-        window.Telegram.WebApp.BackButton.show()
+        window.Telegram.WebApp.BackButton.hide()
         window.Telegram.WebApp.MainButton.hide()
     }, [])
 
