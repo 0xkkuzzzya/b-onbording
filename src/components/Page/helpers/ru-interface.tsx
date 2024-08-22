@@ -182,6 +182,7 @@ export const MainPageRU = () => {
 
     useEffect(() => {
         window.Telegram.WebApp.BackButton.hide()
+        window.Telegram.WebApp.MainButton.hide()
     }, [])
 
     const copyTextToClipboard = async (referalLink: string) => {

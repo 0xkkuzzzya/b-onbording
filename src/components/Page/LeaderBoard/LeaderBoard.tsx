@@ -3,6 +3,7 @@ import Tikcet from '../../../assets/Ticket.webp'
 import TempLeaderLogo from '../../../assets/BytecoinLogo.webp'
 import Cup from '../../../assets/Cup.webp'
 import { LinksToPage } from "../helpers/LinksToPage";
+import { useEffect } from "react";
 
 const Container = styled.div`
     width: 100%;
@@ -283,6 +284,11 @@ const YourTegText = styled.a`
 export const LeaderBoard = () => {
 
     const referalText = "https://t.me/+5435hadsaAHFSssdf"
+
+    useEffect(() => {
+        window.Telegram.WebApp.BackButton.show()
+        window.Telegram.WebApp.MainButton.hide()
+    }, [])
 
     const copyTextToClipboard = async (referalLink: string) => {
         try {
