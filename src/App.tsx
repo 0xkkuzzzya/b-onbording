@@ -7,6 +7,11 @@ const Container = styled.div`
 	max-width: 100%;
 	height: var(--tg-viewport-stable-height);
 	overflow-y: auto;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+	&::-webkit-scrollbar {
+		display: none;
+	}
 `
 
 interface User {
@@ -31,10 +36,10 @@ function App() {
 
 		let countryCode = initDataUnsafe.user?.country || initDataUnsafe.user?.language_code;
 
-		if(countryCode != undefined && countryCode != "") {
-			setGeoposition({country: countryCode!})
+		if (countryCode != undefined && countryCode != "") {
+			setGeoposition({ country: countryCode! })
 		} else {
-			setGeoposition({country: ""})
+			setGeoposition({ country: "" })
 		}
 
 	}, [])

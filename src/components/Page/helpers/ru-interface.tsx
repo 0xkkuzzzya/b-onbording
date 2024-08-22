@@ -161,6 +161,7 @@ const ShareButton = styled.button`
     font-size: 16px;
     font-weight: 500;
     color: #fff;
+    cursor: pointer;
 `
 
 const Text = styled.a`

@@ -166,6 +166,7 @@ const ShareButton = styled.button`
     font-size: 16px;
     font-weight: 500;
     color: #fff;
+    cursor: pointer;
 `
 
 const Text = styled.a`
@@ -289,7 +290,7 @@ export const MainPageEN = () => {
                 <ShareButton >Share</ShareButton>
             </a>
             <div style={{ width: "100%" }}>
-                <Text>You will earn 5<TicketLogo style={{marginLeft: "0px"}} src={Ticket} /> for a premium user.</Text>
+                <Text>You will earn 5<TicketLogo style={{margin: "0px 3px"}} src={Ticket} /> for a premium user.</Text>
             </div>
         </Container>
     )
