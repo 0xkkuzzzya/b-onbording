@@ -23,13 +23,12 @@ export const StoriesPageRU = () => {
 		window.Telegram.WebApp.BackButton.show()
 		window.Telegram.WebApp.MainButton.show()
 		window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
+        if (currentIndex == stories.length - 1) {
+            window.Telegram.WebApp.MainButton.onClick(() => navigate(-1)) 
+        } else  {
+            window.Telegram.WebApp.MainButton.onClick(() => handleNext())
+        }
 	}, [])
-
-    if (currentIndex == stories.length) {
-        window.Telegram.WebApp.MainButton.onClick(() => navigate(-1)) 
-    } else  {
-        window.Telegram.WebApp.MainButton.onClick(() => handleNext())
-    }
 
 	const handleNext = () => {
 		setCurrentIndex((prevIndex) => (prevIndex < stories.length - 1 ? prevIndex + 1 : prevIndex));
