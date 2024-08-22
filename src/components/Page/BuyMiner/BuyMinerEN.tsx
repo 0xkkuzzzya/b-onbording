@@ -9,7 +9,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 50px;
+    margin-top: 70px;
     text-align: center;
     margin-bottom: 110px;
 `
