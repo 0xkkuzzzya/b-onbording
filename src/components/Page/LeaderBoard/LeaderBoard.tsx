@@ -191,7 +191,10 @@ const FieldLeaderName = styled.a`
     color: #fff;
     font-weight: 500;
     font-size: 15px;
+    display: flex;
+    align-items: center;
 `
+
 const OtherLeaderTicketAmount = styled.a`
     color: #858585;
     font-weight: 500;
@@ -254,6 +257,25 @@ const ThirdPlace = styled.div`
     position: absolute;
     margin-top: 52px;
     margin-left: 24px;
+`
+
+const YourTeg = styled.div`
+    width: 24px;
+    height: 14px;
+    border-radius: 3px;
+    background: #4eb0f7;
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+
+const YourTegText = styled.a`
+    font-size: 10px;
+    font-weight: 500;
+    color: #fff;
+    margin-right: 1px;
+    margin-top: 0px;
 `
 
 
@@ -336,7 +358,7 @@ export const LeaderBoard = () => {
             <YourPlace>
                 <FiledLeaderLogo src={TempLeaderLogo} />
                 <NameBlock>
-                    <FieldLeaderName>User 1000</FieldLeaderName>
+                    <FieldLeaderName>User 1000 <YourTeg><YourTegText>You</YourTegText></YourTeg></FieldLeaderName>
                     <OtherLeaderTicketAmount>11 <TicketLogo src={Tikcet} /></OtherLeaderTicketAmount>
                 </NameBlock>
                 <PlaceinField>1K</PlaceinField>
