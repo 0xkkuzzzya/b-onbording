@@ -209,7 +209,7 @@ export const MainPageRU = () => {
             <div style={{ width: "100%", marginTop: "20px" }}>
                 <SectionText>Введение</SectionText>
             </div>
-            <Link to="/Stories" style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
+            <Link to="/StoriesRU" style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
                 <IntroBlock>
                     <Logoblock>
                         <IntroLogoGradient>
