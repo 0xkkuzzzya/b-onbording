@@ -1,4 +1,4 @@
-import { useGetGeoposition } from "../../../store/useGeoposition"
+import { useGeoposition } from "../../../store/useGeoposition"
 import { LinksToPage } from "../Footer/LinksToPage"
 import { LeaderBoardEN } from "./LeaderBoardEN"
 import { LeaderBoardRU } from "./LeaderBoardRU"
@@ -7,7 +7,7 @@ import { LeaderBoardRU } from "./LeaderBoardRU"
 
 export const LeaderBoard = () => {
     
-    const [geoposition, setGeoposition] = useGetGeoposition()
+    const [geoposition, setGeoposition] = useGeoposition()
 
     return (
         <>

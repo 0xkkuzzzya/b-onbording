@@ -1,4 +1,4 @@
-import { useGetGeoposition } from "../../../store/useGeoposition"
+import { useGeoposition } from "../../../store/useGeoposition"
 import { LinksToPage } from "../Footer/LinksToPage"
 import { BuyMinerEN } from "./BuyMinerEN"
 import { BuyMinerRU } from "./BuyMinerRU"
@@ -7,7 +7,7 @@ import { BuyMinerRU } from "./BuyMinerRU"
 
 export const BuyMiner = () => {
     
-    const [geoposition, setGeoposition] = useGetGeoposition()
+    const [geoposition, setGeoposition] = useGeoposition()
 
     return (
         <>
