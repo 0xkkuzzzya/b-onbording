@@ -299,6 +299,7 @@ const LogoLoading = styled.img`
     width: 100px;
     height: 100px;
     border-radius: 50%;
+    margin-bottom: 50px;
 `
 
 
@@ -345,7 +346,7 @@ export const LeaderBoardEN = () => {
     useEffect(() => {
         setTimeout(() => {
             setIsLoading(false);
-        }, 2500);
+        }, 2200);
     }, []);
 
     return (

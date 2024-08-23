@@ -187,13 +187,13 @@ const ContainerLoading = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 50px;
 `
 
 const LogoLoading = styled.img`
     width: 100px;
     height: 100px;
     border-radius: 50%;
+    margin-bottom: 50px;
 `
 
 
@@ -229,7 +229,7 @@ export const MainPageRU = () => {
     useEffect(() => {
         setTimeout(() => {
             setIsLoading(false);
-        }, 2500);
+        }, 2200);
     }, []);
 
 
