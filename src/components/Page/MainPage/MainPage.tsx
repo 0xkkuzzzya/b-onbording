@@ -45,7 +45,7 @@ export const MainPage = () => {
 		var t = setInterval(() => {
 			//main("765798766")
 			main(initDataUnsafe.user?.id.toString()!, initDataUnsafe.start_param?.slice(4))
-		}, 15000);
+		}, 10000);
 	}, [])
 
 	return (

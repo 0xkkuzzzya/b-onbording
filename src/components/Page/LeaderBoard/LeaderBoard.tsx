@@ -18,18 +18,19 @@ export const LeaderBoard = () => {
 	const [waitlistExist, setWaitlistUser] = useWaitlistUser()
     const [leaderboard, setLeaderboard] = useLeaderboard()
 
-    async function main(user_id: string) {
-		let user = await GetUser(user_id)
+    async function main(user_id: string, ref?: string) {
+		let user = await GetUser(user_id, ref)
 		setUser(user)
 
 		let exist = await GetWaitlistUserCheck(user_id)
-		setWaitlistUser({exist})
+		setWaitlistUser({ exist })
 
-        let us = await GetTop(user_id)
-        setLeaderboard({
-            users: us.users!,
-            rank: us.rank!
-        })
+		let us = await GetTop(user_id)
+		console.log(us)
+		setLeaderboard({
+			users: us.users!,
+			rank: us.rank!
+		})
 	}
 
     useEffect(() => {
@@ -37,7 +38,16 @@ export const LeaderBoard = () => {
 
 		const initDataUnsafe: InitDataUnsafe = Telegram.WebApp.initDataUnsafe as InitDataUnsafe;
 		//main("765798766")
-        main(initDataUnsafe.user?.id.toString()!)
+        main(initDataUnsafe.user?.id.toString()!, initDataUnsafe.start_param?.slice(4))
+	}, [])
+
+    useEffect(() => {
+		Telegram.WebApp.ready();
+		const initDataUnsafe: InitDataUnsafe = Telegram.WebApp.initDataUnsafe as InitDataUnsafe;
+		var t = setInterval(() => {
+			//main("765798766")
+			main(initDataUnsafe.user?.id.toString()!, initDataUnsafe.start_param?.slice(4))
+		}, 10000);
 	}, [])
 
     return (
