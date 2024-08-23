@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import ByteLogo from '../../assets/BytecoinLogo.webp'
+import ByteLogo from '../../../assets/BytecoinLogo.webp'
 
 const Container = styled.div`
     width: 100%;
@@ -24,12 +24,12 @@ const Logo = styled.img`
 `
 
 
-export const LoadingPage = () => {
-    return(
+export const MainLoadingPage = () => {
+    return (
         <>
-        <Container>
-            <Logo loading="lazy" src={ByteLogo}/>
-        </Container>
+            <Container>
+                <Logo loading="lazy" src={ByteLogo} />
+            </Container>
         </>
     )
 }
