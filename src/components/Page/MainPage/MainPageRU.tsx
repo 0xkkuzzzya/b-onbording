@@ -202,8 +202,8 @@ export const MainPageRU = () => {
 
     const openAnotherBot = () => {
         const tg = window.Telegram.WebApp;
+        tg.openTelegramLink('https://t.me/bytecoindev_bot/app');
         CompleteTask(user.user_id, "task6")
-        tg.openTelegramLink('https://t.me/bytecoindev_bot?startapp');
     };
 
     
@@ -221,9 +221,7 @@ export const MainPageRU = () => {
             <Link to="/StoriesRU" style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
                 <IntroBlock>
                     <Logoblock>
-                        <IntroLogoGradient>
-                            <IntroLogo src={user.task.task1 ? CompleteLogo : BytecoinLogo} />
-                        </IntroLogoGradient>
+                        <IntroLogo src={user.task.task1 ? CompleteLogo : BytecoinLogo} />
                     </Logoblock>
                     <TextinsideBlock>Что такое Bytecoin?</TextinsideBlock>
                 </IntroBlock>
@@ -259,7 +257,7 @@ export const MainPageRU = () => {
 
             <Link to="https://x.com/bytecoin_ton" onClick={() => {CompleteTask(user.user_id, "task5")}} style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
                 <TasksBlock>
-                    <Logoblock style={{ background: "#000" }}>
+                    <Logoblock>
                         <IntroLogo src={user.task.task5 ? CompleteLogo : Twitter} />
                     </Logoblock>
                     <TextinsideBlock>Подписаться на X</TextinsideBlock>
