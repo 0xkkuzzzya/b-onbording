@@ -19,13 +19,19 @@ export interface User {
                 task5: boolean;
                 task6: boolean;
         }
+        _id?: string;
 }
 
 export interface WaitlistUser {
         exist: boolean
 }
 
-const defaultStateUser: User = {
+export interface Leaderboard {
+        users: User[],
+        rank: number
+}
+
+export const defaultStateUser: User = {
         user_id: "",
         ticket: 0,
         refs: [],
@@ -49,5 +55,11 @@ const defaultStateWaitlistUser: WaitlistUser = {
         exist: false
 };
 
+const defaultStateLeaderboard: Leaderboard = {
+        users: [],
+        rank: 0,
+}
+
 export const [useUser] = createStore(defaultStateUser);
 export const [useWaitlistUser] = createStore(defaultStateWaitlistUser);
+export const [useLeaderboard] = createStore(defaultStateLeaderboard)

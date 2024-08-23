@@ -6,4 +6,5 @@ export interface User {
 
 export interface InitDataUnsafe {
 	user?: User;
+        start_param?: string;
 }

@@ -4,6 +4,8 @@ import TempLeaderLogo from '../../../assets/BytecoinLogo.webp'
 import Cup from '../../../assets/Cup.webp'
 import { LinksToPage } from "../Footer/LinksToPage";
 import { useEffect } from "react";
+import { BOT } from "../../../const";
+import { useUser } from "../../../store/useUsers";
 
 const Container = styled.div`
     width: 100%;
@@ -283,7 +285,8 @@ const YourTegText = styled.a`
 
 export const LeaderBoardRU = () => {
 
-    const referalText = "https://t.me/+5435hadsaAHFSssdf"
+    const [user, setUser] = useUser()
+    const referalText = `${BOT}?startapp=ref_${user.user_id}`
 
     useEffect(() => {
         window.Telegram.WebApp.BackButton.hide()

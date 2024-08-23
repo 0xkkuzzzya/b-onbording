@@ -11,6 +11,8 @@ import Twitter from '../../../assets/X.webp'
 import Diamond from '../../../assets/Diamond.png'
 import Copy from '../../../assets/Copy.png'
 import { useUser } from '../../../store/useUsers';
+import { CompleteTask } from '../../../api/user';
+import { BOT } from '../../../const';
 
 const Container = styled.div`
     width: 80%;
@@ -153,6 +155,7 @@ const ReferalText = styled.a`
     overflow: hidden;
     text-overflow: ellipsis;
     margin-left: 15px;
+    white-space: nowrap;
 `
 
 const ShareButton = styled.button`
@@ -181,7 +184,7 @@ export const MainPageRU = () => {
     const [referal, setReferal] = useState()
     const [user, setUser] = useUser()
 
-    const referalText = `https://t.me/bytecoin_onboarding_dev_bot/app?startapp=ref_${user.user_id}`
+    const referalText = `${BOT}?startapp=ref_${user.user_id}`
 
     useEffect(() => {
         window.Telegram.WebApp.BackButton.hide()
@@ -199,6 +202,7 @@ export const MainPageRU = () => {
 
     const openAnotherBot = () => {
         const tg = window.Telegram.WebApp;
+        CompleteTask(user.user_id, "task6")
         tg.openTelegramLink('https://t.me/bytecoindev_bot?startapp');
     };
 
@@ -253,7 +257,7 @@ export const MainPageRU = () => {
                 </TasksBlock>
             </Link>
 
-            <Link to="https://x.com/bytecoin_ton" style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
+            <Link to="https://x.com/bytecoin_ton" onClick={() => {CompleteTask(user.user_id, "task5")}} style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
                 <TasksBlock>
                     <Logoblock style={{ background: "#000" }}>
                         <IntroLogo src={user.task.task5 ? CompleteLogo : Twitter} />
