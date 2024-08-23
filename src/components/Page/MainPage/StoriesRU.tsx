@@ -3,12 +3,15 @@ import Stories from 'react-insta-stories';
 import firstStories from '../../../assets/Stories/FirstStoriesRU.png'
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { CompleteTask } from "../../../api/user";
+import { useUser } from "../../../store/useUsers";
 
 
 export const StoriesPageRU = () => {
 
 	const [currentIndex, setCurrentIndex] = useState(0);
 	const navigate = useNavigate();
+	const [user, setUser] = useUser()
 
 	const stories = [
 		{
@@ -31,7 +34,9 @@ export const StoriesPageRU = () => {
 			<Stories
 				stories={stories}
 				currentIndex={currentIndex}
-				onAllStoriesEnd={() => navigate(-1)}
+				onAllStoriesEnd={() => {
+					CompleteTask(user.user_id, "task1")
+					navigate(-1)}}
 				width="100%"
 				height="100vh"
 			/>

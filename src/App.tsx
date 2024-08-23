@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { MainIndex } from './components';
-import { useGetGeoposition } from './components/store/geoposition';
+import { useGeoposition } from './store/useGeoposition';
+import { InitDataUnsafe } from './type/tg_type';
 
 const Container = styled.div`
 	max-width: 100%;
@@ -14,20 +15,10 @@ const Container = styled.div`
 	}
 `
 
-interface User {
-	language_code: string;
-	country: string;
-	id: number;
-}
-
-interface InitDataUnsafe {
-	user?: User;
-}
-
 
 function App() {
 
-	const [geoposition, setGeoposition] = useGetGeoposition()
+	const [geoposition, setGeoposition] = useGeoposition()
 
 	useEffect(() => {
 		Telegram.WebApp.ready();
@@ -41,8 +32,8 @@ function App() {
 		} else {
 			setGeoposition({ country: "" })
 		}
-
 	}, [])
+
 
 	return (
 		<Container>

@@ -1,9 +1,12 @@
 import styled from "styled-components";
-import Tikcet from '../../../assets/Ticket.webp'
+import Ticket from '../../../assets/Ticket.webp'
 import TempLeaderLogo from '../../../assets/BytecoinLogo.webp'
 import Cup from '../../../assets/Cup.webp'
+import Avatar from '../../../assets/Avatar.webp'
 import { LinksToPage } from "../Footer/LinksToPage";
 import { useEffect } from "react";
+import { useLeaderboard, useUser } from "../../../store/useUsers";
+import { BOT } from "../../../const";
 
 const Container = styled.div`
     width: 100%;
@@ -46,12 +49,14 @@ const LeadersLogo = styled.img`
     width: 70px;
     height: 70px;
     margin-bottom: 10px;
+    border-radius: 50px;
 `
 
 const Top1LeaderLogo = styled.img`
     width: 80px;
     height: 80px;
     margin-bottom: 10px;
+    border-radius: 50px;
 `
 
 const LeaderBlock = styled.div`
@@ -180,6 +185,7 @@ const FiledLeaderLogo = styled.img`
     width: 35px;
     height: 35px;
     margin-left: 20px;
+    border-radius: 20px;
 `
 
 const NameBlock = styled.div`
@@ -283,7 +289,10 @@ const YourTegText = styled.a`
 
 export const LeaderBoardEN = () => {
 
-    const referalText = "https://t.me/+5435hadsaAHFSssdf"
+    const [user, setUser] = useUser()
+    const [leaderboard, setLeaderboard] = useLeaderboard()
+
+    const referalText = `${BOT}?startapp=ref_${user.user_id}`
 
     useEffect(() => {
         window.Telegram.WebApp.BackButton.hide()
@@ -298,6 +307,24 @@ export const LeaderBoardEN = () => {
         }
     };
 
+    const formatCash = (n: number) => {
+        if (n < 1e3) return n;
+        if (n >= 1e3) return +(n / 1e3).toFixed(1) + "K";
+    };
+
+    let users = leaderboard.users.slice(3);
+
+    let component = users.map((user, index) => 
+        <FieldsOtherLeaders>
+            <FiledLeaderLogo src={user.photo} />
+            <NameBlock>
+                <FieldLeaderName>{user.username}</FieldLeaderName>
+                <OtherLeaderTicketAmount>{user.ticket} <TicketLogo src={Ticket} /></OtherLeaderTicketAmount>
+            </NameBlock>
+            <PlaceinField>{index + 4}</PlaceinField>
+        </FieldsOtherLeaders>
+    )
+
     return (
         <Container>
             <Header>
@@ -307,35 +334,35 @@ export const LeaderBoardEN = () => {
             <LeadersBlock>
                 <LeaderBlock>
                     <div style={{ display: "flex", position: 'relative' }}>
-                        <LeadersLogo src={TempLeaderLogo} />
+                        <LeadersLogo src={leaderboard.users[1].photo} />
                         <SecondPlace>2</SecondPlace>
                     </div>
-                    <LeaderName>User 1</LeaderName>
+                    <LeaderName>{leaderboard.users[1].username}</LeaderName>
                     <div style={{ display: "flex", alignItems: "center", marginTop: "5px" }}>
-                        <TicketLogo src={Tikcet} />
-                        <TicketAmount>777</TicketAmount>
+                        <TicketLogo src={Ticket} />
+                        <TicketAmount>{leaderboard.users[1].ticket}</TicketAmount>
                     </div>
                 </LeaderBlock>
                 <LeaderBlock style={{ marginBottom: "35px", position: 'relative' }}>
                     <div>
-                        <Top1LeaderLogo src={TempLeaderLogo} />
+                        <Top1LeaderLogo src={leaderboard.users[0].photo} />
                         <FiestPlace>1</FiestPlace>
                     </div>
-                    <LeaderName>User 2</LeaderName>
+                    <LeaderName>{leaderboard.users[0].username}</LeaderName>
                     <div style={{ display: "flex", alignItems: "center", marginTop: "5px" }}>
-                        <TicketLogo src={Tikcet} />
-                        <TicketAmount>122</TicketAmount>
+                        <TicketLogo src={Ticket} />
+                        <TicketAmount>{leaderboard.users[0].ticket}</TicketAmount>
                     </div>
                 </LeaderBlock>
                 <LeaderBlock>
                     <div style={{ display: "flex", position: 'relative'}}>
-                        <LeadersLogo src={TempLeaderLogo} />
+                        <LeadersLogo src={leaderboard.users[2].photo} />
                         <ThirdPlace>3</ThirdPlace>
                     </div>
-                    <LeaderName>User 3</LeaderName>
+                    <LeaderName>{leaderboard.users[2].username}</LeaderName>
                     <div style={{ display: "flex", alignItems: "center", marginTop: "5px" }}>
-                        <TicketLogo src={Tikcet} />
-                        <TicketAmount>331</TicketAmount>
+                        <TicketLogo src={Ticket} />
+                        <TicketAmount>{leaderboard.users[2].ticket}</TicketAmount>
                     </div>
                 </LeaderBlock>
             </LeadersBlock>
@@ -343,72 +370,36 @@ export const LeaderBoardEN = () => {
             <InfoContainer>
                 <InfoBlocks>
                     <div>
-                        <InfoText>10 <YourTicketLogo src={Tikcet} /></InfoText>
+                        <InfoText>{user.ticket} <YourTicketLogo src={Ticket} /></InfoText>
                     </div>
                     <InfoDescription>Your Ticket</InfoDescription>
                 </InfoBlocks>
                 <InfoBlocks>
-                    <InfoText>#1K</InfoText>
+                    <InfoText>#{leaderboard.rank != 0 ? formatCash(leaderboard.rank) : 0}</InfoText>
                     <InfoDescription>Your rank</InfoDescription>
                 </InfoBlocks>
                 <InfoBlocks>
-                    <InfoText>0</InfoText>
+                    <InfoText>{user.refs.length}</InfoText>
                     <InfoDescription>Frens invited</InfoDescription>
                 </InfoBlocks>
             </InfoContainer>
 
             <CopyBlock>
                 <CopyReferalButton onClick={() => copyTextToClipboard(referalText)}>Copy your referral link</CopyReferalButton>
-                <CopyText>Invite premium frens to earn <TicketLogo src={Tikcet} /></CopyText>
+                <CopyText>Invite premium frens to earn <TicketLogo src={Ticket} /></CopyText>
             </CopyBlock>
 
             <YourPlace>
-                <FiledLeaderLogo src={TempLeaderLogo} />
+                <FiledLeaderLogo src={user.photo == "" ? Avatar : user.photo} />
                 <NameBlock>
-                    <FieldLeaderName>User 1000 <YourTeg><YourTegText>You</YourTegText></YourTeg></FieldLeaderName>
-                    <OtherLeaderTicketAmount>11 <TicketLogo src={Tikcet} /></OtherLeaderTicketAmount>
+                    <FieldLeaderName>{user.username}<YourTeg><YourTegText>You</YourTegText></YourTeg></FieldLeaderName>
+                    <OtherLeaderTicketAmount>{user.ticket} <TicketLogo src={Ticket} /></OtherLeaderTicketAmount>
                 </NameBlock>
-                <PlaceinField>1K</PlaceinField>
+                <PlaceinField>{leaderboard.rank != 0 ? formatCash(leaderboard.rank) : 0}</PlaceinField>
             </YourPlace>
 
             <ListLeadersContaier>
-                <FieldsOtherLeaders>
-                    <FiledLeaderLogo src={TempLeaderLogo} />
-                    <NameBlock>
-                        <FieldLeaderName>User 4</FieldLeaderName>
-                        <OtherLeaderTicketAmount>114 <TicketLogo src={Tikcet} /></OtherLeaderTicketAmount>
-                    </NameBlock>
-                    <PlaceinField>4</PlaceinField>
-                </FieldsOtherLeaders>
-                <FieldsOtherLeaders>
-                    <FiledLeaderLogo src={TempLeaderLogo} />
-                    <NameBlock>
-                        <FieldLeaderName>User 5</FieldLeaderName>
-                        <OtherLeaderTicketAmount>89 <TicketLogo src={Tikcet} /></OtherLeaderTicketAmount>
-                    </NameBlock>
-                    <PlaceinField>5</PlaceinField>
-                </FieldsOtherLeaders>
-                <FieldsOtherLeaders>
-                    <FiledLeaderLogo src={TempLeaderLogo} />
-                    <NameBlock>
-                        <FieldLeaderName>User 6</FieldLeaderName>
-                        <OtherLeaderTicketAmount>65 <TicketLogo src={Tikcet} /></OtherLeaderTicketAmount>
-                    </NameBlock>
-                    <PlaceinField>6</PlaceinField>
-                </FieldsOtherLeaders>
-                <FieldsOtherLeaders></FieldsOtherLeaders>
-                <FieldsOtherLeaders></FieldsOtherLeaders>
-                <FieldsOtherLeaders></FieldsOtherLeaders>
-                <FieldsOtherLeaders></FieldsOtherLeaders>
-                <FieldsOtherLeaders></FieldsOtherLeaders>
-                <FieldsOtherLeaders></FieldsOtherLeaders>
-                <FieldsOtherLeaders></FieldsOtherLeaders>
-                <FieldsOtherLeaders></FieldsOtherLeaders>
-                <FieldsOtherLeaders></FieldsOtherLeaders>
-                <FieldsOtherLeaders></FieldsOtherLeaders>
-                <FieldsOtherLeaders></FieldsOtherLeaders>
-                <FieldsOtherLeaders></FieldsOtherLeaders>
-                <FieldsOtherLeaders></FieldsOtherLeaders>
+                {component}
             </ListLeadersContaier>
             <LinksToPage />
         </Container>
