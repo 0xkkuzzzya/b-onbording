@@ -241,7 +241,7 @@ export const MainPageEN = () => {
     useEffect(() => {
         setTimeout(() => {
             setIsLoading(false);
-        }, 3000);
+        }, 1300);
     }, []);
 
 
