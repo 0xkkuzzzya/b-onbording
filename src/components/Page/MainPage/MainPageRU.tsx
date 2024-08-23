@@ -178,6 +178,28 @@ const Text = styled.a`
     align-items: center;
 `
 
+const ContainerLoading = styled.div`
+    width: 100%;
+    height: 100vh;
+    background: #151314;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+
+const LogoLoading = styled.img`
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    @keyframes glowing {
+      0% { background-color: rgb(7, 150, 214); box-shadow: 0 0 10px rgb(7, 150, 214); }
+      50% { background-color: rgb(7, 150, 234); box-shadow: 0 0 25px rgb(7, 150, 234); }
+      100% { background-color: rgb(7, 150, 214); box-shadow: 0 0 10px rgb(7, 150, 214) }
+      }
+      animation: glowing 2000ms infinite;
+      margin-bottom: 40px;
+`
+
 
 export const MainPageRU = () => {
 
@@ -189,7 +211,7 @@ export const MainPageRU = () => {
     useEffect(() => {
         window.Telegram.WebApp.BackButton.hide()
         window.Telegram.WebApp.MainButton.hide()
-        window.Telegram.WebApp.MainButton.onClick(() => {})
+        window.Telegram.WebApp.MainButton.onClick(() => { })
     }, [])
 
     const copyTextToClipboard = async (referalLink: string) => {
@@ -206,89 +228,105 @@ export const MainPageRU = () => {
         CompleteTask(user.user_id, "task6")
     };
 
-    
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 3000);
+    }, []);
+
+
 
     return (
-        <Container>
-            <HeaderBlock>
-                <HeaderMainText>Bytecoin Onboarding</HeaderMainText>
-                <HeaderDescriptionText>Узнайте о Bytecoin и заработайте 10 <TicketLogo src={Ticket} /></HeaderDescriptionText>
-            </HeaderBlock>
+        <>
+            {isLoading ? (
+                <ContainerLoading>
+                    <LogoLoading loading="lazy" src={BytecoinLogo} />
+                </ContainerLoading>
+            ) : (
+                <Container>
+                    <HeaderBlock>
+                        <HeaderMainText>Bytecoin Onboarding</HeaderMainText>
+                        <HeaderDescriptionText>Узнайте о Bytecoin и заработайте 10 <TicketLogo src={Ticket} /></HeaderDescriptionText>
+                    </HeaderBlock>
 
-            <div style={{ width: "100%", marginTop: "20px" }}>
-                <SectionText>Введение</SectionText>
-            </div>
-            <Link to="/StoriesRU" style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
-                <IntroBlock>
-                    <Logoblock>
-                        <IntroLogo src={user.task.task1 ? CompleteLogo : BytecoinLogo} />
-                    </Logoblock>
-                    <TextinsideBlock>Что такое Bytecoin?</TextinsideBlock>
-                </IntroBlock>
-            </Link>
+                    <div style={{ width: "100%", marginTop: "20px" }}>
+                        <SectionText>Введение</SectionText>
+                    </div>
+                    <Link to="/StoriesRU" style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
+                        <IntroBlock>
+                            <Logoblock>
+                                <IntroLogo src={user.task.task1 ? CompleteLogo : BytecoinLogo} />
+                            </Logoblock>
+                            <TextinsideBlock>Что такое Bytecoin?</TextinsideBlock>
+                        </IntroBlock>
+                    </Link>
 
-            <div style={{ width: "100%", marginTop: "20px" }}>
-                <SectionText>Задания</SectionText>
-            </div>
-            <TasksBlock>
-                <Logoblock>
-                    <IntroLogo src={user.task.task2 ? CompleteLogo : Teaher} />
-                </Logoblock>
-                <TextinsideBlock>Время теста</TextinsideBlock>
-            </TasksBlock>
+                    <div style={{ width: "100%", marginTop: "20px" }}>
+                        <SectionText>Задания</SectionText>
+                    </div>
+                    <TasksBlock>
+                        <Logoblock>
+                            <IntroLogo src={user.task.task2 ? CompleteLogo : Teaher} />
+                        </Logoblock>
+                        <TextinsideBlock>Время теста</TextinsideBlock>
+                    </TasksBlock>
 
-            <Link to="https://t.me/bytecoin_ru" style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
-                <TasksBlock>
-                    <Logoblock>
-                        <IntroLogo src={user.task.task3 ? CompleteLogo : Megaphone} />
-                    </Logoblock>
-                    <TextinsideBlock>Подписаться на канал</TextinsideBlock>
-                </TasksBlock>
-            </Link>
+                    <Link to="https://t.me/bytecoin_ru" style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
+                        <TasksBlock>
+                            <Logoblock>
+                                <IntroLogo src={user.task.task3 ? CompleteLogo : Megaphone} />
+                            </Logoblock>
+                            <TextinsideBlock>Подписаться на канал</TextinsideBlock>
+                        </TasksBlock>
+                    </Link>
 
-            <Link to="https://t.me/bytecoin_forum" style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
-                <TasksBlock>
-                    <Logoblock>
-                        <IntroLogo src={user.task.task4 ? CompleteLogo : Speacker} />
-                    </Logoblock>
-                    <TextinsideBlock>Подписаться на форум</TextinsideBlock>
-                </TasksBlock>
-            </Link>
+                    <Link to="https://t.me/bytecoin_forum" style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
+                        <TasksBlock>
+                            <Logoblock>
+                                <IntroLogo src={user.task.task4 ? CompleteLogo : Speacker} />
+                            </Logoblock>
+                            <TextinsideBlock>Подписаться на форум</TextinsideBlock>
+                        </TasksBlock>
+                    </Link>
 
-            <Link to="https://x.com/bytecoin_ton" onClick={() => {CompleteTask(user.user_id, "task5")}} style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
-                <TasksBlock>
-                    <Logoblock>
-                        <IntroLogo src={user.task.task5 ? CompleteLogo : Twitter} />
-                    </Logoblock>
-                    <TextinsideBlock>Подписаться на X</TextinsideBlock>
-                </TasksBlock>
-            </Link>
+                    <Link to="https://x.com/bytecoin_ton" onClick={() => { CompleteTask(user.user_id, "task5") }} style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
+                        <TasksBlock>
+                            <Logoblock>
+                                <IntroLogo src={user.task.task5 ? CompleteLogo : Twitter} />
+                            </Logoblock>
+                            <TextinsideBlock>Подписаться на X</TextinsideBlock>
+                        </TasksBlock>
+                    </Link>
 
-            <TasksBlock style={{marginTop: "20px"}} onClick={openAnotherBot}>
-                <Logoblock>
-                    <IntroLogo src={user.task.task6 ? CompleteLogo : Diamond} />
-                </Logoblock>
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                    <TextinsideBlock>Попробуйте демо-версию</TextinsideBlock>
-                    <TasksDescription>Майнинг Bytecoin в тестовой сети TON</TasksDescription>
-                </div>
-            </TasksBlock>
+                    <TasksBlock style={{ marginTop: "20px" }} onClick={openAnotherBot}>
+                        <Logoblock>
+                            <IntroLogo src={user.task.task6 ? CompleteLogo : Diamond} />
+                        </Logoblock>
+                        <div style={{ display: "flex", flexDirection: "column" }}>
+                            <TextinsideBlock>Попробуйте демо-версию</TextinsideBlock>
+                            <TasksDescription>Майнинг Bytecoin в тестовой сети TON</TasksDescription>
+                        </div>
+                    </TasksBlock>
 
-            <div style={{ width: "100%", marginTop: "20px" }}>
-                <SectionText>Ваша реферальная ссылка</SectionText>
-            </div>
-            <ReferalBlock>
-                <ReferalText>{referalText}</ReferalText>
-                <CopiedBlock onClick={() => copyTextToClipboard(referalText)}>
-                    <IntroLogo src={Copy} />
-                </CopiedBlock>
-            </ReferalBlock>
-            <a href={`https://t.me/share/url?url=${referalText}`} target="_blank" style={{ width: "100%", marginTop: "20px" }}>
-                <ShareButton>Поделиться</ShareButton>
-            </a>
-            <div style={{ width: "100%" }}>
-                <Text>Вы заработаете 5<TicketLogo style={{marginLeft: "0px"}} src={Ticket} /> за премиум-пользователя.</Text>
-            </div>
-        </Container>
+                    <div style={{ width: "100%", marginTop: "20px" }}>
+                        <SectionText>Ваша реферальная ссылка</SectionText>
+                    </div>
+                    <ReferalBlock>
+                        <ReferalText>{referalText}</ReferalText>
+                        <CopiedBlock onClick={() => copyTextToClipboard(referalText)}>
+                            <IntroLogo src={Copy} />
+                        </CopiedBlock>
+                    </ReferalBlock>
+                    <a href={`https://t.me/share/url?url=${referalText}`} target="_blank" style={{ width: "100%", marginTop: "20px" }}>
+                        <ShareButton>Поделиться</ShareButton>
+                    </a>
+                    <div style={{ width: "100%" }}>
+                        <Text>Вы заработаете 5<TicketLogo style={{ marginLeft: "0px" }} src={Ticket} /> за премиум-пользователя.</Text>
+                    </div>
+                </Container>
+            )}
+        </>
     )
 }

@@ -27,26 +27,15 @@ const routes = [
 
 export const MainIndex = () => {
 
-    const [isLoading, setIsLoading] = useState(true);
 
-    useEffect(() => {
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 3000);
-    }, []);
 
     return (
         <Container>
-            {isLoading ? (
-                <MainLoadingPage />
-            ) : (
-                <Routes>
-                    {routes.map(({ path, element }) =>
-                        <Route key={path} path={path} element={element} />
-                    )}
-                </Routes>
-            )}
-
+            <Routes>
+                {routes.map(({ path, element }) =>
+                    <Route key={path} path={path} element={element} />
+                )}
+            </Routes>
         </Container>
     )
 }
