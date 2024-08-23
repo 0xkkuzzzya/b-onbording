@@ -1,4 +1,4 @@
-import { useGetGeoposition } from "../../store/geoposition"
+import { useGetGeoposition } from "../../../store/useGeoposition"
 import { LinksToPage } from "../Footer/LinksToPage"
 import { LeaderBoardEN } from "./LeaderBoardEN"
 import { LeaderBoardRU } from "./LeaderBoardRU"

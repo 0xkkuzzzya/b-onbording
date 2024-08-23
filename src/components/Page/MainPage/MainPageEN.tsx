@@ -3,12 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Ticket from '../../../assets/Ticket.webp'
 import BytecoinLogo from '../../../assets/BytecoinLogo.webp'
-import Teaher from '../../../assets/Teacher.webp'
+import CompleteLogo from '../../../assets/Complete.webp'
+import Teacher from '../../../assets/Teacher.webp'
 import Speacker from '../../../assets/Speacker.webp'
 import Megaphone from '../../../assets/Megaphone.webp'
 import Twitter from '../../../assets/X.webp'
 import Diamond from '../../../assets/Diamond.png'
 import Copy from '../../../assets/Copy.png'
+import { useUser } from '../../../store/useUsers';
 
 const Container = styled.div`
     width: 80%;
@@ -183,8 +185,9 @@ export const MainPageEN = () => {
 
     const [referal, setReferal] = useState()
     const [geoposition, setGeoposition] = useState("")
+    const [user, setUser] = useUser()
 
-    const referalText = "https://t.me/+5435hadsaAHFSssdf"
+    const referalText = `https://t.me/bytecoin_onboarding_dev_bot/app?startapp=ref_${user.user_id}`
 
     useEffect(() => {
         window.Telegram.WebApp.BackButton.hide()
@@ -222,7 +225,7 @@ export const MainPageEN = () => {
                 <IntroBlock>
                     <Logoblock>
                         <IntroLogoGradient>
-                            <IntroLogo src={BytecoinLogo} />
+                            <IntroLogo src={user.task.task1 ? CompleteLogo : BytecoinLogo} />
                         </IntroLogoGradient>
                     </Logoblock>
                     <TextinsideBlock>Whats is Bytecoin?</TextinsideBlock>
@@ -234,7 +237,7 @@ export const MainPageEN = () => {
             </div>
             <TasksBlock>
                 <Logoblock>
-                    <IntroLogo src={Teaher} />
+                    <IntroLogo src={user.task.task2 ? CompleteLogo : Teacher} />
                 </Logoblock>
                 <TextinsideBlock>Test Time</TextinsideBlock>
             </TasksBlock>
@@ -243,7 +246,7 @@ export const MainPageEN = () => {
                 style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
                 <TasksBlock>
                     <Logoblock>
-                        <IntroLogo src={Megaphone} />
+                        <IntroLogo src={user.task.task3 ? CompleteLogo : Megaphone} />
                     </Logoblock>
                     <TextinsideBlock>Subscribe to channel</TextinsideBlock>
                 </TasksBlock>
@@ -253,17 +256,16 @@ export const MainPageEN = () => {
                 style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
                 <TasksBlock>
                     <Logoblock>
-                        <IntroLogo src={Speacker} />
+                        <IntroLogo src={user.task.task4 ? CompleteLogo : Speacker} />
                     </Logoblock>
                     <TextinsideBlock>Join forum</TextinsideBlock>
                 </TasksBlock>
             </Link>
 
-            <Link to=""
-                style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
+            <Link to="https://x.com/bytecoin_ton" style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
                 <TasksBlock>
                     <Logoblock style={{ background: "#000" }}>
-                        <IntroLogo src={Twitter} />
+                        <IntroLogo src={user.task.task5 ? CompleteLogo : Twitter} />
                     </Logoblock>
                     <TextinsideBlock>Follow our X</TextinsideBlock>
                 </TasksBlock>
@@ -271,7 +273,7 @@ export const MainPageEN = () => {
 
             <TasksBlock style={{marginTop: "20px"}} onClick={openAnotherBot}>
                 <Logoblock>
-                    <IntroLogo src={Diamond} />
+                    <IntroLogo src={user.task.task6 ? CompleteLogo : Diamond} />
                 </Logoblock>
                 <div style={{ display: "flex", flexDirection: "column" }}>
                     <TextinsideBlock>Try demo</TextinsideBlock>
@@ -288,7 +290,7 @@ export const MainPageEN = () => {
                     <IntroLogo src={Copy} />
                 </CopiedBlock>
             </ReferalBlock>
-            <a href="https://t.me/share/url?url=https://t.me/bytecoindev_bot&text=join us to test our project!" target="_blank" style={{ width: "100%", marginTop: "20px" }}>
+            <a href={`https://t.me/share/url?url=${referalText}`} target="_blank" style={{ width: "100%", marginTop: "20px" }}>
                 <ShareButton >Share</ShareButton>
             </a>
             <div style={{ width: "100%" }}>

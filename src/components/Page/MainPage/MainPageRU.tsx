@@ -3,12 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Ticket from '../../../assets/Ticket.webp'
 import BytecoinLogo from '../../../assets/BytecoinLogo.webp'
+import CompleteLogo from '../../../assets/Complete.webp'
 import Teaher from '../../../assets/Teacher.webp'
 import Speacker from '../../../assets/Speacker.webp'
 import Megaphone from '../../../assets/Megaphone.webp'
 import Twitter from '../../../assets/X.webp'
 import Diamond from '../../../assets/Diamond.png'
 import Copy from '../../../assets/Copy.png'
+import { useUser } from '../../../store/useUsers';
 
 const Container = styled.div`
     width: 80%;
@@ -177,8 +179,9 @@ const Text = styled.a`
 export const MainPageRU = () => {
 
     const [referal, setReferal] = useState()
+    const [user, setUser] = useUser()
 
-    const referalText = "https://t.me/+5435hadsaAHFSssdf"
+    const referalText = `https://t.me/bytecoin_onboarding_dev_bot/app?startapp=ref_${user.user_id}`
 
     useEffect(() => {
         window.Telegram.WebApp.BackButton.hide()
@@ -215,7 +218,7 @@ export const MainPageRU = () => {
                 <IntroBlock>
                     <Logoblock>
                         <IntroLogoGradient>
-                            <IntroLogo src={BytecoinLogo} />
+                            <IntroLogo src={user.task.task1 ? CompleteLogo : BytecoinLogo} />
                         </IntroLogoGradient>
                     </Logoblock>
                     <TextinsideBlock>Что такое Bytecoin?</TextinsideBlock>
@@ -227,7 +230,7 @@ export const MainPageRU = () => {
             </div>
             <TasksBlock>
                 <Logoblock>
-                    <IntroLogo src={Teaher} />
+                    <IntroLogo src={user.task.task2 ? CompleteLogo : Teaher} />
                 </Logoblock>
                 <TextinsideBlock>Время теста</TextinsideBlock>
             </TasksBlock>
@@ -235,7 +238,7 @@ export const MainPageRU = () => {
             <Link to="https://t.me/bytecoin_ru" style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
                 <TasksBlock>
                     <Logoblock>
-                        <IntroLogo src={Megaphone} />
+                        <IntroLogo src={user.task.task3 ? CompleteLogo : Megaphone} />
                     </Logoblock>
                     <TextinsideBlock>Подписаться на канал</TextinsideBlock>
                 </TasksBlock>
@@ -244,7 +247,7 @@ export const MainPageRU = () => {
             <Link to="https://t.me/bytecoin_forum" style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
                 <TasksBlock>
                     <Logoblock>
-                        <IntroLogo src={Speacker} />
+                        <IntroLogo src={user.task.task4 ? CompleteLogo : Speacker} />
                     </Logoblock>
                     <TextinsideBlock>Подписаться на форум</TextinsideBlock>
                 </TasksBlock>
@@ -253,7 +256,7 @@ export const MainPageRU = () => {
             <Link to="https://x.com/bytecoin_ton" style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
                 <TasksBlock>
                     <Logoblock style={{ background: "#000" }}>
-                        <IntroLogo src={Twitter} />
+                        <IntroLogo src={user.task.task5 ? CompleteLogo : Twitter} />
                     </Logoblock>
                     <TextinsideBlock>Подписаться на X</TextinsideBlock>
                 </TasksBlock>
@@ -261,7 +264,7 @@ export const MainPageRU = () => {
 
             <TasksBlock style={{marginTop: "20px"}} onClick={openAnotherBot}>
                 <Logoblock>
-                    <IntroLogo src={Diamond} />
+                    <IntroLogo src={user.task.task6 ? CompleteLogo : Diamond} />
                 </Logoblock>
                 <div style={{ display: "flex", flexDirection: "column" }}>
                     <TextinsideBlock>Попробуйте демо-версию</TextinsideBlock>
@@ -278,7 +281,7 @@ export const MainPageRU = () => {
                     <IntroLogo src={Copy} />
                 </CopiedBlock>
             </ReferalBlock>
-            <a href="https://t.me/share/url?url=https://t.me/bytecoindev_bot&text=join us to test our project!" target="_blank" style={{ width: "100%", marginTop: "20px" }}>
+            <a href={`https://t.me/share/url?url=${referalText}`} target="_blank" style={{ width: "100%", marginTop: "20px" }}>
                 <ShareButton>Поделиться</ShareButton>
             </a>
             <div style={{ width: "100%" }}>

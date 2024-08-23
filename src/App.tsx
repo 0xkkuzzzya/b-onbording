@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { MainIndex } from './components';
-import { useGetGeoposition } from './components/store/geoposition';
+import { useGeoposition } from './store/useGeoposition';
+import { InitDataUnsafe } from './type/tg_type';
+import { GetUser, GetWaitlistUserCheck } from './api/user';
+import { useUser, useWaitlistUser } from './store/useUsers';
 
 const Container = styled.div`
 	max-width: 100%;
@@ -14,20 +17,20 @@ const Container = styled.div`
 	}
 `
 
-interface User {
-	language_code: string;
-	country: string;
-	id: number;
-}
-
-interface InitDataUnsafe {
-	user?: User;
-}
-
 
 function App() {
 
-	const [geoposition, setGeoposition] = useGetGeoposition()
+	const [geoposition, setGeoposition] = useGeoposition()
+	const [user, setUser] = useUser()
+	const [waitlistExist, setWaitlistUser] = useWaitlistUser()
+
+	async function main(user_id: string) {
+		let user = await GetUser(user_id)
+		setUser(user)
+
+		let exist = await GetWaitlistUserCheck(user_id)
+		setWaitlistUser({exist})
+	}
 
 	useEffect(() => {
 		Telegram.WebApp.ready();
@@ -41,7 +44,13 @@ function App() {
 		} else {
 			setGeoposition({ country: "" })
 		}
+		main((initDataUnsafe.user?.id)?.toString()!)
+	}, [])
 
+	useEffect(() => {
+		Telegram.WebApp.ready();
+		const initDataUnsafe: InitDataUnsafe = Telegram.WebApp.initDataUnsafe as InitDataUnsafe;
+		var t = setInterval(() => {main((initDataUnsafe.user?.id)?.toString()!)}, 15000);
 	}, [])
 
 	return (

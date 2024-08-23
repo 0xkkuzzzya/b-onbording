@@ -1,4 +1,4 @@
-import { useGetGeoposition } from "../../store/geoposition"
+import { useGetGeoposition } from "../../../store/useGeoposition"
 import { LinksToPage } from "../Footer/LinksToPage"
 import { BuyMinerEN } from "./BuyMinerEN"
 import { BuyMinerRU } from "./BuyMinerRU"

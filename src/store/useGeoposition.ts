@@ -7,4 +7,4 @@ interface Country {
 
 const defaultStateCountry: Country = { country: "" };
 
-export const [useGetGeoposition] = createStore(defaultStateCountry);
+export const [useGeoposition] = createStore(defaultStateCountry);

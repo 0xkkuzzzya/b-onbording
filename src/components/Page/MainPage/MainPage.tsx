@@ -1,4 +1,4 @@
-import { useGetGeoposition } from "../../store/geoposition"
+import { useGeoposition } from "../../../store/useGeoposition"
 import { LinksToPage } from "../Footer/LinksToPage"
 import { MainPageEN } from "./MainPageEN"
 import { MainPageRU } from "./MainPageRU"
@@ -7,7 +7,7 @@ import { MainPageRU } from "./MainPageRU"
 
 export const MainPage = () => {
     
-    const [geoposition, setGeoposition] = useGetGeoposition()
+    const [geoposition, setGeoposition] = useGeoposition()
 
     return (
         <>
