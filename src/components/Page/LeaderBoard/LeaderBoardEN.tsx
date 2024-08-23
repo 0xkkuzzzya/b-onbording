@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import Ticket from '../../../assets/Ticket.webp'
-import TempLeaderLogo from '../../../assets/BytecoinLogo.webp'
+import LeaderBoardGif from '../../../assets/LoadingLeaderboard.gif'
 import Cup from '../../../assets/Cup.webp'
 import Avatar from '../../../assets/Avatar.webp'
 import { LinksToPage } from "../Footer/LinksToPage";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLeaderboard, useUser } from "../../../store/useUsers";
 import { BOT } from "../../../const";
 
@@ -286,6 +286,21 @@ const YourTegText = styled.a`
     margin-top: 0px;
 `
 
+const ContainerLoading = styled.div`
+    width: 100%;
+    height: 100vh;
+    background: #151314;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+
+const LogoLoading = styled.img`
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+`
+
 
 export const LeaderBoardEN = () => {
 
@@ -314,7 +329,7 @@ export const LeaderBoardEN = () => {
 
     let users = leaderboard.users.slice(3);
 
-    let component = users.map((user, index) => 
+    let component = users.map((user, index) =>
         <FieldsOtherLeaders>
             <FiledLeaderLogo src={user.photo} />
             <NameBlock>
@@ -325,83 +340,99 @@ export const LeaderBoardEN = () => {
         </FieldsOtherLeaders>
     )
 
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 3000);
+    }, []);
+
     return (
-        <Container>
-            <Header>
-                <HeaderText><HedaerLogo src={Cup} />Leaderboard</HeaderText>
-            </Header>
+        <>
+            {isLoading ? (
+                <ContainerLoading>
+                    <LogoLoading loading="lazy" src={LeaderBoardGif} />
+                </ContainerLoading>
+            ) : (
+                <Container>
+                    <Header>
+                        <HeaderText><HedaerLogo src={Cup} />Leaderboard</HeaderText>
+                    </Header>
 
-            <LeadersBlock>
-                <LeaderBlock>
-                    <div style={{ display: "flex", position: 'relative' }}>
-                        <LeadersLogo src={leaderboard.users[1].photo} />
-                        <SecondPlace>2</SecondPlace>
-                    </div>
-                    <LeaderName>{leaderboard.users[1].username}</LeaderName>
-                    <div style={{ display: "flex", alignItems: "center", marginTop: "5px" }}>
-                        <TicketLogo src={Ticket} />
-                        <TicketAmount>{leaderboard.users[1].ticket}</TicketAmount>
-                    </div>
-                </LeaderBlock>
-                <LeaderBlock style={{ marginBottom: "35px", position: 'relative' }}>
-                    <div>
-                        <Top1LeaderLogo src={leaderboard.users[0].photo} />
-                        <FiestPlace>1</FiestPlace>
-                    </div>
-                    <LeaderName>{leaderboard.users[0].username}</LeaderName>
-                    <div style={{ display: "flex", alignItems: "center", marginTop: "5px" }}>
-                        <TicketLogo src={Ticket} />
-                        <TicketAmount>{leaderboard.users[0].ticket}</TicketAmount>
-                    </div>
-                </LeaderBlock>
-                <LeaderBlock>
-                    <div style={{ display: "flex", position: 'relative'}}>
-                        <LeadersLogo src={leaderboard.users[2].photo} />
-                        <ThirdPlace>3</ThirdPlace>
-                    </div>
-                    <LeaderName>{leaderboard.users[2].username}</LeaderName>
-                    <div style={{ display: "flex", alignItems: "center", marginTop: "5px" }}>
-                        <TicketLogo src={Ticket} />
-                        <TicketAmount>{leaderboard.users[2].ticket}</TicketAmount>
-                    </div>
-                </LeaderBlock>
-            </LeadersBlock>
+                    <LeadersBlock>
+                        <LeaderBlock>
+                            <div style={{ display: "flex", position: 'relative' }}>
+                                <LeadersLogo src={leaderboard.users[1].photo} />
+                                <SecondPlace>2</SecondPlace>
+                            </div>
+                            <LeaderName>{leaderboard.users[1].username}</LeaderName>
+                            <div style={{ display: "flex", alignItems: "center", marginTop: "5px" }}>
+                                <TicketLogo src={Ticket} />
+                                <TicketAmount>{leaderboard.users[1].ticket}</TicketAmount>
+                            </div>
+                        </LeaderBlock>
+                        <LeaderBlock style={{ marginBottom: "35px", position: 'relative' }}>
+                            <div>
+                                <Top1LeaderLogo src={leaderboard.users[0].photo} />
+                                <FiestPlace>1</FiestPlace>
+                            </div>
+                            <LeaderName>{leaderboard.users[0].username}</LeaderName>
+                            <div style={{ display: "flex", alignItems: "center", marginTop: "5px" }}>
+                                <TicketLogo src={Ticket} />
+                                <TicketAmount>{leaderboard.users[0].ticket}</TicketAmount>
+                            </div>
+                        </LeaderBlock>
+                        <LeaderBlock>
+                            <div style={{ display: "flex", position: 'relative' }}>
+                                <LeadersLogo src={leaderboard.users[2].photo} />
+                                <ThirdPlace>3</ThirdPlace>
+                            </div>
+                            <LeaderName>{leaderboard.users[2].username}</LeaderName>
+                            <div style={{ display: "flex", alignItems: "center", marginTop: "5px" }}>
+                                <TicketLogo src={Ticket} />
+                                <TicketAmount>{leaderboard.users[2].ticket}</TicketAmount>
+                            </div>
+                        </LeaderBlock>
+                    </LeadersBlock>
 
-            <InfoContainer>
-                <InfoBlocks>
-                    <div>
-                        <InfoText>{user.ticket} <YourTicketLogo src={Ticket} /></InfoText>
-                    </div>
-                    <InfoDescription>Your Ticket</InfoDescription>
-                </InfoBlocks>
-                <InfoBlocks>
-                    <InfoText>#{leaderboard.rank != 0 ? formatCash(leaderboard.rank) : 0}</InfoText>
-                    <InfoDescription>Your rank</InfoDescription>
-                </InfoBlocks>
-                <InfoBlocks>
-                    <InfoText>{user.refs.length}</InfoText>
-                    <InfoDescription>Frens invited</InfoDescription>
-                </InfoBlocks>
-            </InfoContainer>
+                    <InfoContainer>
+                        <InfoBlocks>
+                            <div>
+                                <InfoText>{user.ticket} <YourTicketLogo src={Ticket} /></InfoText>
+                            </div>
+                            <InfoDescription>Your Ticket</InfoDescription>
+                        </InfoBlocks>
+                        <InfoBlocks>
+                            <InfoText>#{leaderboard.rank != 0 ? formatCash(leaderboard.rank) : 0}</InfoText>
+                            <InfoDescription>Your rank</InfoDescription>
+                        </InfoBlocks>
+                        <InfoBlocks>
+                            <InfoText>{user.refs.length}</InfoText>
+                            <InfoDescription>Frens invited</InfoDescription>
+                        </InfoBlocks>
+                    </InfoContainer>
 
-            <CopyBlock>
-                <CopyReferalButton onClick={() => copyTextToClipboard(referalText)}>Copy your referral link</CopyReferalButton>
-                <CopyText>Invite premium frens to earn <TicketLogo src={Ticket} /></CopyText>
-            </CopyBlock>
+                    <CopyBlock>
+                        <CopyReferalButton onClick={() => copyTextToClipboard(referalText)}>Copy your referral link</CopyReferalButton>
+                        <CopyText>Invite premium frens to earn <TicketLogo src={Ticket} /></CopyText>
+                    </CopyBlock>
 
-            <YourPlace>
-                <FiledLeaderLogo src={user.photo == "" ? Avatar : user.photo} />
-                <NameBlock>
-                    <FieldLeaderName>{user.username}<YourTeg><YourTegText>You</YourTegText></YourTeg></FieldLeaderName>
-                    <OtherLeaderTicketAmount>{user.ticket} <TicketLogo src={Ticket} /></OtherLeaderTicketAmount>
-                </NameBlock>
-                <PlaceinField>{leaderboard.rank != 0 ? formatCash(leaderboard.rank) : 0}</PlaceinField>
-            </YourPlace>
+                    <YourPlace>
+                        <FiledLeaderLogo src={user.photo == "" ? Avatar : user.photo} />
+                        <NameBlock>
+                            <FieldLeaderName>{user.username}<YourTeg><YourTegText>You</YourTegText></YourTeg></FieldLeaderName>
+                            <OtherLeaderTicketAmount>{user.ticket} <TicketLogo src={Ticket} /></OtherLeaderTicketAmount>
+                        </NameBlock>
+                        <PlaceinField>{leaderboard.rank != 0 ? formatCash(leaderboard.rank) : 0}</PlaceinField>
+                    </YourPlace>
 
-            <ListLeadersContaier>
-                {component}
-            </ListLeadersContaier>
-            <LinksToPage />
-        </Container>
+                    <ListLeadersContaier>
+                        {component}
+                    </ListLeadersContaier>
+                    <LinksToPage />
+                </Container>
+            )}
+        </>
     )
 }

@@ -11,18 +11,18 @@ const Container = styled.div`
 `
 
 const Logo = styled.img`
-    width: 100px;
-    height: 100px;
+    width: 75px;
+    height: 75px;
     border-radius: 50%;
 `
 
 
 export const LeadeboardLoadingPage = () => {
-    return (
+    return(
         <>
-            <Container>
-                <Logo loading="lazy" src={LeaderBoardGif} />
-            </Container>
+        <Container>
+            <Logo loading="lazy" src={LeaderBoardGif}/>
+        </Container>
         </>
     )
 }

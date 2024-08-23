@@ -7,7 +7,7 @@ import { LeaderBoardEN } from "./LeaderBoardEN"
 import { LeaderBoardRU } from "./LeaderBoardRU"
 import { InitDataUnsafe } from "../../../type/tg_type"
 import { CircularProgress } from "@mui/material"
-import { LeadeboardLoadingPage } from "../Loading/LeaderboardLoading"
+import { LeadeboardLoadingPage } from "../Loading/Loading"
 
 
 
@@ -59,14 +59,7 @@ export const LeaderBoard = () => {
 
 	return (
 		<>
-			{isLoading ? (
-				<LeadeboardLoadingPage/>
-			) : (
-				<>
-					{leaderboard.users.length < 3 ? <LeadeboardLoadingPage /> : geoposition.country == "ru" || geoposition.country == "kz" || geoposition.country == "by" ? <LeaderBoardRU /> : <LeaderBoardEN />}
-					< LinksToPage />
-				</>
-			)}
+			{leaderboard.users.length < 3 ? <LeadeboardLoadingPage /> : geoposition.country == "ru" || geoposition.country == "kz" || geoposition.country == "by" ? <LeaderBoardRU /> : <LeaderBoardEN />}
 		</>
 	)
 }

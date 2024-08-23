@@ -6,8 +6,6 @@ import { LeaderBoard } from "./Page/LeaderBoard/LeaderBoard";
 import { LinksToPage } from "./Page/Footer/LinksToPage";
 import { StoriesPageRU } from "./Page/MainPage/StoriesRU";
 import { BuyMiner } from "./Page/BuyMiner/BuyMiner";
-import { useEffect, useState } from "react";
-import { MainLoadingPage } from "./Page/Loading/MainLoadingPage";
 
 const Container = styled.div`
     width: 100%;

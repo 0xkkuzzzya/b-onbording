@@ -13,6 +13,7 @@ import Copy from '../../../assets/Copy.png'
 import { useUser } from '../../../store/useUsers';
 import { CompleteTask } from '../../../api/user';
 import { BOT } from '../../../const';
+import { LinksToPage } from '../Footer/LinksToPage';
 
 const Container = styled.div`
     width: 80%;
@@ -336,6 +337,7 @@ export const MainPageEN = () => {
                     <div style={{ width: "100%" }}>
                         <Text>You will earn 5<TicketLogo style={{ margin: "0px 3px" }} src={Ticket} /> for a premium user.</Text>
                     </div>
+                    <LinksToPage />
                 </Container>
             )}
         </>
