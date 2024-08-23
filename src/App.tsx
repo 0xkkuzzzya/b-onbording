@@ -52,7 +52,7 @@ function App() {
 			setGeoposition({ country: "" })
 		}
 		//main("765798766")
-		main(initDataUnsafe.user?.id.toString()!, initDataUnsafe.start_param)
+		main(initDataUnsafe.user?.id.toString()!, initDataUnsafe.start_param?.slice(4))
 	}, [])
 
 	useEffect(() => {
@@ -60,7 +60,7 @@ function App() {
 		const initDataUnsafe: InitDataUnsafe = Telegram.WebApp.initDataUnsafe as InitDataUnsafe;
 		var t = setInterval(() => {
 			//main("765798766")
-			main(initDataUnsafe.user?.id.toString()!, initDataUnsafe.start_param)
+			main(initDataUnsafe.user?.id.toString()!, initDataUnsafe.start_param?.slice(4))
 		}, 15000);
 	}, [])
 

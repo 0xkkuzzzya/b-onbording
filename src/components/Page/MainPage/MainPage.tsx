@@ -28,7 +28,7 @@ export const MainPage = () => {
 
 		const initDataUnsafe: InitDataUnsafe = Telegram.WebApp.initDataUnsafe as InitDataUnsafe;
 		//main("765798766")
-        main(initDataUnsafe.user?.id.toString()!, initDataUnsafe.start_param)
+        main(initDataUnsafe.user?.id.toString()!, initDataUnsafe.start_param?.slice(4))
 	}, [])
 
     return (
