@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Ticket from '../../../assets/Ticket.webp'
 import TempLeaderLogo from '../../../assets/BytecoinLogo.webp'
 import Cup from '../../../assets/Cup.webp'
+import Avatar from '../../../assets/Avatar.webp'
 import { LinksToPage } from "../Footer/LinksToPage";
 import { useEffect } from "react";
 import { useLeaderboard, useUser } from "../../../store/useUsers";
@@ -311,6 +312,19 @@ export const LeaderBoardEN = () => {
         if (n >= 1e3) return +(n / 1e3).toFixed(1) + "K";
     };
 
+    let users = leaderboard.users.slice(3);
+
+    let component = users.map((user, index) => 
+        <FieldsOtherLeaders>
+            <FiledLeaderLogo src={user.photo} />
+            <NameBlock>
+                <FieldLeaderName>{user.username}</FieldLeaderName>
+                <OtherLeaderTicketAmount>{user.ticket} <TicketLogo src={Ticket} /></OtherLeaderTicketAmount>
+            </NameBlock>
+            <PlaceinField>{index + 4}</PlaceinField>
+        </FieldsOtherLeaders>
+    )
+
     return (
         <Container>
             <Header>
@@ -320,13 +334,13 @@ export const LeaderBoardEN = () => {
             <LeadersBlock>
                 <LeaderBlock>
                     <div style={{ display: "flex", position: 'relative' }}>
-                        <LeadersLogo src={TempLeaderLogo} />
+                        <LeadersLogo src={leaderboard.users[1].photo} />
                         <SecondPlace>2</SecondPlace>
                     </div>
-                    <LeaderName>User 1</LeaderName>
+                    <LeaderName>{leaderboard.users[1].username}</LeaderName>
                     <div style={{ display: "flex", alignItems: "center", marginTop: "5px" }}>
                         <TicketLogo src={Ticket} />
-                        <TicketAmount>777</TicketAmount>
+                        <TicketAmount>{leaderboard.users[1].ticket}</TicketAmount>
                     </div>
                 </LeaderBlock>
                 <LeaderBlock style={{ marginBottom: "35px", position: 'relative' }}>
@@ -342,13 +356,13 @@ export const LeaderBoardEN = () => {
                 </LeaderBlock>
                 <LeaderBlock>
                     <div style={{ display: "flex", position: 'relative'}}>
-                        <LeadersLogo src={TempLeaderLogo} />
+                        <LeadersLogo src={leaderboard.users[2].photo} />
                         <ThirdPlace>3</ThirdPlace>
                     </div>
-                    <LeaderName>User 3</LeaderName>
+                    <LeaderName>{leaderboard.users[2].username}</LeaderName>
                     <div style={{ display: "flex", alignItems: "center", marginTop: "5px" }}>
                         <TicketLogo src={Ticket} />
-                        <TicketAmount>331</TicketAmount>
+                        <TicketAmount>{leaderboard.users[2].ticket}</TicketAmount>
                     </div>
                 </LeaderBlock>
             </LeadersBlock>
@@ -361,7 +375,7 @@ export const LeaderBoardEN = () => {
                     <InfoDescription>Your Ticket</InfoDescription>
                 </InfoBlocks>
                 <InfoBlocks>
-                    <InfoText>#{formatCash(leaderboard.rank)}</InfoText>
+                    <InfoText>#{leaderboard.rank != 0 ? formatCash(leaderboard.rank) : 0}</InfoText>
                     <InfoDescription>Your rank</InfoDescription>
                 </InfoBlocks>
                 <InfoBlocks>
@@ -376,41 +390,16 @@ export const LeaderBoardEN = () => {
             </CopyBlock>
 
             <YourPlace>
-                <FiledLeaderLogo src={user.photo} />
+                <FiledLeaderLogo src={user.photo == "" ? Avatar : user.photo} />
                 <NameBlock>
                     <FieldLeaderName>{user.username}<YourTeg><YourTegText>You</YourTegText></YourTeg></FieldLeaderName>
                     <OtherLeaderTicketAmount>{user.ticket} <TicketLogo src={Ticket} /></OtherLeaderTicketAmount>
                 </NameBlock>
-                <PlaceinField>1K</PlaceinField>
+                <PlaceinField>{leaderboard.rank != 0 ? formatCash(leaderboard.rank) : 0}</PlaceinField>
             </YourPlace>
 
             <ListLeadersContaier>
-                <FieldsOtherLeaders>
-                    <FiledLeaderLogo src={TempLeaderLogo} />
-                    <NameBlock>
-                        <FieldLeaderName>User 4</FieldLeaderName>
-                        <OtherLeaderTicketAmount>114 <TicketLogo src={Ticket} /></OtherLeaderTicketAmount>
-                    </NameBlock>
-                    <PlaceinField>4</PlaceinField>
-                </FieldsOtherLeaders>
-                <FieldsOtherLeaders>
-                    <FiledLeaderLogo src={TempLeaderLogo} />
-                    <NameBlock>
-                        <FieldLeaderName>User 5</FieldLeaderName>
-                        <OtherLeaderTicketAmount>89 <TicketLogo src={Ticket} /></OtherLeaderTicketAmount>
-                    </NameBlock>
-                    <PlaceinField>5</PlaceinField>
-                </FieldsOtherLeaders>
-                <FieldsOtherLeaders>
-                    <FiledLeaderLogo src={TempLeaderLogo} />
-                    <NameBlock>
-                        <FieldLeaderName>User 6</FieldLeaderName>
-                        <OtherLeaderTicketAmount>65 <TicketLogo src={Ticket} /></OtherLeaderTicketAmount>
-                    </NameBlock>
-                    <PlaceinField>6</PlaceinField>
-                </FieldsOtherLeaders>
-                <FieldsOtherLeaders></FieldsOtherLeaders>
-                <FieldsOtherLeaders></FieldsOtherLeaders>
+                {component}
             </ListLeadersContaier>
             <LinksToPage />
         </Container>

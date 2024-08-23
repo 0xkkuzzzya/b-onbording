@@ -10,35 +10,36 @@ import { InitDataUnsafe } from "../../../type/tg_type"
 
 
 export const MainPage = () => {
-    
-    const [geoposition, setGeoposition] = useGeoposition()
-    const [user, setUser] = useUser()
-	const [waitlistExist, setWaitlistUser] = useWaitlistUser()
-    const [leaderboard, setLeaderboard] = useLeaderboard()
 
-    async function main(user_id: string, ref?: string) {
+	const [geoposition, setGeoposition] = useGeoposition()
+	const [user, setUser] = useUser()
+	const [waitlistExist, setWaitlistUser] = useWaitlistUser()
+	const [leaderboard, setLeaderboard] = useLeaderboard()
+
+	async function main(user_id: string, ref?: string) {
 		let user = await GetUser(user_id, ref)
 		setUser(user)
 
 		let exist = await GetWaitlistUserCheck(user_id)
-		setWaitlistUser({exist})
+		setWaitlistUser({ exist })
 
-        let us = await GetTop(user_id)
+		let us = await GetTop(user_id)
+		console.log(us)
 		setLeaderboard({
-		    users: us.users!,
-		    rank: us.rank!
+			users: us.users!,
+			rank: us.rank!
 		})
 	}
 
-    useEffect(() => {
+	useEffect(() => {
 		Telegram.WebApp.ready();
 
 		const initDataUnsafe: InitDataUnsafe = Telegram.WebApp.initDataUnsafe as InitDataUnsafe;
 		//main("765798766")
-        main(initDataUnsafe.user?.id.toString()!, initDataUnsafe.start_param?.slice(4))
+		main(initDataUnsafe.user?.id.toString()!, initDataUnsafe.start_param?.slice(4))
 	}, [])
 
-    useEffect(() => {
+	useEffect(() => {
 		Telegram.WebApp.ready();
 		const initDataUnsafe: InitDataUnsafe = Telegram.WebApp.initDataUnsafe as InitDataUnsafe;
 		var t = setInterval(() => {
@@ -47,10 +48,10 @@ export const MainPage = () => {
 		}, 15000);
 	}, [])
 
-    return (
-        <>
-            {geoposition.country == "ru" || geoposition.country == "kz" || geoposition.country == "by" ? <MainPageRU /> : <MainPageEN /> }
-            <LinksToPage />
-        </>
-    )
+	return (
+		<>
+			{geoposition.country == "ru" || geoposition.country == "kz" || geoposition.country == "by" ? <MainPageRU /> : <MainPageEN />}
+			<LinksToPage />
+		</>
+	)
 }

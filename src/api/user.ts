@@ -1,6 +1,6 @@
 import { API } from "../const"
 import { User, WaitlistUser, defaultStateUser } from "../store/useUsers"
-
+import Avatar from '../assets/Avatar.webp'
 
 async function NewUser(user_id: string, ref: string): Promise<number> {
         let s = ref != "" ? `${API}/referral/new?user_id=${user_id}&ref=${ref}` : `${API}/referral/new?user_id=${user_id}`
@@ -28,7 +28,7 @@ export async function GetUser(user_id: string, ref?: string): Promise<User> {
 
         try {
                 let res: Response = await (await fetch(API + `/referral/sync?user_id=${user_id}`)).json()
-                if (res.ok == "true") { 
+                if (res.ok == "true") {
                         return res.result.user!
                 } else if (res.ok == "false" && res.err == "Not exist") {
                         await NewUser(user_id, ref === undefined ? "" : ref)
@@ -56,7 +56,7 @@ export async function GetWaitlistUserCheck(user_id: string): Promise<boolean> {
 
         try {
                 let res: Response = await (await fetch(API + `/waitlist/check?user_id=${user_id}`)).json()
-                if (res.ok == "true") { 
+                if (res.ok == "true") {
                         return res.result.exist!
                 } else {
                         return false
@@ -68,7 +68,7 @@ export async function GetWaitlistUserCheck(user_id: string): Promise<boolean> {
 }
 
 interface Result {
-        users?: User[], 
+        users?: User[],
         rank?: number
 }
 
@@ -82,13 +82,88 @@ export async function GetTop(user_id: string): Promise<Result> {
         try {
                 let res: Response = await (await fetch(API + `/referral/top?user_id=${user_id}`)).json()
                 console.log(res)
-                if (res.ok == "true") { 
+                if (res.ok == "true") {
+                        if (res.result.users?.length! < 3) {
+                                for (let index = 0; index < (3 - res.result.users?.length!); index++) {
+                                        res.result.users?.push({
+                                                user_id: "",
+                                                ticket: 0,
+                                                refs: [],
+                                                get_ticket: false,
+                                                premium: false,
+                                                lang: "",
+                                                from_ref: "",
+                                                photo: Avatar,
+                                                username: "",
+                                                task: {
+                                                        task1: false,
+                                                        task2: false,
+                                                        task3: false,
+                                                        task4: false,
+                                                        task5: false,
+                                                        task6: false,
+                                                }
+                                        })
+                                }
+                        }
                         return res.result
                 } else {
-                        return <Result>{}
+                        let empty_users: User[] = []
+                        for (let index = 0; index < 3; index++) {
+                                empty_users.push({
+                                        user_id: "",
+                                        ticket: 0,
+                                        refs: [],
+                                        get_ticket: false,
+                                        premium: false,
+                                        lang: "",
+                                        from_ref: "",
+                                        photo: Avatar,
+                                        username: "",
+                                        task: {
+                                                task1: false,
+                                                task2: false,
+                                                task3: false,
+                                                task4: false,
+                                                task5: false,
+                                                task6: false,
+                                        }
+                                })
+
+                        }
+                        return <Result>{
+                                users: empty_users,
+                                rank: 0
+                        }
                 }
         } catch (e) {
                 console.log(e)
         }
-        return <Result>{}
+        let empty_users: User[] = []
+        for (let index = 0; index < 3; index++) {
+                empty_users.push({
+                        user_id: "",
+                        ticket: 0,
+                        refs: [],
+                        get_ticket: false,
+                        premium: false,
+                        lang: "",
+                        from_ref: "",
+                        photo: Avatar,
+                        username: "",
+                        task: {
+                                task1: false,
+                                task2: false,
+                                task3: false,
+                                task4: false,
+                                task5: false,
+                                task6: false,
+                        }
+                })
+
+        }
+        return <Result>{
+                users: empty_users,
+                rank: 0
+        }
 }
