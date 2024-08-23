@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Ticket from '../../../assets/Ticket.webp'
 import BytecoinLogo from '../../../assets/BytecoinLogo.webp'
+import LoadingGif from '../../../assets/Loading.gif'
 import CompleteLogo from '../../../assets/Complete.webp'
 import Teacher from '../../../assets/Teacher.webp'
 import Speacker from '../../../assets/Speacker.webp'
@@ -191,19 +192,13 @@ const ContainerLoading = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 50px;
 `
 
 const LogoLoading = styled.img`
-    width: 75px;
-    height: 75px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
-    @keyframes glowing {
-      0% { background-color: rgb(7, 150, 214); box-shadow: 0 0 10px rgb(7, 150, 214); }
-      50% { background-color: rgb(7, 150, 234); box-shadow: 0 0 25px rgb(7, 150, 234); }
-      100% { background-color: rgb(7, 150, 214); box-shadow: 0 0 10px rgb(7, 150, 214) }
-      }
-      animation: glowing 2000ms infinite;
-      margin-bottom: 40px;
 `
 
 
@@ -241,7 +236,7 @@ export const MainPageEN = () => {
     useEffect(() => {
         setTimeout(() => {
             setIsLoading(false);
-        }, 1300);
+        }, 2500);
     }, []);
 
 
@@ -249,7 +244,7 @@ export const MainPageEN = () => {
         <>
             {isLoading ? (
                 <ContainerLoading>
-                    <LogoLoading loading="lazy" src={BytecoinLogo} />
+                    <LogoLoading loading="lazy" src={LoadingGif} />
                 </ContainerLoading>
             ) : (
                 <Container>

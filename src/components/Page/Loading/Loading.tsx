@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import LeaderBoardGif from '../../../assets/LoadingLeaderboard.gif'
+import LoadingGif from '../../../assets/Loading.gif'
 
 const Container = styled.div`
     width: 100%;
@@ -21,7 +21,7 @@ export const LeadeboardLoadingPage = () => {
     return(
         <>
         <Container>
-            <Logo loading="lazy" src={LeaderBoardGif}/>
+            <Logo loading="lazy" src={LoadingGif}/>
         </Container>
         </>
     )

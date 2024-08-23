@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Ticket from '../../../assets/Ticket.webp'
-import LeaderBoardGif from '../../../assets/LoadingLeaderboard.gif'
+import LoadingGif from '../../../assets/Loading.gif'
 import Cup from '../../../assets/Cup.webp'
 import { LinksToPage } from "../Footer/LinksToPage";
 import { useEffect, useState } from "react";
@@ -344,14 +344,14 @@ export const LeaderBoardRU = () => {
     useEffect(() => {
         setTimeout(() => {
             setIsLoading(false);
-        }, 2000);
+        }, 2500);
     }, []);
 
     return (
         <>
             {isLoading ? (
                 <ContainerLoading>
-                    <LogoLoading loading="lazy" src={LeaderBoardGif} />
+                    <LogoLoading loading="lazy" src={LoadingGif} />
                 </ContainerLoading>
             ) : (
 
