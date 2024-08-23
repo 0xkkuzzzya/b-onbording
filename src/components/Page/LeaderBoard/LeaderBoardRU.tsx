@@ -5,7 +5,7 @@ import Cup from '../../../assets/Cup.webp'
 import { LinksToPage } from "../Footer/LinksToPage";
 import { useEffect } from "react";
 import { BOT } from "../../../const";
-import { useUser } from "../../../store/useUsers";
+import { useLeaderboard, useUser } from "../../../store/useUsers";
 
 const Container = styled.div`
     width: 100%;
@@ -286,6 +286,7 @@ const YourTegText = styled.a`
 export const LeaderBoardRU = () => {
 
     const [user, setUser] = useUser()
+    const [leaderboard, setLeaderboard] = useLeaderboard()
     const referalText = `${BOT}?startapp=ref_${user.user_id}`
 
     useEffect(() => {
@@ -299,6 +300,11 @@ export const LeaderBoardRU = () => {
         } catch (err) {
             console.error(err);
         }
+    };
+
+    const formatCash = (n: number) => {
+        if (n < 1e3) return n;
+        if (n >= 1e3) return +(n / 1e3).toFixed(1) + "K";
     };
 
     return (
@@ -346,17 +352,17 @@ export const LeaderBoardRU = () => {
             <InfoContainer>
                 <InfoBlocks>
                     <div>
-                        <InfoText>10 <YourTicketLogo src={Tikcet} /></InfoText>
+                        <InfoText>{user.ticket} <YourTicketLogo src={Tikcet} /></InfoText>
                     </div>
                     <InfoDescription>Ваши билеты</InfoDescription>
                 </InfoBlocks>
                 <InfoBlocks>
-                    <InfoText>#1K</InfoText>
+                    <InfoText>#{formatCash(leaderboard.rank)}</InfoText>
                     <InfoDescription>Ваш рейтинг</InfoDescription>
                 </InfoBlocks>
                 <InfoBlocks>
-                    <InfoText>0</InfoText>
-                    <InfoDescription>Пригласите друзей</InfoDescription>
+                    <InfoText>{user.refs.length}</InfoText>
+                    <InfoDescription>Приглашенных друзей</InfoDescription>
                 </InfoBlocks>
             </InfoContainer>
 
