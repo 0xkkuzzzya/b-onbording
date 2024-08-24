@@ -5,15 +5,15 @@ import Leaderboard from '../../../assets/LeaderBoard.svg'
 import { Link } from "react-router-dom";
 
 const Container = styled.div`
-    width: 100%;
-    height: 80px;
-    background: #171717;
+    width: 95%;
+    height: 60px;
+    background: #181818;
     position: fixed;
-    bottom: 0px;
+    bottom: 10px;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    border-top: 1px solid #2e2e2e;
+    border-radius: 25px;
 `
 
 const LinkBlock = Link;
@@ -43,15 +43,12 @@ export const LinksToPage = () => {
         <Container>
             <LogoBlock to="/">
                 <Logo src={Onboarding} />
-                <Name>Onboarding</Name>
             </LogoBlock>
             <LogoBlock to="/buyminer">
                 <Logo src={BuyMiner} />
-                <Name>Buy Miner</Name>
             </LogoBlock>
             <LogoBlock to="/leaderboard">
                 <Logo src={Leaderboard} />
-                <Name>Leaderboard</Name>
             </LogoBlock>
         </Container>
     )
