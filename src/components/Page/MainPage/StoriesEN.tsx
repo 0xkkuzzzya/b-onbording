@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import Stories from 'react-insta-stories';
-import firstStories from '../../../assets/Stories/FirstStoriesEN.png'
+import Stories1 from '../../../assets/Stories/StoriesEN1.jpg'
+import Stories2 from '../../../assets/Stories/StoriesEN2.jpg'
+import Stories3 from '../../../assets/Stories/StoriesEN3.jpg'
+import Stories4 from '../../../assets/Stories/StoriesEN4.jpg'
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { CompleteTask } from "../../../api/user";
@@ -15,10 +18,16 @@ export const StoriesPageEN = () => {
 
 	const stories = [
 		{
-			url: firstStories,
+			url: Stories1,
 		},
 		{
-			url: "https://avatars.mds.yandex.net/i?id=2d29f4839ac021807aae0f05cdbf6231ddc92a2ab1848bbf-11540573-images-thumbs&n=13",
+			url: Stories2,
+		},
+		{
+			url: Stories3,
+		},
+		{
+			url: Stories4,
 		},
 	];
 
@@ -29,7 +38,7 @@ export const StoriesPageEN = () => {
 	}, [])
 
 	return (
-		<div style={{ overflow: "hidden" }}>
+		<div style={{ overflow: "hidden", width: "100%", height: "100vh" }}>
 			<Stories
 				stories={stories}
 				currentIndex={currentIndex}
