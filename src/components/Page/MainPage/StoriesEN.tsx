@@ -4,6 +4,7 @@ import Stories1 from '../../../assets/Stories/StoriesEN1.jpg'
 import Stories2 from '../../../assets/Stories/StoriesEN2.jpg'
 import Stories3 from '../../../assets/Stories/StoriesEN3.jpg'
 import Stories4 from '../../../assets/Stories/StoriesEN4.jpg'
+import Stories5 from '../../../assets/Stories/Stories5EN.jpg'
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { CompleteTask } from "../../../api/user";
@@ -28,6 +29,9 @@ export const StoriesPageEN = () => {
 		},
 		{
 			url: Stories4,
+		},
+		{
+			url: Stories5,
 		},
 	];
 

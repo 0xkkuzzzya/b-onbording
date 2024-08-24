@@ -81,7 +81,7 @@ export async function GetTop(user_id: string): Promise<Result> {
 
         try {
                 let res: Response = await (await fetch(API + `/referral/top?user_id=${user_id}`)).json()
-                console.log(res)
+                //console.log(res)
                 if (res.ok == "true") {
                         if (res.result.users?.length! < 3) {
                                 for (let index = 0; index < (3 - res.result.users?.length!); index++) {

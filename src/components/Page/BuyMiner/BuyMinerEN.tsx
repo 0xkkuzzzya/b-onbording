@@ -2,7 +2,8 @@ import styled from "styled-components";
 import TelegamLogo from '../../../assets/TelegramLogo.png'
 import Gif from '../../../assets/BuyMinerGif.gif'
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react"; 
+import { TonConnectUI } from "@tonconnect/ui-react";
 
 const Container = styled.div`
     width: 90%;

@@ -24,7 +24,7 @@ export const MainPage = () => {
 		setWaitlistUser({ exist })
 
 		let us = await GetTop(user_id)
-		console.log(us)
+		//console.log(us)
 		setLeaderboard({
 			users: us.users!,
 			rank: us.rank!
