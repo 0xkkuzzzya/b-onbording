@@ -31,11 +31,6 @@ const RadioBlock = styled.div`
     border: 1px solid #333;
 `
 
-const Img = styled.img`
-    width: 20px;
-    height: 20px;
-`
-
 
 export const TasksPageEN = () => {
     const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
@@ -80,10 +75,9 @@ export const TasksPageEN = () => {
                 <Block>
                     <RadioBlock />
                     <RadioLabel
-                        key={index}
-                        onClick={(e) => setSelectedAnswer(response)}
-                        style={{ color: isCorrect }}
-                    >
+                    key={index}
+                    onClick={(e) => setSelectedAnswer(response)}
+                    style={{ color: isCorrect }}>
                         {response}
                     </RadioLabel>
                 </Block>
