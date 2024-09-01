@@ -4,6 +4,8 @@ import Gif from '../../../assets/BuyMinerGif.gif'
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useTonConnectModal, useTonWallet } from '@tonconnect/ui-react';
+import { useUser, useWaitlistUser } from "../../../store/useUsers";
+import { JoinWaitlist } from "../../../api/user";
 
 const Container = styled.div`
     width: 90%;
@@ -38,6 +40,16 @@ const JoinWaitlistButton = styled.button`
     width: 90%;
     height: 40px;
     background: #4bb5ef;
+    border-radius: 10px;
+    margin-top: 30px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #fff;
+`
+const JoinWaitlistButtonInactive = styled.button`
+    width: 90%;
+    height: 40px;
+    background: #211d1f;
     border-radius: 10px;
     margin-top: 30px;
     font-size: 15px;
@@ -84,26 +96,35 @@ const InfoText = styled.a`
 export const BuyMinerRU = () => {
     const { state, open, close } = useTonConnectModal();
     const wallet = useTonWallet();
+    const [waitlist, setWaitlist] = useWaitlistUser()
+    const [user, setUser] = useUser()
 
     useEffect(() => {
         window.Telegram.WebApp.BackButton.hide()
         window.Telegram.WebApp.MainButton.hide()
     }, [])
 
+    let text = wallet ? "Присоединиться к списку ожидания" : "Подключить кошелек"
+
     return (
         <Container>
             <Logo src={Gif} />
             <MainText>Продажа Bytecoin NFT Miners начнется в ближайшее время.</MainText>
             <Description>Присоединяйтесь к списку ожидания и будьте готовы стать одним из первых майнеров Bitcoin, он же Bitcoin on TON.</Description>
-            <JoinWaitlistButton onClick={
-                () => {
-                    if (wallet) {
-                        // TODO: send to api
-                    } else {
-                        open()
+
+            {
+                waitlist.exist ? 
+                <JoinWaitlistButtonInactive>Вы в списке ожидания</JoinWaitlistButtonInactive> : 
+                <JoinWaitlistButton onClick={() => {
+                        if (wallet && !waitlist.exist) {
+                            JoinWaitlist(user.user_id, wallet.account.address)
+                            setWaitlist({exist: true})
+                        } else {
+                            open()
+                        }
                     }
-                }
-            }>Присоединиться к списку ожидания</JoinWaitlistButton>
+                }>{text}</JoinWaitlistButton>
+            }
             <Link to="https://t.me/bytecoin_ru"
                 style={{ width: "100%", textDecoration: "none", display: "flex", justifyContent: "center", marginTop: "20px" }}>
                 <FollowButton><LogoinButton src={TelegamLogo} />Следите за новостями о Bytecoin</FollowButton>
