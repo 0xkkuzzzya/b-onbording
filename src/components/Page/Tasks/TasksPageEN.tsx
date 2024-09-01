@@ -1,9 +1,8 @@
 import styled from "styled-components";
-import { useCallback, useEffect, useState } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { Task, Tasks } from "../../../store/useTasks";
-import { Link } from "react-router-dom";
-import Complite from "../../../assets/images/complite.webp";
-import Error from "../../../assets/images/Error.webp";
+import Complete from "../../../assets/Complete.webp";
+import Error from "../../../assets/Error.webp";
 
 const Container = styled.div`
     width: 100%;
@@ -18,30 +17,35 @@ const RadioLabel = styled.label`
 `
 
 const RadioInput = styled.input`
-    display: none;
+    margin-right: 10px;
 `
 
-const CustomRadio = styled.span<{ checked: boolean }>`
+const ResultImage = styled.img`
     width: 20px;
     height: 20px;
-    margin-right: 10px;
-    background-image: url(${props => props.checked ? Complite : Error});
-    background-size: cover;
-    display: inline-block;
+    margin-left: 10px;
 `
 
 export const TasksPageEN = () => {
     const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
     const [tasks, setTasks] = useState<Task[]>([]);
     const [selectedAnswer, setSelectedAnswer] = useState("");
+    const [showResult, setShowResult] = useState(false);
 
     const handleNextQuestion = useCallback(() => {
+        if (!selectedAnswer) {
+            alert("Пожалуйста, выберите ответ");
+            return;
+        }
+
+        setShowResult(true);
+
         if (selectedAnswer === tasks[currentTaskIndex]?.correctAnswer) {
-            setCurrentTaskIndex(prevIndex => prevIndex + 1);
-            setSelectedAnswer("");
-            window.Telegram.WebApp.MainButton.setText("Next question");
-        } else {
-            alert("Incorrect answer. Try again.");
+            setTimeout(() => {
+                setCurrentTaskIndex(prevIndex => prevIndex + 1);
+                setSelectedAnswer("");
+                setShowResult(false);
+            }, 1500); // Задержка перед переходом к следующему вопросу
         }
     }, [selectedAnswer, currentTaskIndex, tasks]);
 
@@ -49,7 +53,7 @@ export const TasksPageEN = () => {
         setTasks(Tasks);
         
         const mainButton = window.Telegram.WebApp.MainButton;
-        mainButton.setText("Select the correct answer");
+        mainButton.setText("Проверить ответ");
         mainButton.show();
         mainButton.onClick(handleNextQuestion);
 
@@ -60,12 +64,7 @@ export const TasksPageEN = () => {
     }, [handleNextQuestion]);
 
     if (tasks.length === 0 || currentTaskIndex >= tasks.length) {
-        return <Container>
-            All tasks completed!
-            <Link to="/">
-                <button>Go to the main page</button>
-            </Link>
-        </Container>;
+        return <Container>Все задания выполнены!</Container>;
     }
 
     const currentTask = tasks[currentTaskIndex];
@@ -81,9 +80,14 @@ export const TasksPageEN = () => {
                         value={response}
                         checked={selectedAnswer === response}
                         onChange={(e) => setSelectedAnswer(e.target.value)}
+                        disabled={showResult}
                     />
-                    <CustomRadio checked={selectedAnswer === response} />
                     {response}
+                    {showResult && (
+                        <ResultImage 
+                            src={response === currentTask.correctAnswer ? Complete : Error} 
+                        />
+                    )}
                 </RadioLabel>
             ))}
         </Container>
