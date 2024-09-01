@@ -49,9 +49,8 @@ export const TasksPageEN = () => {
                 setSelectedAnswer("");
                 setCheckedAnswer("");
                 setIsCorrect(false);
-            }, 1500); // Задержка перед переходом к следующему вопросу
+            }, 500); 
         } else {
-            // Если ответ неправильный, позволяем выбрать снова
             setSelectedAnswer("");
         }
     }, [selectedAnswer, currentTaskIndex, tasks]);
@@ -81,6 +80,11 @@ export const TasksPageEN = () => {
             <h2>{currentTask.title}</h2>
             {currentTask.responses.map((response, index) => (
                 <RadioLabel key={index}>
+                    {checkedAnswer === response && (
+                        <ResultImage 
+                            src={response === currentTask.correctAnswer ? Complete : Error} 
+                        />
+                    )}
                     <RadioInput 
                         type="radio" 
                         name="answer" 
@@ -90,11 +94,6 @@ export const TasksPageEN = () => {
                         disabled={isCorrect}
                     />
                     {response}
-                    {checkedAnswer === response && (
-                        <ResultImage 
-                            src={response === currentTask.correctAnswer ? Complete : Error} 
-                        />
-                    )}
                 </RadioLabel>
             ))}
         </Container>
