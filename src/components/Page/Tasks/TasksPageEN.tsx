@@ -58,7 +58,7 @@ export const TasksPageEN = () => {
                 setCurrentTaskIndex(prevIndex => prevIndex + 1);
                 setSelectedAnswer("");
                 setCheckedAnswer("");
-                setIsCorrect(false);
+                setIsCorrect(true);
                 window.Telegram.WebApp.MainButton.setText("Next question");
             }, 1500);
         } else {
@@ -98,8 +98,8 @@ export const TasksPageEN = () => {
                 <RadioLabel key={index}>
                     {selectedAnswer == "" ? (
                         <SelectCircle />
-                    ) : selectedAnswer === response ? (
-                        isCorrect ? (
+                    ) : selectedAnswer === tasks[currentTaskIndex].correctAnswer ? (
+                        isCorrect == true ? (
                             <ResultImage src={Complete} />
                         ) : (
                             <ResultImage src={Error} />
