@@ -96,14 +96,15 @@ export const TasksPageEN = () => {
             <h2>{currentTask.title}</h2>
             {currentTask.responses.map((response, index) => (
                 <RadioLabel key={index}>
-                    {selectedAnswer == "" ? (
-                        <SelectCircle />
-                    ) : selectedAnswer === tasks[currentTaskIndex].correctAnswer ? (
-                        <ResultImage src={Complete} />
+                    {selectedAnswer === response ? (
+                        selectedAnswer === tasks[currentTaskIndex].correctAnswer ? (
+                            <ResultImage src={Complete} />
+                        ) : (
+                            <ResultImage src={Error} />
+                        )
                     ) : (
-                        <ResultImage src={Error} />
+                        <SelectCircle />
                     )}
-                    
                     <RadioInput
                         type="radio"
                         name="answer"
