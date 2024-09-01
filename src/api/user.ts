@@ -17,6 +17,22 @@ export async function CompleteTask(user_id: string, task: string): Promise<boole
         return res.ok
 }
 
+export async function JoinWaitlist(user_id: string, wallet: string): Promise<boolean> {
+        let res = await fetch(`${API}/waitlist/new?user_id=${user_id}&wallet=${wallet}`, {
+                method: "POST"
+        })
+        return res.ok
+}
+
+export async function CheckWaitlist(user_id: string): Promise<boolean> {
+        interface Response {
+                ok: string,
+                result: { exist?: boolean }
+                err: string
+        }
+        let res: Response = await (await fetch(`${API}/waitlist/check?user_id=${user_id}`)).json()
+        return res.ok == "true" ? res.result.exist! : false
+}
 
 export async function GetUser(user_id: string, ref?: string): Promise<User> {
 

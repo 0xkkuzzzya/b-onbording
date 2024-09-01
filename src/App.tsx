@@ -36,6 +36,8 @@ function App() {
 
 
 	return (
+
+		
 		<Container>
 			<MainIndex />
 		</Container>
