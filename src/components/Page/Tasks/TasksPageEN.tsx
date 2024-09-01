@@ -1,5 +1,5 @@
-import { useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
+import { useState, useCallback, useEffect } from "react";
 import { Task, Tasks } from "../../../store/useTasks";
 import Complete from "../../../assets/Complete.webp";
 import Error from "../../../assets/Error.webp";
@@ -9,50 +9,51 @@ const Container = styled.div`
     height: 100%;
 `
 
-const RadioLabel = styled.div`
+const RadioLabel = styled.label`
     display: flex;
     align-items: center;
     margin: 10px 0;
     cursor: pointer;
-    font-size: 14px;
-    line-height: 2;
-    white-space: nowrap;
 `
 
-const Block = styled.label`
-    display: flex;
-    align-items: center;
+const RadioInput = styled.input`
+    margin-right: 10px;
 `
 
-const RadioBlock = styled.div`
+const ResultImage = styled.img`
     width: 20px;
     height: 20px;
-    border-radius: 50%;
-    border: 1px solid #333;
+    margin-left: 10px;
 `
-
 
 export const TasksPageEN = () => {
     const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
     const [tasks, setTasks] = useState<Task[]>([]);
     const [selectedAnswer, setSelectedAnswer] = useState("");
-    const [isCorrect, setIsCorrect] = useState("white");
+    const [showResult, setShowResult] = useState(false);
 
     const handleNextQuestion = useCallback(() => {
+        if (!selectedAnswer) {
+            alert("Пожалуйста, выберите ответ");
+            return;
+        }
+
+        setShowResult(true);
+
         if (selectedAnswer === tasks[currentTaskIndex]?.correctAnswer) {
-            setCurrentTaskIndex(prevIndex => prevIndex + 1);
-            setSelectedAnswer("");
-            setIsCorrect("green");
-        } else {
-            setIsCorrect("red");
+            setTimeout(() => {
+                setCurrentTaskIndex(prevIndex => prevIndex + 1);
+                setSelectedAnswer("");
+                setShowResult(false);
+            }, 1500); // Задержка перед переходом к следующему вопросу
         }
     }, [selectedAnswer, currentTaskIndex, tasks]);
 
     useEffect(() => {
         setTasks(Tasks);
-
+        
         const mainButton = window.Telegram.WebApp.MainButton;
-        mainButton.setText("Следующий вопрос");
+        mainButton.setText("Проверить ответ");
         mainButton.show();
         mainButton.onClick(handleNextQuestion);
 
@@ -72,16 +73,27 @@ export const TasksPageEN = () => {
         <Container>
             <h2>{currentTask.title}</h2>
             {currentTask.responses.map((response, index) => (
-                <Block>
-                    <RadioBlock />
-                    <RadioLabel
-                    key={index}
-                    onClick={(e) => setSelectedAnswer(response)}
-                    style={{ color: isCorrect }}>
-                        {response}
-                    </RadioLabel>
-                </Block>
+                <RadioLabel key={index}>
+                    <RadioInput 
+                        type="radio" 
+                        name="answer" 
+                        value={response}
+                        checked={selectedAnswer === response}
+                        onChange={(e) => setSelectedAnswer(e.target.value)}
+                        disabled={showResult}
+                    />
+                    {response}
+                    {showResult && selectedAnswer === response && (
+                        <ResultImage 
+                            src={response === currentTask.correctAnswer ? Complete : Error} 
+                            alt={response === currentTask.correctAnswer ? "Правильно" : "Неправильно"}
+                        />
+                    )}
+                </RadioLabel>
             ))}
         </Container>
     );
 }
+
+
+
