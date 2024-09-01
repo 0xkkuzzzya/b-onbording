@@ -60,7 +60,7 @@ export const TasksPageEN = () => {
                 setCheckedAnswer("");
                 setIsCorrect(false);
                 window.Telegram.WebApp.MainButton.setText("Next question");
-            }, 1500); 
+            }, 1500);
         } else {
             setSelectedAnswer("");
         }
@@ -68,7 +68,7 @@ export const TasksPageEN = () => {
 
     useEffect(() => {
         setTasks(Tasks);
-        
+
         const mainButton = window.Telegram.WebApp.MainButton;
         mainButton.setText("Check answer");
         mainButton.show();
@@ -97,15 +97,19 @@ export const TasksPageEN = () => {
             {currentTask.responses.map((response, index) => (
                 <RadioLabel key={index}>
                     {checkedAnswer == "" ? (
-                        <SelectCircle/>
+                        <SelectCircle />
+                    ) : selectedAnswer === response ? (
+                        isCorrect ? (
+                            <ResultImage src={Complete} />
+                        ) : (
+                            <ResultImage src={Error} />
+                        )
                     ) : (
-                        <ResultImage 
-                            src={response === currentTask.correctAnswer ? Complete : Error} 
-                        />
+                        <SelectCircle />
                     )}
-                    <RadioInput 
-                        type="radio" 
-                        name="answer" 
+                    <RadioInput
+                        type="radio"
+                        name="answer"
                         value={response}
                         checked={selectedAnswer === response}
                         onChange={(e) => setSelectedAnswer(e.target.value)}
