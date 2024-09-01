@@ -262,12 +262,15 @@ export const MainPageRU = () => {
                     <div style={{ width: "100%", marginTop: "20px" }}>
                         <SectionText>Задания</SectionText>
                     </div>
-                    <TasksBlock>
-                        <Logoblock>
-                            <IntroLogo src={user.task.task2 ? CompleteLogo : Teaher} />
-                        </Logoblock>
-                        <TextinsideBlock>Время теста</TextinsideBlock>
-                    </TasksBlock>
+                    <Link to="/testtime"
+                        style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
+                        <TasksBlock>
+                            <Logoblock>
+                                <IntroLogo src={user.task.task2 ? CompleteLogo : Teaher} />
+                            </Logoblock>
+                            <TextinsideBlock>Время теста</TextinsideBlock>
+                        </TasksBlock>
+                    </Link>
 
                     <Link to="https://t.me/bytecoin_ru" style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
                         <TasksBlock>
