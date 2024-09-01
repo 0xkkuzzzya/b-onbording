@@ -6,16 +6,18 @@ import Error from "../../../assets/Error.webp";
 import { Link } from "react-router-dom";
 
 const Container = styled.div`
-    width: 100%;
+    width: 90%;
     height: 100%;
+    
 `
 
 const RadioLabel = styled.label`
     display: flex;
     align-items: center;
-    margin: 10px 0;
+    margin: 20px 0;
     cursor: pointer;
     color: #fff;
+    font-size: 15px;
 `
 
 const RadioInput = styled.input`
@@ -55,6 +57,7 @@ export const TasksPageEN = () => {
                 setCheckedAnswer("");
                 setIsCorrect(false);
                 window.Telegram.WebApp.MainButton.setText("Next question");
+                window.Telegram.WebApp.MainButton.onClick(() => setCurrentTaskIndex(prevIndex => prevIndex + 1));
             }, 1500);
         } else {
             setSelectedAnswer("");
@@ -67,7 +70,7 @@ export const TasksPageEN = () => {
         const mainButton = window.Telegram.WebApp.MainButton;
         mainButton.setText("Check answer");
         mainButton.show();
-        mainButton.onClick(() => setCurrentTaskIndex(prevIndex => prevIndex + 1));
+        mainButton.onClick(() => handleCheckAnswer);
 
         return () => {
             mainButton.offClick(handleCheckAnswer);
@@ -91,7 +94,7 @@ export const TasksPageEN = () => {
             <h2>{currentTask.title}</h2>
             {currentTask.responses.map((response, index) => (
                 <RadioLabel key={index}>
-                    {checkedAnswer == "" ? (
+                    {selectedAnswer == "" ? (
                         <SelectCircle />
                     ) : selectedAnswer === response ? (
                         isCorrect ? (
@@ -107,8 +110,8 @@ export const TasksPageEN = () => {
                         name="answer"
                         value={response}
                         checked={selectedAnswer === response}
-                        onClick={() => setSelectedAnswer(response)}
-                        disabled={isCorrect}
+                        onChange={() => setSelectedAnswer(response)}
+                        onClick={handleCheckAnswer}
                     />
                     {response}
                 </RadioLabel>
