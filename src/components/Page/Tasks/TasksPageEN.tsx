@@ -99,14 +99,11 @@ export const TasksPageEN = () => {
                     {selectedAnswer == "" ? (
                         <SelectCircle />
                     ) : selectedAnswer === tasks[currentTaskIndex].correctAnswer ? (
-                        isCorrect == false ? (
-                            <ResultImage src={Complete} />
-                        ) : (
-                            <ResultImage src={Error} />
-                        )
+                        <ResultImage src={Complete} />
                     ) : (
-                        <SelectCircle />
+                        <ResultImage src={Error} />
                     )}
+                    
                     <RadioInput
                         type="radio"
                         name="answer"
