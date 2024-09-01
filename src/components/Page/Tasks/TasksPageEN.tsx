@@ -17,6 +17,7 @@ const RadioLabel = styled.label`
 `
 
 const RadioInput = styled.input`
+    display: none;
     margin-right: 10px;
 `
 
