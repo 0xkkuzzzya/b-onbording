@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Task, Tasks } from "../../../store/useTasks";
 
@@ -17,6 +17,15 @@ export const TasksPageEN = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [selectedAnswer, setSelectedAnswer] = useState("");
 
+    const handleNextQuestion = useCallback(() => {
+        if (selectedAnswer === tasks[currentTaskIndex]?.correctAnswer) {
+            setCurrentTaskIndex(prevIndex => prevIndex + 1);
+            setSelectedAnswer("");
+        } else {
+            alert("Неправильный ответ. Попробуйте еще раз.");
+        }
+    }, [selectedAnswer, currentTaskIndex, tasks]);
+
     useEffect(() => {
         setTasks(Tasks);
         
@@ -26,19 +35,10 @@ export const TasksPageEN = () => {
         mainButton.onClick(handleNextQuestion);
 
         return () => {
+            mainButton.offClick(handleNextQuestion);
             mainButton.hide();
         };
-    }, []);
-
-    const handleNextQuestion = () => {
-        if (selectedAnswer === tasks[currentTaskIndex].correctAnswer) {
-            setCurrentTaskIndex(prevIndex => prevIndex + 1);
-            setSelectedAnswer("");
-        } else {
-            // Обработка неправильного ответа
-            alert("Неправильный ответ. Попробуйте еще раз.");
-        }
-    };
+    }, [handleNextQuestion]);
 
     if (tasks.length === 0 || currentTaskIndex >= tasks.length) {
         return <Container>Все задания выполнены!</Container>;
