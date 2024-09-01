@@ -3,6 +3,7 @@ import { useState, useCallback, useEffect } from "react";
 import { Task, Tasks } from "../../../store/useTasks";
 import Complete from "../../../assets/Complete.webp";
 import Error from "../../../assets/Error.webp";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
     width: 100%;
@@ -23,10 +24,9 @@ const RadioInput = styled.input`
 `
 
 const ResultImage = styled.img`
-    width: 20px;
-    height: 20px;
-    margin-left: 10px;
-    margin-right: 10px;
+    width: 17px;
+    height: 17px;
+    margin: 0px 5px;
 `
 
 export const TasksPageEN = () => {
@@ -38,8 +38,7 @@ export const TasksPageEN = () => {
 
     const handleCheckAnswer = useCallback(() => {
         if (!selectedAnswer) {
-            alert("Пожалуйста, выберите ответ");
-            return;
+            alert("Please, choose answer");
         }
 
         setCheckedAnswer(selectedAnswer);
@@ -52,6 +51,7 @@ export const TasksPageEN = () => {
                 setSelectedAnswer("");
                 setCheckedAnswer("");
                 setIsCorrect(false);
+                window.Telegram.WebApp.MainButton.setText("Next question");
             }, 1500); 
         } else {
             setSelectedAnswer("");
@@ -62,7 +62,7 @@ export const TasksPageEN = () => {
         setTasks(Tasks);
         
         const mainButton = window.Telegram.WebApp.MainButton;
-        mainButton.setText("Проверить ответ");
+        mainButton.setText("Check answer");
         mainButton.show();
         mainButton.onClick(handleCheckAnswer);
 
@@ -73,7 +73,12 @@ export const TasksPageEN = () => {
     }, [handleCheckAnswer]);
 
     if (tasks.length === 0 || currentTaskIndex >= tasks.length) {
-        return <Container>Все задания выполнены!</Container>;
+        return (
+            <Container>
+                All tasks completed!
+                <Link to="/">Go to main page</Link>
+            </Container>
+        );
     }
 
     const currentTask = tasks[currentTaskIndex];
