@@ -72,7 +72,7 @@ export const TasksPageEN = () => {
         const mainButton = window.Telegram.WebApp.MainButton;
         mainButton.setText("Check answer");
         mainButton.show();
-        mainButton.onClick(() => handleCheckAnswer);
+        mainButton.onClick(handleCheckAnswer);
 
         return () => {
             mainButton.offClick(handleCheckAnswer);
