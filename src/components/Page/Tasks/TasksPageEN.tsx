@@ -116,7 +116,7 @@ export const TasksPageEN = () => {
                     {response}
                 </RadioLabel>
             ))}
-            <button onClick={handleCheckAnswer}>Check answer</button>
+            {/* <button onClick={handleCheckAnswer}>Check answer</button> */}
         </Container>
     );
 }
