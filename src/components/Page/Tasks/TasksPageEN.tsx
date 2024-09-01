@@ -99,7 +99,7 @@ export const TasksPageEN = () => {
                     {selectedAnswer == "" ? (
                         <SelectCircle />
                     ) : selectedAnswer === tasks[currentTaskIndex].correctAnswer ? (
-                        isCorrect == true ? (
+                        isCorrect == false ? (
                             <ResultImage src={Complete} />
                         ) : (
                             <ResultImage src={Error} />
