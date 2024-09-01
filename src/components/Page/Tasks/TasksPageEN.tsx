@@ -116,20 +116,23 @@ export const TasksPageEN = () => {
         setTasks(Tasks);
 
         window.Telegram.WebApp.BackButton.show()
-		window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
+        window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
 
         window.Telegram.WebApp.MainButton.show()
+        window.Telegram.WebApp.MainButton.setText("Next question")
         window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
         window.Telegram.WebApp.MainButton.setParams({
+            text: "Select the correct answer",
             color: '#2A2A2A',
             is_active: false,
         });
-        window.Telegram.WebApp.MainButton.setText("Next question")
+        
     }, []);
 
     useEffect(() => {
-        if(isCorrect){
+        if (isCorrect) {
             window.Telegram.WebApp.MainButton.setParams({
+                text: "Next question",
                 color: '#3A91C1',
                 is_active: true,
             });
@@ -174,10 +177,6 @@ export const TasksPageEN = () => {
 
     const currentTask = tasks[currentTaskIndex];
 
-    if (!currentTask) {
-        return <Container>Loading...</Container>;
-    }
-
     const progress = ((currentTaskIndex + 1) / tasks.length) * 100;
 
     return (
@@ -189,15 +188,17 @@ export const TasksPageEN = () => {
             <AnswerContainer>
                 {currentTask.responses.map((response, index) => (
                     <RadioLabel key={index}>
-                        {checkedAnswers.includes(response) ? (
-                            response === currentTask.correctAnswer ? (
-                                <ResultImage src={Complete} alt="Correct" />
+                        <div style={{width: "20px", height: "20px", marginRight: "10px"}}>
+                            {checkedAnswers.includes(response) ? (
+                                response === currentTask.correctAnswer ? (
+                                    <ResultImage src={Complete} alt="Correct" />
+                                ) : (
+                                    <ResultImage src={Error} alt="Incorrect" />
+                                )
                             ) : (
-                                <ResultImage src={Error} alt="Incorrect" />
-                            )
-                        ) : (
-                            <SelectCircle />
-                        )}
+                                <SelectCircle />
+                            )}
+                        </div>
                         <RadioInput
                             type="radio"
                             name="answer"
@@ -206,7 +207,7 @@ export const TasksPageEN = () => {
                             onChange={() => handleAnswerSelect(response)}
                             disabled={isCorrect}
                         />
-                        
+
                         {response}
                     </RadioLabel>
                 ))}
