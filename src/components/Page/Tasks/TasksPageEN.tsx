@@ -9,7 +9,7 @@ const Container = styled.div`
     height: 100%;
 `
 
-const RadioLabel = styled.label`
+const RadioLabel = styled.div`
     display: flex;
     align-items: center;
     margin: 10px 0;
@@ -19,8 +19,9 @@ const RadioLabel = styled.label`
     white-space: nowrap;
 `
 
-const RadioInput = styled.input`
-    display: none;
+const Block = styled.label`
+    display: flex;
+    align-items: center;
 `
 
 const RadioBlock = styled.div`
@@ -54,7 +55,7 @@ export const TasksPageEN = () => {
 
     useEffect(() => {
         setTasks(Tasks);
-        
+
         const mainButton = window.Telegram.WebApp.MainButton;
         mainButton.setText("Следующий вопрос");
         mainButton.show();
@@ -76,18 +77,16 @@ export const TasksPageEN = () => {
         <Container>
             <h2>{currentTask.title}</h2>
             {currentTask.responses.map((response, index) => (
-                <RadioLabel key={index}>
-                    <RadioBlock/>
-                    <RadioInput 
-                        type="radio" 
-                        name="answer" 
-                        value={response}
-                        checked={selectedAnswer === response}
-                        onChange={(e) => setSelectedAnswer(e.target.value)}
-                        style={{color: isCorrect}}
-                    />
-                    {response}
-                </RadioLabel>
+                <Block>
+                    <RadioBlock />
+                    <RadioLabel
+                        key={index}
+                        onClick={(e) => setSelectedAnswer(response)}
+                        style={{ color: isCorrect }}
+                    >
+                        {response}
+                    </RadioLabel>
+                </Block>
             ))}
         </Container>
     );
