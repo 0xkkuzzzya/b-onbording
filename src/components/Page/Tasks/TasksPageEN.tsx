@@ -53,11 +53,11 @@ export const TasksPageEN = () => {
 
         if (selectedAnswer === tasks[currentTaskIndex]?.correctAnswer) {
             setTimeout(() => {
+                setCurrentTaskIndex(prevIndex => prevIndex + 1);
                 setSelectedAnswer("");
                 setCheckedAnswer("");
                 setIsCorrect(false);
                 window.Telegram.WebApp.MainButton.setText("Next question");
-                window.Telegram.WebApp.MainButton.onClick(() => setCurrentTaskIndex(prevIndex => prevIndex + 1));
             }, 1500);
         } else {
             setSelectedAnswer("");
@@ -111,7 +111,6 @@ export const TasksPageEN = () => {
                         value={response}
                         checked={selectedAnswer === response}
                         onChange={() => setSelectedAnswer(response)}
-                        onClick={handleCheckAnswer}
                     />
                     {response}
                 </RadioLabel>
