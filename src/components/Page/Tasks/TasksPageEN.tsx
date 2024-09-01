@@ -119,15 +119,23 @@ export const TasksPageEN = () => {
 		window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
 
         window.Telegram.WebApp.MainButton.show()
-        window.Telegram.WebApp.setBackgroundColor("#2A2A2A")
+        window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
+        window.Telegram.WebApp.MainButton.setParams({
+            color: '#2A2A2A',
+            is_active: false,
+        });
         window.Telegram.WebApp.MainButton.setText("Next question")
+    }, []);
 
-        if(isCorrect == true){
-            window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
-            window.Telegram.WebApp.setBackgroundColor("#3A91C1")
+    useEffect(() => {
+        if(isCorrect){
+            window.Telegram.WebApp.MainButton.setParams({
+                color: '#3A91C1',
+                is_active: true,
+            });
             console.log("Next question")   
         }
-    }, []);
+    }, [isCorrect]);
 
     const handleAnswerSelect = (response: string) => {
         if (isCorrect) return;
