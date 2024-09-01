@@ -51,7 +51,9 @@ export const TasksPageEN = () => {
             alert("Please, choose answer");
         }
 
-        if (selectedAnswer === tasks[currentTaskIndex]?.correctAnswer) {
+        console.log(selectedAnswer, tasks[currentTaskIndex].correctAnswer);
+
+        if (selectedAnswer === tasks[currentTaskIndex].correctAnswer) {
             setTimeout(() => {
                 setCurrentTaskIndex(prevIndex => prevIndex + 1);
                 setSelectedAnswer("");
