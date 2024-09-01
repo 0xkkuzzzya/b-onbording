@@ -133,7 +133,6 @@ export const TasksPageEN = () => {
                 color: '#3A91C1',
                 is_active: true,
             });
-            console.log("Next question")   
         }
     }, [isCorrect]);
 
@@ -155,6 +154,11 @@ export const TasksPageEN = () => {
         setSelectedAnswer("");
         setCheckedAnswers([]);
         setIsCorrect(false);
+
+        window.Telegram.WebApp.MainButton.setParams({
+            color: '#2A2A2A',
+            is_active: false,
+        });
     };
 
     if (tasks.length === 0 || currentTaskIndex >= tasks.length) {
