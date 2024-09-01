@@ -10,24 +10,28 @@ const Container = styled.div`
 const RadioLabel = styled.label`
     display: block;
     margin: 10px 0;
+    cursor: pointer;
+    font-size: 15px;
+    line-height: 2;
 `
 
 const RadioInput = styled.input`
     display: none;
-    color: #fff;
 `
 
 export const TasksPageEN = () => {
     const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
     const [tasks, setTasks] = useState<Task[]>([]);
     const [selectedAnswer, setSelectedAnswer] = useState("");
+    const [isCorrect, setIsCorrect] = useState("white");
 
     const handleNextQuestion = useCallback(() => {
         if (selectedAnswer === tasks[currentTaskIndex]?.correctAnswer) {
             setCurrentTaskIndex(prevIndex => prevIndex + 1);
             setSelectedAnswer("");
+            setIsCorrect("green");
         } else {
-            alert("Неправильный ответ. Попробуйте еще раз.");
+            setIsCorrect("red");
         }
     }, [selectedAnswer, currentTaskIndex, tasks]);
 
@@ -55,14 +59,13 @@ export const TasksPageEN = () => {
         <Container>
             <h2>{currentTask.title}</h2>
             {currentTask.responses.map((response, index) => (
-                <RadioLabel key={index}>
+                <RadioLabel key={index} style={{color: isCorrect}}>
                     <RadioInput 
                         type="radio" 
                         name="answer" 
                         value={response}
                         checked={selectedAnswer === response}
                         onChange={(e) => setSelectedAnswer(e.target.value)}
-                        style={{color: selectedAnswer === response ? "green" : "red"}}
                     />
                     {response}
                 </RadioLabel>
