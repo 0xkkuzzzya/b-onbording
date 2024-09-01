@@ -14,6 +14,7 @@ const RadioLabel = styled.label`
     align-items: center;
     margin: 10px 0;
     cursor: pointer;
+    color: #fff;
 `
 
 const RadioInput = styled.input`
@@ -25,6 +26,7 @@ const ResultImage = styled.img`
     width: 20px;
     height: 20px;
     margin-left: 10px;
+    margin-right: 10px;
 `
 
 export const TasksPageEN = () => {
