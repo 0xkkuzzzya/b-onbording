@@ -29,6 +29,14 @@ const ResultImage = styled.img`
     margin: 0px 5px;
 `
 
+const SelectCircle = styled.div`
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    border: 1px solid #333;
+    margin-right: 5px;
+`
+
 export const TasksPageEN = () => {
     const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
     const [tasks, setTasks] = useState<Task[]>([]);
@@ -88,7 +96,9 @@ export const TasksPageEN = () => {
             <h2>{currentTask.title}</h2>
             {currentTask.responses.map((response, index) => (
                 <RadioLabel key={index}>
-                    {checkedAnswer === response && (
+                    {checkedAnswer == "" ? (
+                        <SelectCircle/>
+                    ) : (
                         <ResultImage 
                             src={response === currentTask.correctAnswer ? Complete : Error} 
                         />
