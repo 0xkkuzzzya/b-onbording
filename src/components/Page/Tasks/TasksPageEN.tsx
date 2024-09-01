@@ -1,6 +1,8 @@
 import { useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
 import { Task, Tasks } from "../../../store/useTasks";
+import Complete from "../../../assets/Complete.webp";
+import Error from "../../../assets/Error.webp";
 
 const Container = styled.div`
     width: 100%;
@@ -8,16 +10,31 @@ const Container = styled.div`
 `
 
 const RadioLabel = styled.label`
-    display: block;
+    display: flex;
+    align-items: center;
     margin: 10px 0;
     cursor: pointer;
-    font-size: 15px;
+    font-size: 14px;
     line-height: 2;
+    white-space: nowrap;
 `
 
 const RadioInput = styled.input`
     display: none;
 `
+
+const RadioBlock = styled.div`
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid #333;
+`
+
+const Img = styled.img`
+    width: 20px;
+    height: 20px;
+`
+
 
 export const TasksPageEN = () => {
     const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
@@ -59,13 +76,15 @@ export const TasksPageEN = () => {
         <Container>
             <h2>{currentTask.title}</h2>
             {currentTask.responses.map((response, index) => (
-                <RadioLabel key={index} style={{color: isCorrect}}>
+                <RadioLabel key={index}>
+                    <RadioBlock/>
                     <RadioInput 
                         type="radio" 
                         name="answer" 
                         value={response}
                         checked={selectedAnswer === response}
                         onChange={(e) => setSelectedAnswer(e.target.value)}
+                        style={{color: isCorrect}}
                     />
                     {response}
                 </RadioLabel>
