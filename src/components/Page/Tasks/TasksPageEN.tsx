@@ -98,7 +98,7 @@ export const TasksPageEN = () => {
                 <RadioLabel key={index}>
                     {selectedAnswer == "" ? (
                         <SelectCircle />
-                    ) : selectedAnswer === response ? (
+                    ) : selectedAnswer === tasks[currentTaskIndex].correctAnswer ? (
                         isCorrect ? (
                             <ResultImage src={Complete} />
                         ) : (
