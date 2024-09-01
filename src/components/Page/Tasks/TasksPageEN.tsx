@@ -56,7 +56,7 @@ export const TasksPageEN = () => {
                 setCurrentTaskIndex(prevIndex => prevIndex + 1);
                 setSelectedAnswer("");
                 setCheckedAnswer("");
-                setIsCorrect(false);
+                setIsCorrect(true);
                 window.Telegram.WebApp.MainButton.setText("Next question");
             }, 1500);
         } else {
