@@ -3,6 +3,7 @@ import TelegamLogo from '../../../assets/TelegramLogo.png'
 import Gif from '../../../assets/BuyMinerGif.gif'
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import { useTonConnectModal, useTonWallet } from '@tonconnect/ui-react';
 
 const Container = styled.div`
     width: 90%;
@@ -81,6 +82,8 @@ const InfoText = styled.a`
 
 
 export const BuyMinerRU = () => {
+    const { state, open, close } = useTonConnectModal();
+    const wallet = useTonWallet();
 
     useEffect(() => {
         window.Telegram.WebApp.BackButton.hide()
@@ -92,7 +95,15 @@ export const BuyMinerRU = () => {
             <Logo src={Gif} />
             <MainText>Продажа Bytecoin NFT Miners начнется в ближайшее время.</MainText>
             <Description>Присоединяйтесь к списку ожидания и будьте готовы стать одним из первых майнеров Bitcoin, он же Bitcoin on TON.</Description>
-            <JoinWaitlistButton>Присоединиться к списку ожидания</JoinWaitlistButton>
+            <JoinWaitlistButton onClick={
+                () => {
+                    if (wallet) {
+                        // TODO: send to api
+                    } else {
+                        open()
+                    }
+                }
+            }>Присоединиться к списку ожидания</JoinWaitlistButton>
             <Link to="https://t.me/bytecoin_ru"
                 style={{ width: "100%", textDecoration: "none", display: "flex", justifyContent: "center", marginTop: "20px" }}>
                 <FollowButton><LogoinButton src={TelegamLogo} />Следите за новостями о Bytecoin</FollowButton>

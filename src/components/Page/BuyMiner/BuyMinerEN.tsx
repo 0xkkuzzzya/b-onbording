@@ -3,7 +3,9 @@ import TelegamLogo from '../../../assets/TelegramLogo.png'
 import Gif from '../../../assets/BuyMinerGif.gif'
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react"; 
-import { TonConnectUI } from "@tonconnect/ui-react";
+import { useTonConnectModal, useTonWallet } from '@tonconnect/ui-react';
+import { useUser, useWaitlistUser } from "../../../store/useUsers";
+import { JoinWaitlist } from "../../../api/user";
 
 const Container = styled.div`
     width: 90%;
@@ -38,6 +40,16 @@ const JoinWaitlistButton = styled.button`
     width: 90%;
     height: 40px;
     background: #4bb5ef;
+    border-radius: 10px;
+    margin-top: 30px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #fff;
+`
+const JoinWaitlistButtonInactive = styled.button`
+    width: 90%;
+    height: 40px;
+    background: #211d1f;
     border-radius: 10px;
     margin-top: 30px;
     font-size: 15px;
@@ -82,18 +94,37 @@ const InfoText = styled.a`
 
 
 export const BuyMinerEN = () => {
+    const { state, open, close } = useTonConnectModal();
+    const wallet = useTonWallet();
+    const [waitlist, setWaitlist] = useWaitlistUser()
+    const [user, setUser] = useUser()
 
     useEffect(() => {
         window.Telegram.WebApp.BackButton.hide()
         window.Telegram.WebApp.MainButton.hide()
     }, [])
 
+    let text = wallet ? "Join waitlist" : "Connect wallet"
+
     return (
         <Container>
             <Logo src={Gif} />
             <MainText>Bytecoin NFT Miners <br /> sale will be live soon.</MainText>
             <Description>Join waitlist and be ready to be among the first Bitcoin miners, aka Bitcoin on TON.</Description>
-            <JoinWaitlistButton>Join waitlist</JoinWaitlistButton>
+            {
+                waitlist.exist ? 
+                <JoinWaitlistButtonInactive>You're on a waitlist</JoinWaitlistButtonInactive> : 
+                <JoinWaitlistButton onClick={() => {
+                        if (wallet && !waitlist.exist) {
+                            JoinWaitlist(user.user_id, wallet.account.address)
+                            setWaitlist({exist: true})
+                        } else {
+                            open()
+                        }
+                    }
+                }>{text}</JoinWaitlistButton>
+            }
+            
             <Link to="https://t.me/bytecoin_news"
                 style={{ width: "100%", textDecoration: "none", display: "flex", justifyContent: "center", marginTop: "20px" }}>
                 <FollowButton><LogoinButton src={TelegamLogo} />Follow Bytecoin news</FollowButton>
