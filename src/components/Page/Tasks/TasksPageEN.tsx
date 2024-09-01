@@ -122,9 +122,10 @@ export const TasksPageEN = () => {
         window.Telegram.WebApp.setBackgroundColor("#2A2A2A")
         window.Telegram.WebApp.MainButton.setText("Next question")
 
-        if(isCorrect){
+        if(isCorrect == true){
             window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
-            window.Telegram.WebApp.setBackgroundColor("#3A91C1")   
+            window.Telegram.WebApp.setBackgroundColor("#3A91C1")
+            console.log("Next question")   
         }
     }, []);
 
