@@ -50,7 +50,7 @@ export const TasksPageEN = () => {
                 setSelectedAnswer("");
                 setCheckedAnswer("");
                 setIsCorrect(false);
-            }, 500); 
+            }, 1500); 
         } else {
             setSelectedAnswer("");
         }
