@@ -49,13 +49,8 @@ export const TasksPageEN = () => {
             alert("Please, choose answer");
         }
 
-        setCheckedAnswer(selectedAnswer);
-        const correct = selectedAnswer === tasks[currentTaskIndex]?.correctAnswer;
-        setIsCorrect(correct);
-
-        if (correct) {
+        if (selectedAnswer === tasks[currentTaskIndex]?.correctAnswer) {
             setTimeout(() => {
-                setCurrentTaskIndex(prevIndex => prevIndex + 1);
                 setSelectedAnswer("");
                 setCheckedAnswer("");
                 setIsCorrect(false);
@@ -72,7 +67,7 @@ export const TasksPageEN = () => {
         const mainButton = window.Telegram.WebApp.MainButton;
         mainButton.setText("Check answer");
         mainButton.show();
-        mainButton.onClick(handleCheckAnswer);
+        mainButton.onClick(() => setCurrentTaskIndex(prevIndex => prevIndex + 1));
 
         return () => {
             mainButton.offClick(handleCheckAnswer);
@@ -112,7 +107,7 @@ export const TasksPageEN = () => {
                         name="answer"
                         value={response}
                         checked={selectedAnswer === response}
-                        onChange={(e) => setSelectedAnswer(e.target.value)}
+                        onClick={() => setSelectedAnswer(response)}
                         disabled={isCorrect}
                     />
                     {response}
