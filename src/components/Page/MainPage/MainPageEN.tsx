@@ -272,12 +272,15 @@ export const MainPageEN = () => {
                     <div style={{ width: "100%", marginTop: "20px" }}>
                         <SectionText>Tasks</SectionText>
                     </div>
-                    <TasksBlock>
-                        <Logoblock>
-                            <IntroLogo src={user.task.task2 ? CompleteLogo : Teacher} />
-                        </Logoblock>
-                        <TextinsideBlock>Test Time</TextinsideBlock>
-                    </TasksBlock>
+                    <Link to="/testtime"
+                        style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
+                        <TasksBlock>
+                            <Logoblock>
+                                <IntroLogo src={user.task.task2 ? CompleteLogo : Teacher} />
+                            </Logoblock>
+                            <TextinsideBlock>Test Time</TextinsideBlock>
+                        </TasksBlock>
+                    </Link>
 
                     <Link to="https://t.me/bytecoin_news"
                         style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
