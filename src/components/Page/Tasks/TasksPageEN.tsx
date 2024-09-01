@@ -30,22 +30,29 @@ export const TasksPageEN = () => {
     const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
     const [tasks, setTasks] = useState<Task[]>([]);
     const [selectedAnswer, setSelectedAnswer] = useState("");
-    const [showResult, setShowResult] = useState(false);
+    const [checkedAnswer, setCheckedAnswer] = useState("");
+    const [isCorrect, setIsCorrect] = useState(false);
 
-    const handleNextQuestion = useCallback(() => {
+    const handleCheckAnswer = useCallback(() => {
         if (!selectedAnswer) {
             alert("Пожалуйста, выберите ответ");
             return;
         }
 
-        setShowResult(true);
+        setCheckedAnswer(selectedAnswer);
+        const correct = selectedAnswer === tasks[currentTaskIndex]?.correctAnswer;
+        setIsCorrect(correct);
 
-        if (selectedAnswer === tasks[currentTaskIndex]?.correctAnswer) {
+        if (correct) {
             setTimeout(() => {
                 setCurrentTaskIndex(prevIndex => prevIndex + 1);
                 setSelectedAnswer("");
-                setShowResult(false);
+                setCheckedAnswer("");
+                setIsCorrect(false);
             }, 1500); // Задержка перед переходом к следующему вопросу
+        } else {
+            // Если ответ неправильный, позволяем выбрать снова
+            setSelectedAnswer("");
         }
     }, [selectedAnswer, currentTaskIndex, tasks]);
 
@@ -55,13 +62,13 @@ export const TasksPageEN = () => {
         const mainButton = window.Telegram.WebApp.MainButton;
         mainButton.setText("Проверить ответ");
         mainButton.show();
-        mainButton.onClick(handleNextQuestion);
+        mainButton.onClick(handleCheckAnswer);
 
         return () => {
-            mainButton.offClick(handleNextQuestion);
+            mainButton.offClick(handleCheckAnswer);
             mainButton.hide();
         };
-    }, [handleNextQuestion]);
+    }, [handleCheckAnswer]);
 
     if (tasks.length === 0 || currentTaskIndex >= tasks.length) {
         return <Container>Все задания выполнены!</Container>;
@@ -80,13 +87,12 @@ export const TasksPageEN = () => {
                         value={response}
                         checked={selectedAnswer === response}
                         onChange={(e) => setSelectedAnswer(e.target.value)}
-                        disabled={showResult}
+                        disabled={isCorrect}
                     />
                     {response}
-                    {showResult && selectedAnswer === response && (
+                    {checkedAnswer === response && (
                         <ResultImage 
                             src={response === currentTask.correctAnswer ? Complete : Error} 
-                            alt={response === currentTask.correctAnswer ? "Правильно" : "Неправильно"}
                         />
                     )}
                 </RadioLabel>
@@ -94,6 +100,3 @@ export const TasksPageEN = () => {
         </Container>
     );
 }
-
-
-
