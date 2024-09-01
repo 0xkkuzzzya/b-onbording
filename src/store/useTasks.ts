@@ -7,7 +7,7 @@ export interface Task {
 
 export const Tasks: Task[] = [
     {
-        id: 1,
+        id: 0,
         title: "What are key components of Bytecoin?",
         responses: [
             "NFT, Slashing, L2 on TON, Telegram usernames",
@@ -17,7 +17,7 @@ export const Tasks: Task[] = [
         correctAnswer: "Virtual Mining, Farming, Halvings, virtual electricity"
     },
     {
-        id: 2,
+        id: 1,
         title: "How much is the total supply of Bytecoin?",
         responses: [
             "21 million",
@@ -27,7 +27,7 @@ export const Tasks: Task[] = [
         correctAnswer: "21 million",
     },
     {
-        id: 3,
+        id: 2,
         title: "BYTE token distribution is?",
         responses: [
             "15% Team, 30% Fair-launch, 55% community (mining)",
@@ -37,7 +37,7 @@ export const Tasks: Task[] = [
         correctAnswer: "0% Team, 0% Insiders, 100% community (mining)",
     },
     {
-        id: 4,
+        id: 3,
         title: "How do you mine BYTE?",
         responses: [
             "by using NFT Miners",
@@ -47,7 +47,7 @@ export const Tasks: Task[] = [
         correctAnswer: "by using NFT Miners",
     },
     {
-        id: 5,
+        id: 4,
         title: "What does the Bytecoin protocol work on?",
         responses: [
             "By leveraging TON smart-contracts",
@@ -57,7 +57,7 @@ export const Tasks: Task[] = [
         correctAnswer: "By leveraging TON smart-contracts",
     },
     {
-        id: 6,
+        id: 5,
         title: "How many NFT GPUs is available?",
         responses: [
             "10000",
@@ -67,7 +67,7 @@ export const Tasks: Task[] = [
         correctAnswer: "3000",
     },
     {
-        id: 7,
+        id: 6,
         title: "What percentage of electricity revenue go to rewards for farmers on DEX?",
         responses: [
             "50%",
