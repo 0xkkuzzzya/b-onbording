@@ -272,7 +272,7 @@ export const MainPageEN = () => {
                     <div style={{ width: "100%", marginTop: "20px" }}>
                         <SectionText>Tasks</SectionText>
                     </div>
-                    <Link to="/testtime"
+                    <Link to="/testtimeEN"
                         style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
                         <TasksBlock>
                             <Logoblock>

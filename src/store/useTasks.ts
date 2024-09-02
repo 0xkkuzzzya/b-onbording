@@ -5,7 +5,7 @@ export interface Task {
     correctAnswer: string;
 }
 
-export const Tasks: Task[] = [
+export const TasksEN: Task[] = [
     {
         id: 0,
         title: "What are key components of Bytecoin?",
@@ -77,4 +77,77 @@ export const Tasks: Task[] = [
         correctAnswer: "80%",
     },
 
+]
+
+export const TasksRU: Task[] = [
+    {
+        id: 0,
+        title: "Что такое Bytecoin?",
+        responses: [
+            "NFT, Слэшинг, L2 на TON, Имена пользователей Telegram",
+            "Фарминг, Боты Telegram, Майнинг на GPU, Слэшинг",
+            "Виртуальный майнинг, Фарминг, Халвинги, виртуальное электричество"
+        ],
+        correctAnswer: "Виртуальный майнинг, Фарминг, Халвинги, виртуальное электричество"
+    },
+    {
+        id: 1,
+        title: "Каков общий объем предложения Bytecoin?",
+        responses: [
+            "21 миллион",
+            "100 миллионов",
+            "21 миллиард",
+        ],
+        correctAnswer: "21 миллион",
+    },
+    {
+        id: 2,
+        title: "Как распределяются токены BYTE?",
+        responses: [
+            "15% Команда, 30% Честный запуск, 55% сообщество (майнинг)",
+            "0% Команда, 0% Инсайдеры, 100% сообщество (майнинг)",
+            "5% команда, 3% инсайдеры, 93% сообщество (майнинг)",
+        ],
+        correctAnswer: "0% Команда, 0% Инсайдеры, 100% сообщество (майнинг)",
+    },
+    {
+        id: 3,
+        title: "Как добывать BYTE?",
+        responses: [
+            "с помощью NFT Майнеров",
+            "с помощью реальных GPU",
+            "путем стейкинга",
+        ],
+        correctAnswer: "с помощью NFT Майнеров",
+    },
+    {
+        id: 4,
+        title: "На чем работает протокол Bytecoin?",
+        responses: [
+            "Используя смарт-контракты TON",
+            "Используя Web2 Telegram Bot",
+            "Используя Telegram Mini App",
+        ],
+        correctAnswer: "Используя смарт-контракты TON",
+    },
+    {
+        id: 5,
+        title: "Сколько NFT GPU доступно?",
+        responses: [
+            "10000",
+            "30000",
+            "3000",
+        ],
+        correctAnswer: "3000",
+    },
+    {
+        id: 6,
+        title: "Какой процент дохода от электричества идет на вознаграждения для фармеров на DEX?",
+        responses: [
+            "50%",
+            "80%",
+            "30%",
+        ],
+        correctAnswer: "80%",
+    },
 ]

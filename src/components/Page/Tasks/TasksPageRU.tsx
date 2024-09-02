@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import { useState, useCallback, useEffect } from "react";
-import { Task, TasksEN } from "../../../store/useTasks";
+import { Task, TasksRU } from "../../../store/useTasks";
 import { Link, useNavigate } from "react-router-dom";
 import Complete from "../../../assets/Complete.webp";
 import Error from "../../../assets/Error.webp";
 import CompleteLogoSticker from "../../../assets/CompleteTasks.webp";
+
 
 const Container = styled.div`
     width: 100%;
@@ -107,13 +108,14 @@ const AnswerContainer = styled.div`
 `;
 
 const CompleteLogo = styled.img`
-    width: 220px;
-    height: 220px;
-    margin-top: 50px;
+    width: 200px;
+    height: 200px;
+    margin-right: 10px;
 `;
 
 
-export const TasksPageEN = () => {
+
+export const TasksPageRU = () => {
     const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
     const [tasks, setTasks] = useState<Task[]>([]);
     const [selectedAnswer, setSelectedAnswer] = useState("");
@@ -122,7 +124,7 @@ export const TasksPageEN = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        setTasks(TasksEN);
+        setTasks(TasksRU);
 
         window.Telegram.WebApp.BackButton.show()
         window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
@@ -131,7 +133,7 @@ export const TasksPageEN = () => {
         window.Telegram.WebApp.MainButton.setText("Next question")
         window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
         window.Telegram.WebApp.MainButton.setParams({
-            text: "Select the correct answer",
+            text: "Выберите правильный ответ",
             color: '#2A2A2A',
             is_active: false,
         });
@@ -141,7 +143,7 @@ export const TasksPageEN = () => {
     useEffect(() => {
         if (isCorrect) {
             window.Telegram.WebApp.MainButton.setParams({
-                text: "Next question",
+                text: "Следующий вопрос",
                 color: '#3A91C1',
                 is_active: true,
             });
@@ -168,24 +170,20 @@ export const TasksPageEN = () => {
         setIsCorrect(false);
 
         window.Telegram.WebApp.MainButton.setParams({
-            text: "Select the correct answer",
+            text: "Выберите правильный ответ",
             color: '#2A2A2A',
             is_active: false,
         });
     };
 
     if (tasks.length === 0 || currentTaskIndex >= tasks.length) {
-        window.Telegram.WebApp.MainButton.onClick(() => navigate(-1))
-        window.Telegram.WebApp.MainButton.setParams({
-            text: "Go to main page",
-            color: '#3A91C1',
-            is_active: true,
-        });
-
         return (
             <Container>
-                <Title>All tasks completed!</Title>
+                <Title>Все задания выполнены</Title>
                 <CompleteLogo src={CompleteLogoSticker} />
+                <Link to="/">
+                    <NextButton>Вернуться на главную страницу</NextButton>
+                </Link>
             </Container>
         );
     }
@@ -206,9 +204,9 @@ export const TasksPageEN = () => {
                         <div style={{width: "20px", height: "20px", marginRight: "10px"}}>
                             {checkedAnswers.includes(response) ? (
                                 response === currentTask.correctAnswer ? (
-                                    <ResultImage src={Complete} alt="Correct" />
+                                    <ResultImage src={Complete} />
                                 ) : (
-                                    <ResultImage src={Error} alt="Incorrect" />
+                                    <ResultImage src={Error} />
                                 )
                             ) : (
                                 <SelectCircle />
@@ -226,7 +224,6 @@ export const TasksPageEN = () => {
                         {response}
                     </RadioLabel>
                 ))}
-                <button style={{width: "100px", height: "100px"}} onClick={() => handleNextQuestion()}></button>
             </AnswerContainer>
         </Container>
     );
