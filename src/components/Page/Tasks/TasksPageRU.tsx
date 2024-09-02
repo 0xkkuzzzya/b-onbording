@@ -154,15 +154,6 @@ export const TasksPageRU = () => {
             is_active: false
         });
 
-        if (isCorrect || isResult) {
-            window.Telegram.WebApp.MainButton.setParams({
-                text: "Следующий вопрос",
-                color: '#4AB6ED',
-                is_active: true
-            });
-            console.log("Следующий вопрос")
-        }
-
         // if (currentTaskIndex >= tasks.length) {
         //     window.Telegram.WebApp.MainButton.onClick(() => navigate('/'))
         //     window.Telegram.WebApp.MainButton.setParams({
@@ -179,6 +170,12 @@ export const TasksPageRU = () => {
         if (tasks[currentTaskIndex]?.correctAnswer === response) {
             setIsCorrect(true);
         }
+
+        window.Telegram.WebApp.MainButton.setParams({
+            text: "Следующий вопрос",
+            color: '#4AB6ED',
+            is_active: true
+        });
     };
 
     const handleNextQuestion = () => {
