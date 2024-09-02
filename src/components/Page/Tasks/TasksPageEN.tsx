@@ -160,7 +160,6 @@ export const TasksPageEN = () => {
                 window.Telegram.WebApp.MainButton.setParams({
                         text: "Next question",
                         color: '#4AB6ED',
-                        is_active: false
                 });
         }
 
