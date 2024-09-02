@@ -197,9 +197,8 @@ export const TasksPageEN = () => {
                 setIsCorrect(false);
                 setIsResult(false);
         }
-
-        console.log(TasksEN.length - currentTaskIndex)
-        console.log(TasksEN.length - allTasksComplete.amount)
+        
+        console.log(currentTaskIndex)
 
         return (
                 <Container>
