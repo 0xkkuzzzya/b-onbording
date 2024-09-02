@@ -166,7 +166,6 @@ export const TasksPageEN = () => {
         }
 
         const handleNextQuestion = () => {
-                alert("CLICK")
                 setCurrentTaskIndex(prevIndex => prevIndex + 1);
                 setSelectedAnswer("");
                 setIsCorrect(false);
