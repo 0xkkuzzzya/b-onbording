@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import { useState, useCallback, useEffect } from "react";
-import { Task, TasksEN } from "../../../store/useTasks";
+import { Task, TasksEN, useAllTasksComplete } from "../../../store/useTasks";
 import { Link, useNavigate } from "react-router-dom";
 import Complete from "../../../assets/Complete.webp";
 import Error from "../../../assets/Error.webp";
 import CompleteLogoSticker from "../../../assets/CompleteTasks.webp";
+import { CompleteTask } from "../../../api/user";
+import { useUser } from "../../../store/useUsers";
 
 const Container = styled.div`
     width: 100%;
@@ -87,10 +89,10 @@ const ProgressBar = styled.div`
     overflow: hidden;
 `;
 
-const Progress = styled.div<{ width: number }>`
+const Progress = styled.div<{ width: number, color: string }>`
     width: ${props => props.width}%;
     height: 100%;
-    background-color: #4AB6ED;
+    background-color: ${props => props.color};
     transition: width 0.3s ease;
 `;
 
@@ -136,6 +138,8 @@ export const TasksPageEN = () => {
         const [isResult, setIsResult] = useState(false);
         const [isCorrect, setIsCorrect] = useState(false);
         const navigate = useNavigate();
+        const [allTasksComplete, setAllTasksComplete] = useAllTasksComplete();
+        const [user, setUser] = useUser()
 
         let component;
 
@@ -153,10 +157,30 @@ export const TasksPageEN = () => {
                 }
         }, [selectedAnswer]);
 
+        useEffect(() => {
+                if (currentTaskIndex == TasksEN.length - 1) {
+                        window.Telegram.WebApp.MainButton.show()
+                        window.Telegram.WebApp.MainButton.setParams({
+                                text: "Complete",
+                                color: '#4AB6ED',
+                        });
+                        window.Telegram.WebApp.BackButton.onClick(() => {
+                                if(allTasksComplete.amount == 5) {
+                                        console.log("Complete task 2")
+                                        CompleteTask(user.user_id, "task2")
+                                }
+                                navigate(-1)
+                        })
+                }
+        }, [currentTaskIndex]);
+
         const handleAnswerSelect = (answer: string) => {
                 setIsResult(true);
                 setSelectedAnswer(answer);
                 setIsCorrect(TasksEN[currentTaskIndex].correctAnswer === answer);
+                if (TasksEN[currentTaskIndex].correctAnswer === answer) {
+                        setAllTasksComplete({amount: allTasksComplete.amount + 1});
+                }
                 window.Telegram.WebApp.MainButton.show()
 
                 window.Telegram.WebApp.MainButton.setParams({
@@ -190,7 +214,7 @@ export const TasksPageEN = () => {
                 component = 
                         <Container>
                                 <ProgressBar>
-                                        <Progress width={((currentTaskIndex + 1) / TasksEN.length) * 100} />
+                                        <Progress width={((currentTaskIndex + 1) / TasksEN.length) * 100} color={allTasksComplete.amount == currentTaskIndex ? "#4AB6ED" : "#ff081d"} />
                                 </ProgressBar>
 
                                 <Title>{TasksEN[currentTaskIndex].title}</Title>
@@ -224,6 +248,38 @@ export const TasksPageEN = () => {
         }
 
         return (
-                <>{component}</>
+                <Container>
+                        <ProgressBar>
+                                <Progress width={((currentTaskIndex + 1) / TasksEN.length) * 100} />
+                        </ProgressBar>
+
+                        <Title>{TasksEN[currentTaskIndex].title}</Title>
+                        <AnswerContainer>
+                                {TasksEN[currentTaskIndex].responses.map((response, index) => (
+                                        <RadioLabel key={index}>
+                                                <div style={{ width: "20px", height: "20px", marginRight: "10px" }}>
+                                                        {isResult && selectedAnswer === response ? (
+                                                                <ResultImage
+                                                                        src={isCorrect ? Complete : Error}
+                                                                        alt={isCorrect ? "Correct" : "Incorrect"}
+                                                                />
+                                                        ) : (
+                                                                <SelectCircle />
+                                                        )}
+                                                </div>
+                                                <RadioInput
+                                                        type="radio"
+                                                        name="answer"
+                                                        value={response}
+                                                        checked={selectedAnswer === response}
+                                                        onChange={() => handleAnswerSelect(response)}
+                                                        disabled={isResult}
+                                                />
+
+                                                {response}
+                                        </RadioLabel>
+                                ))}
+                        </AnswerContainer>
+                </Container>
         );
 };

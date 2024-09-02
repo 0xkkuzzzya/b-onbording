@@ -1,3 +1,5 @@
+import { createStore } from "./store";
+
 export interface Task {
     id: number;
     title: string;
@@ -151,3 +153,7 @@ export const TasksRU: Task[] = [
         correctAnswer: "80%",
     },
 ]
+
+export const [useAllTasksComplete] = createStore({
+    amount: 0
+});
