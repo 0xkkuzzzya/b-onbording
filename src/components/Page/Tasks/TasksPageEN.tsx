@@ -226,7 +226,6 @@ export const TasksPageEN = () => {
                         {response}
                     </RadioLabel>
                 ))}
-                <button style={{width: "100px", height: "100px"}} onClick={() => handleNextQuestion()}></button>
             </AnswerContainer>
         </Container>
     );

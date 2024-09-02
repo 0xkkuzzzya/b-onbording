@@ -5,8 +5,7 @@ import { StoriesPageEN } from "./Page/MainPage/StoriesEN";
 import { LeaderBoard } from "./Page/LeaderBoard/LeaderBoard";
 import { StoriesPageRU } from "./Page/MainPage/StoriesRU";
 import { BuyMiner } from "./Page/BuyMiner/BuyMiner";
-import { TasksPageEN } from "./Page/Tasks/TasksPageEN";
-import { TasksPageRU } from "./Page/Tasks/TasksPageRU";
+import { TasksPage } from "./Page/Tasks/TasksPage";
 
 const Container = styled.div`
     width: 100%;
@@ -21,8 +20,7 @@ const routes = [
     { path: '/StoriesRU', name: 'Stories', element: <StoriesPageRU /> },
     { path: '/leaderboard', name: 'leaderboard', element: <LeaderBoard /> },
     { path: '/buyminer', name: 'buyminer', element: <BuyMiner /> },
-    { path: '/testtimeEN', name: 'testtime', element: <TasksPageEN /> },
-    { path: '/testtimeRU', name: 'testtime', element: <TasksPageRU /> },
+    { path: '/testtime', name: 'testtimeEN', element: <TasksPage /> },
 ]
 
 

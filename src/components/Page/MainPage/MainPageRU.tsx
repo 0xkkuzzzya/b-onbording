@@ -262,7 +262,7 @@ export const MainPageRU = () => {
                     <div style={{ width: "100%", marginTop: "20px" }}>
                         <SectionText>Задания</SectionText>
                     </div>
-                    <Link to="/testtimeRU"
+                    <Link to="/testtime"
                         style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
                         <TasksBlock>
                             <Logoblock>
