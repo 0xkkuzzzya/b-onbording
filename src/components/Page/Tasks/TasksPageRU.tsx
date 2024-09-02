@@ -236,35 +236,26 @@ export const TasksPageRU = () => {
             <ProgressBar>
                 <Progress width={progress} />
             </ProgressBar>
-
             <Title>{currentTask.title}</Title>
-            <AnswerContainer>
-                {currentTask.responses.map((response, index) => (
-                    <RadioLabel key={index}>
-                        <div style={{width: "20px", height: "20px", marginRight: "10px"}}>
-                            {checkedAnswers.includes(response) ? (
-                                response === currentTask.correctAnswer ? (
-                                    <ResultImage src={Complete} />
-                                ) : (
-                                    <ResultImage src={Error} />
-                                )
-                            ) : (
-                                <SelectCircle />
-                            )}
-                        </div>
-                        <RadioInput
-                            type="radio"
-                            name="answer"
-                            value={response}
-                            checked={selectedAnswer === response}
-                            onChange={() => handleAnswerSelect(response)}
-                            disabled={isCorrect}
+            {currentTask.responses.map((response, index) => (
+                <RadioLabel key={index}>
+                    <RadioInput
+                        type="radio"
+                        name="answer"
+                        value={response}
+                        checked={selectedAnswer === response}
+                        onChange={() => handleAnswerSelect(response)}
+                        disabled={showResult && isCorrect}
+                    />
+                    {showResult && selectedAnswer === response && (
+                        <ResultImage 
+                            src={response === currentTask.correctAnswer ? Complete : Error} 
+                            alt={response === currentTask.correctAnswer ? "Правильно" : "Неправильно"} 
                         />
-
-                        {response}
-                    </RadioLabel>
-                ))}
-            </AnswerContainer>
+                    )}
+                    {response}
+                </RadioLabel>
+            ))}
         </Container>
     );
 };
