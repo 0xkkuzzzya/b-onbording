@@ -153,19 +153,21 @@ export const TasksPageEN = () => {
                 setIsCorrect(TasksEN[currentTaskIndex].correctAnswer === answer);
                 window.Telegram.WebApp.MainButton.show()
 
-                window.Telegram.WebApp.MainButton.onClick(() => {
-                        console.log("CLICK")
-                        setCurrentTaskIndex(prevIndex => prevIndex + 1);
-                        setSelectedAnswer("");
-                        setIsCorrect(false);
-                        setIsResult(false);
-                })
+                window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
 
                 window.Telegram.WebApp.MainButton.setParams({
                         text: "Next question",
                         color: '#4AB6ED',
                         is_active: false
                 });
+        }
+
+        const handleNextQuestion = () => {
+                console.log("CLICK")
+                setCurrentTaskIndex(prevIndex => prevIndex + 1);
+                setSelectedAnswer("");
+                setIsCorrect(false);
+                setIsResult(false);
         }
 
 
