@@ -222,7 +222,7 @@ export const TasksPageRU = () => {
                 {currentTask.responses.map((response, index) => (
                     <RadioLabel key={index}>
                         <div style={{width: "20px", height: "20px", marginRight: "10px"}}>
-                            {isResult ? (
+                            {isResult && currentTaskIndex == index ? (
                                 isCorrect ? (
                                     <ResultImage src={Complete} alt="Correct" />
                                 ) : (
