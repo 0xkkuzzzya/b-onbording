@@ -19,10 +19,9 @@ const Container = styled.div`
 `;
 
 const Title = styled.h2`
-    width: 90%;
     color: #FFFFFF;
     font-size: 24px;
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 20px;
     text-align: center;
 `;
@@ -137,7 +136,6 @@ export const TasksPageEN = () => {
     const [selectedAnswer, setSelectedAnswer] = useState("");
     const [checkedAnswers, setCheckedAnswers] = useState<string[]>([]);
     const [isCorrect, setIsCorrect] = useState(false);
-    const [showResult, setShowResult] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -147,76 +145,62 @@ export const TasksPageEN = () => {
         window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
 
         window.Telegram.WebApp.MainButton.show()
-        window.Telegram.WebApp.MainButton.onClick(handleMainButtonClick)
+        window.Telegram.WebApp.MainButton.setText("Следующий вопрос")
+        window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
         
-        return () => {
-            window.Telegram.WebApp.MainButton.offClick(handleMainButtonClick)
-        }
-    }, []);
+        window.Telegram.WebApp.MainButton.setParams({
+            text: "Choose the correct answer",
+            color: '#2A2A2A',
+            is_active: false
+        });
 
-    useEffect(() => {
-        if (currentTaskIndex >= tasks.length) {
-            window.Telegram.WebApp.MainButton.setParams({
-                text: "Go to main page",
-                color: '#4AB6ED',
-                is_active: true
-            });
-        } else if (showResult && isCorrect) {
+        if (isCorrect) {
             window.Telegram.WebApp.MainButton.setParams({
                 text: "Next question",
                 color: '#4AB6ED',
                 is_active: true
             });
-        } else if (selectedAnswer) {
-            window.Telegram.WebApp.MainButton.setParams({
-                text: "Check answer",
-                color: '#4AB6ED',
-                is_active: true
-            });
-        } else {
-            window.Telegram.WebApp.MainButton.setParams({
-                text: "Select answer",
-                color: '#2A2A2A',
-                is_active: false
-            });
         }
-    }, [isCorrect, selectedAnswer, showResult, currentTaskIndex, tasks.length]);
+        
+        // if (currentTaskIndex >= tasks.length) {
+        //     window.Telegram.WebApp.MainButton.setParams({
+        //         text: "Go to main page",
+        //         color: '#4AB6ED',
+        //         is_active: true
+        //     });
+        //     window.Telegram.WebApp.MainButton.onClick(() => navigate('/'))
+        // }
+    }, [isCorrect, selectedAnswer, currentTaskIndex, tasks.length]);
 
     const handleAnswerSelect = (response: string) => {
+        if (isCorrect) return;
+
         setSelectedAnswer(response);
-        setShowResult(false);
+        if (!checkedAnswers.includes(response)) {
+            setCheckedAnswers(prev => [...prev, response]);
+        }
+
+        if (tasks[currentTaskIndex]?.correctAnswer === response) {
+            setIsCorrect(true);
+        }
     };
 
-    const handleMainButtonClick = useCallback(() => {
-        if (!selectedAnswer) return;
+    const handleNextQuestion = () => {
+        setCurrentTaskIndex(prevIndex => prevIndex + 1);
+        setSelectedAnswer("");
+        setCheckedAnswers([]);
+        setIsCorrect(false);
 
-        const currentTask = tasks[currentTaskIndex];
-        const correct = currentTask?.correctAnswer === selectedAnswer;
-        setIsCorrect(correct);
-        setShowResult(true);
-
-        if (correct) {
-            setTimeout(() => {
-                if (currentTaskIndex >= tasks.length - 1) {
-                    navigate('/');
-                } else {
-                    setCurrentTaskIndex(prevIndex => prevIndex + 1);
-                    setSelectedAnswer("");
-                    setIsCorrect(false);
-                    setShowResult(false);
-                }
-            }, 1000);
-        }
-    }, [selectedAnswer, currentTaskIndex, tasks.length, navigate]);
-
-    if (tasks.length === 0) {
-        return <Container>Загрузка...</Container>;
-    }
+        window.Telegram.WebApp.MainButton.setParams({
+            text: "Choose the correct answer",
+            color: '#2A2A2A',
+            is_active: false
+        });
+    };
 
     console.log(tasks.length)
 
     if (currentTaskIndex >= tasks.length) {
-        window.Telegram.WebApp.MainButton.hide();
         return (
             <Container>
                 <Title>All tasks completed!</Title>
@@ -236,25 +220,33 @@ export const TasksPageEN = () => {
                 <Progress width={progress} />
             </ProgressBar>
             <Title>{currentTask.title}</Title>
-            {currentTask.responses.map((response, index) => (
-                <RadioLabel key={index}>
-                    <RadioInput
-                        type="radio"
-                        name="answer"
-                        value={response}
-                        checked={selectedAnswer === response}
-                        onChange={() => handleAnswerSelect(response)}
-                        disabled={showResult && isCorrect}
-                    />
-                    {showResult && selectedAnswer === response && (
-                        <ResultImage 
-                            src={response === currentTask.correctAnswer ? Complete : Error} 
-                            alt={response === currentTask.correctAnswer ? "Правильно" : "Неправильно"} 
+            <AnswerContainer>
+                {currentTask.responses.map((response, index) => (
+                    <RadioLabel key={index}>
+                        <div style={{width: "20px", height: "20px", marginRight: "10px"}}>
+                            {checkedAnswers.includes(response) ? (
+                                response === currentTask.correctAnswer ? (
+                                    <ResultImage src={Complete} alt="Correct" />
+                                ) : (
+                                    <ResultImage src={Error} alt="Incorrect" />
+                                )
+                            ) : (
+                                <SelectCircle />
+                            )}
+                        </div>
+                        <RadioInput
+                            type="radio"
+                            name="answer"
+                            value={response}
+                            checked={selectedAnswer === response}
+                            onChange={() => handleAnswerSelect(response)}
+                            disabled={isCorrect}
                         />
-                    )}
-                    {response}
-                </RadioLabel>
-            ))}
+
+                        {response}
+                    </RadioLabel>
+                ))}
+            </AnswerContainer>
         </Container>
     );
 };
