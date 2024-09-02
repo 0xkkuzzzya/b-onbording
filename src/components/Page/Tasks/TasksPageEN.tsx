@@ -160,7 +160,7 @@ export const TasksPageEN = () => {
         useEffect(() => {
                 if (currentTaskIndex == TasksEN.length - 1) {
                         window.Telegram.WebApp.BackButton.onClick(() => {
-                                if(allTasksComplete.amount == 5) {
+                                if(allTasksComplete.amount == TasksEN.length) {
                                         console.log("Complete task 2")
                                         CompleteTask(user.user_id, "task2")
                                 }
@@ -178,7 +178,7 @@ export const TasksPageEN = () => {
                 }
                 window.Telegram.WebApp.MainButton.show()
 
-                if (currentTaskIndex + 1 == TasksEN.length - 1) {
+                if (currentTaskIndex == TasksEN.length - 1) {
                         window.Telegram.WebApp.MainButton.setParams({
                                 text: "Complete",
                                 color: '#4AB6ED',
