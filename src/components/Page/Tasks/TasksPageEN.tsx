@@ -145,6 +145,10 @@ export const TasksPageEN = () => {
                 window.Telegram.WebApp.BackButton.show()
                 window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
                 window.Telegram.WebApp.MainButton.hide()
+
+                if (selectedAnswer != "") {
+                        window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
+                }
         }, [currentTaskIndex]);
 
         const handleAnswerSelect = (answer: string) => {
@@ -152,8 +156,6 @@ export const TasksPageEN = () => {
                 setSelectedAnswer(answer);
                 setIsCorrect(TasksEN[currentTaskIndex].correctAnswer === answer);
                 window.Telegram.WebApp.MainButton.show()
-
-                window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
 
                 window.Telegram.WebApp.MainButton.setParams({
                         text: "Next question",
