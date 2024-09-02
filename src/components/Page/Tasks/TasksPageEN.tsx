@@ -153,7 +153,7 @@ export const TasksPageEN = () => {
                         is_active: false
                 });
 
-                if (!selectedAnswer) {
+                if (selectedAnswer !== "") {
                         window.Telegram.WebApp.MainButton.setParams({
                                 text: "Check answer",
                                 color: '#4AB6ED',
@@ -161,7 +161,7 @@ export const TasksPageEN = () => {
                         });
                         window.Telegram.WebApp.MainButton.onClick(() => handleMainButtonClick())
                 }
-        }, []);
+        }, [selectedAnswer, isResult, checkedAnswer, isCorrect]);
 
         let component;
 
@@ -170,7 +170,7 @@ export const TasksPageEN = () => {
                         setSelectedAnswer(response);
                         if (TasksEN[currentTaskIndex]?.correctAnswer === response) {
                                 setIsCorrect(true);
-                                if (currentTaskIndex == TasksEN.length - 1) {
+                                if (currentTaskIndex === TasksEN.length - 1) {
                                         window.Telegram.WebApp.MainButton.setParams({
                                                 text: "Next question",
                                                 color: '#4AB6ED',
