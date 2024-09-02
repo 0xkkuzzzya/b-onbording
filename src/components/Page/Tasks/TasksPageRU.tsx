@@ -136,15 +136,6 @@ export const TasksPageRU = () => {
             is_active: false
         });
 
-        if (currentTaskIndex >= tasks.length) {
-            window.Telegram.WebApp.MainButton.onClick(() => navigate('/'))
-            window.Telegram.WebApp.MainButton.setParams({
-                text: "Вернуться на главную",
-                color: '#4AB6ED',
-                is_active: true
-            });
-        } 
-
         if (isCorrect) {
             window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
             window.Telegram.WebApp.MainButton.setParams({
@@ -153,6 +144,15 @@ export const TasksPageRU = () => {
                 is_active: true
             });
         }
+
+        if (currentTaskIndex >= tasks.length) {
+            window.Telegram.WebApp.MainButton.onClick(() => navigate('/'))
+            window.Telegram.WebApp.MainButton.setParams({
+                text: "Вернуться на главную",
+                color: '#4AB6ED',
+                is_active: true
+            });
+        } 
     }, [isCorrect, selectedAnswer, currentTaskIndex, tasks.length]);
 
     const handleAnswerSelect = (response: string) => {
@@ -181,7 +181,7 @@ export const TasksPageRU = () => {
         });
     };
     
-    console.log(tasks.length)
+    console.log(currentTaskIndex, tasks.length)
 
     if (currentTaskIndex >= tasks.length) {
         return (
