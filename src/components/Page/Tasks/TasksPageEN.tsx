@@ -150,7 +150,7 @@ export const TasksPageEN = () => {
         }, []);
 
         useEffect(() => {
-                if (selectedAnswer != "") {
+                if (selectedAnswer != "" && selectedAnswer != "complete") {
                         window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
                 } else {
                         window.Telegram.WebApp.MainButton.hide()
@@ -179,6 +179,7 @@ export const TasksPageEN = () => {
                 window.Telegram.WebApp.MainButton.show()
 
                 if (currentTaskIndex == TasksEN.length - 1) {
+                        setSelectedAnswer("complete");
                         window.Telegram.WebApp.MainButton.setParams({
                                 text: "Complete",
                                 color: '#4AB6ED',
