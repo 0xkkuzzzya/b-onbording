@@ -9,7 +9,7 @@ const Container = styled.div`
     height: 60px;
     background: #181818;
     position: fixed;
-    bottom: 10px;
+    bottom: 15px;
     display: flex;
     align-items: center;
     justify-content: space-evenly;

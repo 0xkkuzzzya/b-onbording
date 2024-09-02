@@ -14,7 +14,7 @@ const Container = styled.div`
     flex-direction: column;
     align-items: center;
     margin-top: 11px;
-    margin-bottom: 135px;
+    margin-bottom: 140px;
 `
 
 const Header = styled.div`
@@ -160,7 +160,7 @@ const YourPlace = styled.div`
     display: flex;
     align-items: center;
     position: fixed;
-    bottom: 80px;
+    bottom: 85px;
     border-top: 1px solid #2e2e2e;
 `
 

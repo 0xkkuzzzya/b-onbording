@@ -130,25 +130,33 @@ export const TasksPageRU = () => {
         window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
 
         window.Telegram.WebApp.MainButton.show()
-        window.Telegram.WebApp.MainButton.setText("Next question")
+        window.Telegram.WebApp.MainButton.setText("Следующий вопрос")
         window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
-        window.Telegram.WebApp.MainButton.setParams({
-            text: "Выберите правильный ответ",
-            color: '#2A2A2A',
-            is_active: false,
-        });
         
     }, []);
 
     useEffect(() => {
-        if (isCorrect) {
+        if (currentTaskIndex >= tasks.length) {
+            window.Telegram.WebApp.MainButton.setParams({
+                text: "Вернуться на главную",
+                color: '#4AB6ED',
+                is_active: true
+            });
+            window.Telegram.WebApp.MainButton.onClick(() => navigate('/'))
+        } else if (isCorrect) {
             window.Telegram.WebApp.MainButton.setParams({
                 text: "Следующий вопрос",
-                color: '#3A91C1',
-                is_active: true,
+                color: '#4AB6ED',
+                is_active: true
+            });
+        } else {
+            window.Telegram.WebApp.MainButton.setParams({
+                text: "Выберите правильный ответ",
+                color: '#2A2A2A',
+                is_active: false
             });
         }
-    }, [isCorrect]);
+    }, [isCorrect, selectedAnswer, currentTaskIndex, tasks.length]);
 
     const handleAnswerSelect = (response: string) => {
         if (isCorrect) return;
@@ -168,25 +176,14 @@ export const TasksPageRU = () => {
         setSelectedAnswer("");
         setCheckedAnswers([]);
         setIsCorrect(false);
-
-        window.Telegram.WebApp.MainButton.setParams({
-            text: "Выберите правильный ответ",
-            color: '#2A2A2A',
-            is_active: false,
-        });
     };
 
-    if (tasks.length === 0 || currentTaskIndex >= tasks.length) {
-        window.Telegram.WebApp.MainButton.onClick(() => navigate(-1))
-        window.Telegram.WebApp.MainButton.setParams({
-            text: "Вернуться на главную",
-            color: '#3A91C1',
-            is_active: true,
-        });
+    console.log(currentTaskIndex)
 
+    if (currentTaskIndex >= tasks.length) {
         return (
             <Container>
-                <Title>All tasks completed!</Title>
+                <Title>Все задания выполнены!</Title>
                 <CompleteLogo src={CompleteLogoSticker} />
             </Container>
         );
