@@ -200,7 +200,7 @@ export const TasksPageEN = () => {
         return (
                 <Container>
                         <ProgressBar>
-                                <Progress width={((currentTaskIndex + 1) / TasksEN.length) * 100} color={allTasksComplete.amount == currentTaskIndex ? "#4AB6ED" : "#ff081d"} />
+                                <Progress width={((currentTaskIndex) / TasksEN.length) * 100} color={TasksEN.length - currentTaskIndex == TasksEN.length - allTasksComplete.amount ? "#4AB6ED" : "#ff081d"} />
                         </ProgressBar>
 
                         <Title>{TasksEN[currentTaskIndex].title}</Title>
