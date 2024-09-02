@@ -152,7 +152,7 @@ export const TasksPageEN = () => {
         useEffect(() => {
                 if (selectedAnswer != "" && selectedAnswer != "complete") {
                         window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
-                } else {
+                } else if (selectedAnswer == "") {
                         window.Telegram.WebApp.MainButton.hide()
                 }
         }, [selectedAnswer]);
