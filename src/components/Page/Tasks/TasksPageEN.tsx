@@ -192,12 +192,12 @@ export const TasksPageEN = () => {
         }
 
         const handleNextQuestion = () => {
-                setCurrentTaskIndex(prevIndex => prevIndex + 1);
+                setCurrentTaskIndex(currentTaskIndex + 1);
                 setSelectedAnswer("");
                 setIsCorrect(false);
                 setIsResult(false);
         }
-        
+
         console.log(currentTaskIndex)
 
         return (
