@@ -154,7 +154,7 @@ export const TasksPageEN = () => {
             is_active: false
         });
 
-        if (isCorrect) {
+        if (isCorrect || selectedAnswer !== "") {
             window.Telegram.WebApp.MainButton.setParams({
                 text: "Next question",
                 color: '#4AB6ED',
@@ -173,13 +173,6 @@ export const TasksPageEN = () => {
     }, [isCorrect, selectedAnswer, currentTaskIndex, tasks.length]);
 
     const handleAnswerSelect = (response: string) => {
-        if (isCorrect) return;
-
-        setSelectedAnswer(response);
-        if (!checkedAnswers.includes(response)) {
-            setCheckedAnswers(prev => [...prev, response]);
-        }
-
         if (tasks[currentTaskIndex]?.correctAnswer === response) {
             setIsCorrect(true);
         }
@@ -227,7 +220,7 @@ export const TasksPageEN = () => {
                     <RadioLabel key={index}>
                         <div style={{width: "20px", height: "20px", marginRight: "10px"}}>
                             {checkedAnswers.includes(response) ? (
-                                response === currentTask.correctAnswer ? (
+                                isCorrect ? (
                                     <ResultImage src={Complete} alt="Correct" />
                                 ) : (
                                     <ResultImage src={Error} alt="Incorrect" />
@@ -242,7 +235,7 @@ export const TasksPageEN = () => {
                             value={response}
                             checked={selectedAnswer === response}
                             onChange={() => handleAnswerSelect(response)}
-                            disabled={isCorrect}
+                            disabled={selectedAnswer !== ""}
                         />
 
                         {response}

@@ -153,7 +153,7 @@ export const TasksPageRU = () => {
             is_active: false
         });
 
-        if (isCorrect) {
+        if (isCorrect || selectedAnswer !== "") {
             window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
             window.Telegram.WebApp.MainButton.setParams({
                 text: "Следующий вопрос",
@@ -175,13 +175,6 @@ export const TasksPageRU = () => {
     }, [isCorrect, selectedAnswer, currentTaskIndex, tasks.length]);
 
     const handleAnswerSelect = (response: string) => {
-        if (isCorrect) return;
-
-        setSelectedAnswer(response);
-        if (!checkedAnswers.includes(response)) {
-            setCheckedAnswers(prev => [...prev, response]);
-        }
-
         if (tasks[currentTaskIndex]?.correctAnswer === response) {
             setIsCorrect(true);
         }
@@ -220,7 +213,7 @@ export const TasksPageRU = () => {
     return (
         <Container>
             <ProgressBar>
-                <Progress width={progress} />
+                <Progress width={progress} /> 
             </ProgressBar>
 
             <Title>{currentTask.title}</Title>
@@ -229,10 +222,10 @@ export const TasksPageRU = () => {
                     <RadioLabel key={index}>
                         <div style={{width: "20px", height: "20px", marginRight: "10px"}}>
                             {checkedAnswers.includes(response) ? (
-                                response === currentTask.correctAnswer ? (
-                                    <ResultImage src={Complete} />
+                                isCorrect ? (
+                                    <ResultImage src={Complete} alt="Correct" />
                                 ) : (
-                                    <ResultImage src={Error} />
+                                    <ResultImage src={Error} alt="Incorrect" />
                                 )
                             ) : (
                                 <SelectCircle />
@@ -244,7 +237,7 @@ export const TasksPageRU = () => {
                             value={response}
                             checked={selectedAnswer === response}
                             onChange={() => handleAnswerSelect(response)}
-                            disabled={isCorrect}
+                            disabled={selectedAnswer !== ""}
                         />
 
                         {response}
