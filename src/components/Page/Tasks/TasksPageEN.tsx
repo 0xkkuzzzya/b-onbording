@@ -138,10 +138,8 @@ export const TasksPageEN = () => {
         const navigate = useNavigate();
 
         let component;
-        console.log(currentTaskIndex)
 
         useEffect(() => {
-                console.log("USE: " + currentTaskIndex)
                 window.Telegram.WebApp.BackButton.show()
                 window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
                 window.Telegram.WebApp.MainButton.hide()
@@ -150,6 +148,8 @@ export const TasksPageEN = () => {
         useEffect(() => {
                 if (selectedAnswer != "") {
                         window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
+                } else {
+                        window.Telegram.WebApp.MainButton.hide()
                 }
         }, [selectedAnswer]);
 
@@ -173,7 +173,7 @@ export const TasksPageEN = () => {
         }
 
 
-        /*if (currentTaskIndex == TasksEN.length - 1) {
+        if (currentTaskIndex == TasksEN.length - 1) {
                 component = (
                         <Container>
                                 <Title>All tasks completed!</Title>
@@ -221,41 +221,9 @@ export const TasksPageEN = () => {
                                         ))}
                                 </AnswerContainer>
                         </Container>
-        }*/
+        }
 
         return (
-                <Container>
-                        <ProgressBar>
-                                <Progress width={((currentTaskIndex + 1) / TasksEN.length) * 100} />
-                        </ProgressBar>
-
-                        <Title>{TasksEN[currentTaskIndex].title}</Title>
-                        <AnswerContainer>
-                                {TasksEN[currentTaskIndex].responses.map((response, index) => (
-                                        <RadioLabel key={index}>
-                                                <div style={{ width: "20px", height: "20px", marginRight: "10px" }}>
-                                                        {isResult && selectedAnswer === response ? (
-                                                                <ResultImage
-                                                                        src={isCorrect ? Complete : Error}
-                                                                        alt={isCorrect ? "Correct" : "Incorrect"}
-                                                                />
-                                                        ) : (
-                                                                <SelectCircle />
-                                                        )}
-                                                </div>
-                                                <RadioInput
-                                                        type="radio"
-                                                        name="answer"
-                                                        value={response}
-                                                        checked={selectedAnswer === response}
-                                                        onChange={() => handleAnswerSelect(response)}
-                                                        disabled={isResult}
-                                                />
-
-                                                {response}
-                                        </RadioLabel>
-                                ))}
-                        </AnswerContainer>
-                </Container>
+                <>{component}</>
         );
 };
