@@ -128,25 +128,35 @@ export const TasksPageEN = () => {
         window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
 
         window.Telegram.WebApp.MainButton.show()
-        window.Telegram.WebApp.MainButton.setText("Next question")
+        window.Telegram.WebApp.MainButton.setText("Следующий вопрос")
         window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
+        
         window.Telegram.WebApp.MainButton.setParams({
-            text: "Select the correct answer",
+            text: "Choose the correct answer",
             color: '#2A2A2A',
-            is_active: false,
+            is_active: false
         });
         
     }, []);
 
     useEffect(() => {
+        if (currentTaskIndex >= tasks.length) {
+            window.Telegram.WebApp.MainButton.setParams({
+                text: "Go to main page",
+                color: '#4AB6ED',
+                is_active: true
+            });
+            window.Telegram.WebApp.MainButton.onClick(() => navigate('/'))
+        }
+
         if (isCorrect) {
             window.Telegram.WebApp.MainButton.setParams({
                 text: "Next question",
-                color: '#3A91C1',
-                is_active: true,
+                color: '#4AB6ED',
+                is_active: true
             });
-        }
-    }, [isCorrect]);
+        } 
+    }, [isCorrect, selectedAnswer, currentTaskIndex, tasks.length]);
 
     const handleAnswerSelect = (response: string) => {
         if (isCorrect) return;
@@ -168,20 +178,15 @@ export const TasksPageEN = () => {
         setIsCorrect(false);
 
         window.Telegram.WebApp.MainButton.setParams({
-            text: "Select the correct answer",
+            text: "Choose the correct answer",
             color: '#2A2A2A',
-            is_active: false,
+            is_active: false
         });
     };
 
-    if (tasks.length === 0 || currentTaskIndex >= tasks.length) {
-        window.Telegram.WebApp.MainButton.onClick(() => navigate(-1))
-        window.Telegram.WebApp.MainButton.setParams({
-            text: "Go to main page",
-            color: '#3A91C1',
-            is_active: true,
-        });
+    console.log(tasks.length)
 
+    if (currentTaskIndex >= tasks.length) {
         return (
             <Container>
                 <Title>All tasks completed!</Title>

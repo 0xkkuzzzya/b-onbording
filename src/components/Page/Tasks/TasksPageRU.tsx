@@ -132,6 +132,12 @@ export const TasksPageRU = () => {
         window.Telegram.WebApp.MainButton.show()
         window.Telegram.WebApp.MainButton.setText("Следующий вопрос")
         window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
+
+        window.Telegram.WebApp.MainButton.setParams({
+            text: "Выберите правильный ответ",
+            color: '#2A2A2A',
+            is_active: false
+        });
         
     }, []);
 
@@ -143,17 +149,13 @@ export const TasksPageRU = () => {
                 is_active: true
             });
             window.Telegram.WebApp.MainButton.onClick(() => navigate('/'))
-        } else if (isCorrect) {
+        } 
+
+        if (isCorrect) {
             window.Telegram.WebApp.MainButton.setParams({
                 text: "Следующий вопрос",
                 color: '#4AB6ED',
                 is_active: true
-            });
-        } else {
-            window.Telegram.WebApp.MainButton.setParams({
-                text: "Выберите правильный ответ",
-                color: '#2A2A2A',
-                is_active: false
             });
         }
     }, [isCorrect, selectedAnswer, currentTaskIndex, tasks.length]);
@@ -176,9 +178,15 @@ export const TasksPageRU = () => {
         setSelectedAnswer("");
         setCheckedAnswers([]);
         setIsCorrect(false);
-    };
 
-    console.log(currentTaskIndex)
+        window.Telegram.WebApp.MainButton.setParams({
+            text: "Выберите правильный ответ",
+            color: '#2A2A2A',
+            is_active: false
+        });
+    };
+    
+    console.log(tasks.length)
 
     if (currentTaskIndex >= tasks.length) {
         return (
