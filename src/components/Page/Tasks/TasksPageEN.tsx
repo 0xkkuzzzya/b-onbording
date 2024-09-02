@@ -136,10 +136,7 @@ export const TasksPageEN = () => {
             color: '#2A2A2A',
             is_active: false
         });
-        
-    }, []);
 
-    useEffect(() => {
         if (currentTaskIndex >= tasks.length) {
             window.Telegram.WebApp.MainButton.setParams({
                 text: "Go to main page",
