@@ -157,25 +157,25 @@ export const TasksPageEN = () => {
     useEffect(() => {
         if (currentTaskIndex >= tasks.length) {
             window.Telegram.WebApp.MainButton.setParams({
-                text: "Вернуться на главную",
+                text: "Go to main page",
                 color: '#4AB6ED',
                 is_active: true
             });
         } else if (showResult && isCorrect) {
             window.Telegram.WebApp.MainButton.setParams({
-                text: "Следующий вопрос",
+                text: "Next question",
                 color: '#4AB6ED',
                 is_active: true
             });
         } else if (selectedAnswer) {
             window.Telegram.WebApp.MainButton.setParams({
-                text: "Проверить ответ",
+                text: "Check answer",
                 color: '#4AB6ED',
                 is_active: true
             });
         } else {
             window.Telegram.WebApp.MainButton.setParams({
-                text: "Выберите ответ",
+                text: "Select answer",
                 color: '#2A2A2A',
                 is_active: false
             });

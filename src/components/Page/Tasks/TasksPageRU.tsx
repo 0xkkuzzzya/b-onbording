@@ -138,6 +138,7 @@ export const TasksPageRU = () => {
     const [selectedAnswer, setSelectedAnswer] = useState("");
     const [checkedAnswers, setCheckedAnswers] = useState<string[]>([]);
     const [isCorrect, setIsCorrect] = useState(false);
+    const [showResult, setShowResult] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -147,60 +148,73 @@ export const TasksPageRU = () => {
         window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
 
         window.Telegram.WebApp.MainButton.show()
-        window.Telegram.WebApp.MainButton.setParams({
-            text: "Выберите правильный ответ",
-            color: '#2A2A2A',
-            is_active: false
-        });
+        window.Telegram.WebApp.MainButton.onClick(handleMainButtonClick)
+        
+        return () => {
+            window.Telegram.WebApp.MainButton.offClick(handleMainButtonClick)
+        }
+    }, []);
 
-        if (isCorrect) {
-            window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
+    useEffect(() => {
+        if (currentTaskIndex >= tasks.length) {
+            window.Telegram.WebApp.MainButton.setParams({
+                text: "Вернуться на главную",
+                color: '#4AB6ED',
+                is_active: true
+            });
+        } else if (showResult && isCorrect) {
             window.Telegram.WebApp.MainButton.setParams({
                 text: "Следующий вопрос",
                 color: '#4AB6ED',
                 is_active: true
             });
-            console.log("Следующий вопрос")
+        } else if (selectedAnswer) {
+            window.Telegram.WebApp.MainButton.setParams({
+                text: "Проверить ответ",
+                color: '#4AB6ED',
+                is_active: true
+            });
+        } else {
+            window.Telegram.WebApp.MainButton.setParams({
+                text: "Выберите ответ",
+                color: '#2A2A2A',
+                is_active: false
+            });
         }
-
-        // if (currentTaskIndex >= tasks.length) {
-        //     window.Telegram.WebApp.MainButton.onClick(() => navigate('/'))
-        //     window.Telegram.WebApp.MainButton.setParams({
-        //         text: "Вернуться на главную",
-        //         color: '#4AB6ED',
-        //         is_active: true
-        //     });
-        //     console.log("Вернуться на главную")
-        // } 
-    }, [isCorrect, selectedAnswer, currentTaskIndex, tasks.length]);
+    }, [isCorrect, selectedAnswer, showResult, currentTaskIndex, tasks.length]);
 
     const handleAnswerSelect = (response: string) => {
-        if (isCorrect) return;
-
         setSelectedAnswer(response);
-        if (!checkedAnswers.includes(response)) {
-            setCheckedAnswers(prev => [...prev, response]);
-        }
-
-        if (tasks[currentTaskIndex]?.correctAnswer === response) {
-            setIsCorrect(true);
-        }
+        setShowResult(false);
     };
 
-    const handleNextQuestion = () => {
-        setCurrentTaskIndex(prevIndex => prevIndex + 1);
-        setSelectedAnswer("");
-        setCheckedAnswers([]);
-        setIsCorrect(false);
+    const handleMainButtonClick = useCallback(() => {
+        if (!selectedAnswer) return;
 
-        window.Telegram.WebApp.MainButton.setParams({
-            text: "Выберите правильный ответ",
-            color: '#2A2A2A',
-            is_active: false
-        });
-    };
-    
-    // console.log(currentTaskIndex, tasks.length)
+        const currentTask = tasks[currentTaskIndex];
+        const correct = currentTask?.correctAnswer === selectedAnswer;
+        setIsCorrect(correct);
+        setShowResult(true);
+
+        if (correct) {
+            setTimeout(() => {
+                if (currentTaskIndex >= tasks.length - 1) {
+                    navigate('/');
+                } else {
+                    setCurrentTaskIndex(prevIndex => prevIndex + 1);
+                    setSelectedAnswer("");
+                    setIsCorrect(false);
+                    setShowResult(false);
+                }
+            }, 1000);
+        }
+    }, [selectedAnswer, currentTaskIndex, tasks.length, navigate]);
+
+    if (tasks.length === 0) {
+        return <Container>Загрузка...</Container>;
+    }
+
+    console.log(tasks.length)
 
     if (currentTaskIndex >= tasks.length) {
         window.Telegram.WebApp.MainButton.hide();
