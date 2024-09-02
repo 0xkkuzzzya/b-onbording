@@ -13,9 +13,10 @@ export const TasksPage = () => {
     
     const [geoposition, setGeoposition] = useGeoposition()
 
-    return (
+    /*return (
         <>
             {geoposition.country == "ru" || geoposition.country == "kz" || geoposition.country == "by" ? <TasksPageRU /> : <TasksPageEN /> }
         </>
-    )
+    )*/
+    return (<><TasksPageEN /></>)
 }
