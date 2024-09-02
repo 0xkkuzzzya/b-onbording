@@ -136,7 +136,6 @@ export const TasksPageRU = () => {
     const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
     const [tasks, setTasks] = useState<Task[]>([]);
     const [selectedAnswer, setSelectedAnswer] = useState("");
-    const [checkedAnswers, setCheckedAnswers] = useState<string[]>([]);
     const [isCorrect, setIsCorrect] = useState(false);
     const [showResult, setShowResult] = useState(false);
     const navigate = useNavigate();
@@ -144,15 +143,15 @@ export const TasksPageRU = () => {
     useEffect(() => {
         setTasks(TasksRU);
 
-        window.Telegram.WebApp.BackButton.show()
-        window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
+        window.Telegram.WebApp.BackButton.show();
+        window.Telegram.WebApp.BackButton.onClick(() => navigate(-1));
 
-        window.Telegram.WebApp.MainButton.show()
-        window.Telegram.WebApp.MainButton.onClick(handleMainButtonClick)
-        
+        window.Telegram.WebApp.MainButton.show();
+        window.Telegram.WebApp.MainButton.onClick(handleMainButtonClick);
+
         return () => {
-            window.Telegram.WebApp.MainButton.offClick(handleMainButtonClick)
-        }
+            window.Telegram.WebApp.MainButton.offClick(handleMainButtonClick);
+        };
     }, []);
 
     useEffect(() => {
@@ -206,7 +205,7 @@ export const TasksPageRU = () => {
                     setIsCorrect(false);
                     setShowResult(false);
                 }
-            }, 1000);
+            }, 1000); 
         }
     }, [selectedAnswer, currentTaskIndex, tasks.length, navigate]);
 
@@ -214,10 +213,7 @@ export const TasksPageRU = () => {
         return <Container>Загрузка...</Container>;
     }
 
-    console.log(tasks.length)
-
     if (currentTaskIndex >= tasks.length) {
-        window.Telegram.WebApp.MainButton.hide();
         return (
             <Container>
                 <Title>Все задания выполнены!</Title>
@@ -228,7 +224,6 @@ export const TasksPageRU = () => {
     }
 
     const currentTask = tasks[currentTaskIndex];
-
     const progress = ((currentTaskIndex + 1) / tasks.length) * 100;
 
     return (
@@ -247,7 +242,7 @@ export const TasksPageRU = () => {
                         onChange={() => handleAnswerSelect(response)}
                         disabled={showResult && isCorrect}
                     />
-                    {showResult && selectedAnswer === response && (
+                    {showResult && (
                         <ResultImage 
                             src={response === currentTask.correctAnswer ? Complete : Error} 
                             alt={response === currentTask.correctAnswer ? "Правильно" : "Неправильно"} 
@@ -259,3 +254,4 @@ export const TasksPageRU = () => {
         </Container>
     );
 };
+
