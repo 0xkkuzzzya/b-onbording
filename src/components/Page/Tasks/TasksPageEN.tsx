@@ -197,60 +197,10 @@ export const TasksPageEN = () => {
         }
 
 
-        if (currentTaskIndex == TasksEN.length - 1) {
-                component = (
-                        <Container>
-                                <Title>All tasks completed!</Title>
-                                <CompleteLogo src={CompleteLogoSticker} />
-                        </Container>
-                );
-                window.Telegram.WebApp.MainButton.setParams({
-                        text: "Go to main page",
-                        color: '#4AB6ED',
-                        is_active: true
-                });
-                window.Telegram.WebApp.MainButton.onClick(() => navigate('/'))
-        } else {
-                component = 
-                        <Container>
-                                <ProgressBar>
-                                        <Progress width={((currentTaskIndex + 1) / TasksEN.length) * 100} color={allTasksComplete.amount == currentTaskIndex ? "#4AB6ED" : "#ff081d"} />
-                                </ProgressBar>
-
-                                <Title>{TasksEN[currentTaskIndex].title}</Title>
-                                <AnswerContainer>
-                                        {TasksEN[currentTaskIndex].responses.map((response, index) => (
-                                                <RadioLabel key={index}>
-                                                        <div style={{ width: "20px", height: "20px", marginRight: "10px" }}>
-                                                                {isResult && selectedAnswer === response ? (
-                                                                        <ResultImage
-                                                                                src={isCorrect ? Complete : Error}
-                                                                                alt={isCorrect ? "Correct" : "Incorrect"}
-                                                                        />
-                                                                ) : (
-                                                                        <SelectCircle />
-                                                                )}
-                                                        </div>
-                                                        <RadioInput
-                                                                type="radio"
-                                                                name="answer"
-                                                                value={response}
-                                                                checked={selectedAnswer === response}
-                                                                onChange={() => handleAnswerSelect(response)}
-                                                                disabled={isResult}
-                                                        />
-
-                                                        {response}
-                                                </RadioLabel>
-                                        ))}
-                                </AnswerContainer>
-                        </Container>
-        }
-
         return (
                 <Container>
                         <ProgressBar>
-                                <Progress width={((currentTaskIndex + 1) / TasksEN.length) * 100} />
+                                <Progress width={((currentTaskIndex + 1) / TasksEN.length) * 100} color={allTasksComplete.amount == currentTaskIndex ? "#4AB6ED" : "#ff081d"} />
                         </ProgressBar>
 
                         <Title>{TasksEN[currentTaskIndex].title}</Title>
