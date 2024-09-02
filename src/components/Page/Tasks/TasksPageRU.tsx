@@ -20,9 +20,10 @@ const Container = styled.div`
 `;
 
 const Title = styled.h2`
+    width: 90%;
     color: #FFFFFF;
     font-size: 24px;
-    font-weight: 600;
+    font-weight: 500;
     margin-bottom: 20px;
     text-align: center;
 `;
@@ -174,6 +175,13 @@ export const TasksPageRU = () => {
     }, [isCorrect, selectedAnswer, currentTaskIndex, tasks.length]);
 
     const handleAnswerSelect = (response: string) => {
+        if (isCorrect) return;
+
+        setSelectedAnswer(response);
+        if (!checkedAnswers.includes(response)) {
+            setCheckedAnswers(prev => [...prev, response]);
+        }
+
         if (tasks[currentTaskIndex]?.correctAnswer === response) {
             setIsCorrect(true);
         }
@@ -192,9 +200,10 @@ export const TasksPageRU = () => {
         });
     };
     
-    console.log(currentTaskIndex, tasks.length)
+    // console.log(currentTaskIndex, tasks.length)
 
     if (currentTaskIndex >= tasks.length) {
+        window.Telegram.WebApp.MainButton.hide();
         return (
             <Container>
                 <Title>Все задания выполнены!</Title>
@@ -213,6 +222,7 @@ export const TasksPageRU = () => {
             <ProgressBar>
                 <Progress width={progress} />
             </ProgressBar>
+
             <Title>{currentTask.title}</Title>
             <AnswerContainer>
                 {currentTask.responses.map((response, index) => (
