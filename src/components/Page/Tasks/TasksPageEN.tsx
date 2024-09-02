@@ -21,7 +21,7 @@ const Container = styled.div`
 const Title = styled.h2`
     color: #FFFFFF;
     font-size: 24px;
-    font-weight: 600;
+    font-weight: 500;
     margin-bottom: 20px;
     text-align: center;
 `;
@@ -201,6 +201,7 @@ export const TasksPageEN = () => {
     console.log(tasks.length)
 
     if (currentTaskIndex >= tasks.length) {
+        window.Telegram.WebApp.MainButton.hide();
         return (
             <Container>
                 <Title>All tasks completed!</Title>
@@ -217,8 +218,9 @@ export const TasksPageEN = () => {
     return (
         <Container>
             <ProgressBar>
-                <Progress width={progress} />
+                <Progress width={progress} /> 
             </ProgressBar>
+
             <Title>{currentTask.title}</Title>
             <AnswerContainer>
                 {currentTask.responses.map((response, index) => (
