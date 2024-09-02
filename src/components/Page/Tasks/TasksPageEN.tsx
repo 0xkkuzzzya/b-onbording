@@ -168,17 +168,6 @@ export const TasksPageEN = () => {
         const handleAnswerSelect = (response: string) => {
                 if (!isResult) {
                         setSelectedAnswer(response);
-                        if (TasksEN[currentTaskIndex]?.correctAnswer === response) {
-                                setIsCorrect(true);
-                                if (currentTaskIndex === TasksEN.length - 1) {
-                                        window.Telegram.WebApp.MainButton.setParams({
-                                                text: "Next question",
-                                                color: '#4AB6ED',
-                                                is_active: true
-                                        });
-                                        window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
-                                }
-                        }
                 }
         };
 
