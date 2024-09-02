@@ -19,6 +19,7 @@ const Container = styled.div`
 `;
 
 const Title = styled.h2`
+    width: 90%;
     color: #FFFFFF;
     font-size: 24px;
     font-weight: 500;
