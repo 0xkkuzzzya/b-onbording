@@ -108,9 +108,9 @@ const AnswerContainer = styled.div`
 `;
 
 const CompleteLogo = styled.img`
-    width: 200px;
-    height: 200px;
-    margin-right: 10px;
+    width: 220px;
+    height: 220px;
+    margin-top: 50px;
 `;
 
 
@@ -177,13 +177,17 @@ export const TasksPageRU = () => {
     };
 
     if (tasks.length === 0 || currentTaskIndex >= tasks.length) {
+        window.Telegram.WebApp.MainButton.onClick(() => navigate(-1))
+        window.Telegram.WebApp.MainButton.setParams({
+            text: "Вернуться на главную",
+            color: '#3A91C1',
+            is_active: true,
+        });
+
         return (
             <Container>
-                <Title>Все задания выполнены</Title>
+                <Title>All tasks completed!</Title>
                 <CompleteLogo src={CompleteLogoSticker} />
-                <Link to="/">
-                    <NextButton>Вернуться на главную страницу</NextButton>
-                </Link>
             </Container>
         );
     }
