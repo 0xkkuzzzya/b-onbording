@@ -136,8 +136,8 @@ export const TasksPageRU = () => {
     const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
     const [tasks, setTasks] = useState<Task[]>([]);
     const [selectedAnswer, setSelectedAnswer] = useState("");
-    const [checkedAnswers, setCheckedAnswers] = useState<string[]>([]);
     const [isCorrect, setIsCorrect] = useState(false);
+    const [isResult, setIsResult] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -175,6 +175,7 @@ export const TasksPageRU = () => {
     }, [isCorrect, selectedAnswer, currentTaskIndex, tasks.length]);
 
     const handleAnswerSelect = (response: string) => {
+        setIsResult(true);
         if (tasks[currentTaskIndex]?.correctAnswer === response) {
             setIsCorrect(true);
         }
@@ -183,8 +184,8 @@ export const TasksPageRU = () => {
     const handleNextQuestion = () => {
         setCurrentTaskIndex(prevIndex => prevIndex + 1);
         setSelectedAnswer("");
-        setCheckedAnswers([]);
         setIsCorrect(false);
+        setIsResult(false);
 
         window.Telegram.WebApp.MainButton.setParams({
             text: "Выберите правильный ответ",
@@ -221,7 +222,7 @@ export const TasksPageRU = () => {
                 {currentTask.responses.map((response, index) => (
                     <RadioLabel key={index}>
                         <div style={{width: "20px", height: "20px", marginRight: "10px"}}>
-                            {checkedAnswers.includes(response) ? (
+                            {isResult ? (
                                 isCorrect ? (
                                     <ResultImage src={Complete} alt="Correct" />
                                 ) : (
@@ -237,7 +238,7 @@ export const TasksPageRU = () => {
                             value={response}
                             checked={selectedAnswer === response}
                             onChange={() => handleAnswerSelect(response)}
-                            disabled={selectedAnswer !== ""}
+                            disabled={isResult}
                         />
 
                         {response}

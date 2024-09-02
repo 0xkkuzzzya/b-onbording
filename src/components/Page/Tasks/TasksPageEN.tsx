@@ -134,8 +134,8 @@ export const TasksPageEN = () => {
     const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
     const [tasks, setTasks] = useState<Task[]>([]);
     const [selectedAnswer, setSelectedAnswer] = useState("");
-    const [checkedAnswers, setCheckedAnswers] = useState<string[]>([]);
     const [isCorrect, setIsCorrect] = useState(false);
+    const [isResult, setIsResult] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -173,6 +173,7 @@ export const TasksPageEN = () => {
     }, [isCorrect, selectedAnswer, currentTaskIndex, tasks.length]);
 
     const handleAnswerSelect = (response: string) => {
+        setIsResult(true);
         if (tasks[currentTaskIndex]?.correctAnswer === response) {
             setIsCorrect(true);
         }
@@ -181,8 +182,8 @@ export const TasksPageEN = () => {
     const handleNextQuestion = () => {
         setCurrentTaskIndex(prevIndex => prevIndex + 1);
         setSelectedAnswer("");
-        setCheckedAnswers([]);
         setIsCorrect(false);
+        setIsResult(false);
 
         window.Telegram.WebApp.MainButton.setParams({
             text: "Choose the correct answer",
@@ -210,38 +211,38 @@ export const TasksPageEN = () => {
 
     return (
         <Container>
-            <ProgressBar>
-                <Progress width={progress} /> 
-            </ProgressBar>
+        <ProgressBar>
+            <Progress width={progress} /> 
+        </ProgressBar>
 
-            <Title>{currentTask.title}</Title>
-            <AnswerContainer>
-                {currentTask.responses.map((response, index) => (
-                    <RadioLabel key={index}>
-                        <div style={{width: "20px", height: "20px", marginRight: "10px"}}>
-                            {checkedAnswers.includes(response) ? (
-                                isCorrect ? (
-                                    <ResultImage src={Complete} alt="Correct" />
-                                ) : (
-                                    <ResultImage src={Error} alt="Incorrect" />
-                                )
+        <Title>{currentTask.title}</Title>
+        <AnswerContainer>
+            {currentTask.responses.map((response, index) => (
+                <RadioLabel key={index}>
+                    <div style={{width: "20px", height: "20px", marginRight: "10px"}}>
+                        {isResult ? (
+                            isCorrect ? (
+                                <ResultImage src={Complete} alt="Correct" />
                             ) : (
-                                <SelectCircle />
-                            )}
-                        </div>
-                        <RadioInput
-                            type="radio"
-                            name="answer"
-                            value={response}
-                            checked={selectedAnswer === response}
-                            onChange={() => handleAnswerSelect(response)}
-                            disabled={selectedAnswer !== ""}
-                        />
+                                <ResultImage src={Error} alt="Incorrect" />
+                            )
+                        ) : (
+                            <SelectCircle />
+                        )}
+                    </div>
+                    <RadioInput
+                        type="radio"
+                        name="answer"
+                        value={response}
+                        checked={selectedAnswer === response}
+                        onChange={() => handleAnswerSelect(response)}
+                        disabled={isResult}
+                    />
 
-                        {response}
-                    </RadioLabel>
-                ))}
-            </AnswerContainer>
-        </Container>
+                    {response}
+                </RadioLabel>
+            ))}
+        </AnswerContainer>
+    </Container>
     );
 };
