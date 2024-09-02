@@ -143,6 +143,7 @@ export const TasksPageEN = () => {
                 window.Telegram.WebApp.BackButton.show()
                 window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
                 window.Telegram.WebApp.MainButton.hide()
+                console.log(currentTaskIndex)
         }, [currentTaskIndex]);
 
         const handleAnswerSelect = (answer: string) => {
@@ -157,7 +158,6 @@ export const TasksPageEN = () => {
                 });
                 window.Telegram.WebApp.MainButton.onClick(() => {
                         setCurrentTaskIndex(prevIndex => prevIndex + 1);
-                        console.log(currentTaskIndex)
                         setSelectedAnswer("");
                         setIsCorrect(false);
                         setIsResult(false);
