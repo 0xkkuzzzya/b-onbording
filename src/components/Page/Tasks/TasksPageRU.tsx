@@ -139,10 +139,11 @@ export const TasksPageRU = () => {
         if (isCorrect) {
             window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
             window.Telegram.WebApp.MainButton.setParams({
-                text: "Следующий вопрос 5",
+                text: "Следующий вопрос",
                 color: '#4AB6ED',
                 is_active: true
             });
+            console.log("Следующий вопрос")
         }
 
         if (currentTaskIndex >= tasks.length) {
@@ -152,6 +153,7 @@ export const TasksPageRU = () => {
                 color: '#4AB6ED',
                 is_active: true
             });
+            console.log("Вернуться на главную")
         } 
     }, [isCorrect, selectedAnswer, currentTaskIndex, tasks.length]);
 
