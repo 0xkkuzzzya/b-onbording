@@ -159,11 +159,6 @@ export const TasksPageEN = () => {
 
         useEffect(() => {
                 if (currentTaskIndex == TasksEN.length - 1) {
-                        window.Telegram.WebApp.MainButton.show()
-                        window.Telegram.WebApp.MainButton.setParams({
-                                text: "Complete",
-                                color: '#4AB6ED',
-                        });
                         window.Telegram.WebApp.BackButton.onClick(() => {
                                 if(allTasksComplete.amount == 5) {
                                         console.log("Complete task 2")
@@ -183,10 +178,17 @@ export const TasksPageEN = () => {
                 }
                 window.Telegram.WebApp.MainButton.show()
 
-                window.Telegram.WebApp.MainButton.setParams({
-                        text: "Next question",
-                        color: '#4AB6ED',
-                });
+                if (currentTaskIndex + 1 == TasksEN.length - 1) {
+                        window.Telegram.WebApp.MainButton.setParams({
+                                text: "Complete",
+                                color: '#4AB6ED',
+                        });
+                } else {
+                        window.Telegram.WebApp.MainButton.setParams({
+                                text: "Next question",
+                                color: '#4AB6ED',
+                        });
+                }
         }
 
         const handleNextQuestion = () => {
@@ -196,6 +198,8 @@ export const TasksPageEN = () => {
                 setIsResult(false);
         }
 
+        console.log(TasksEN.length - currentTaskIndex)
+        console.log(TasksEN.length - allTasksComplete.amount)
 
         return (
                 <Container>
