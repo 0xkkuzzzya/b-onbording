@@ -179,12 +179,11 @@ export const TasksPageEN = () => {
                                         window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
                                 }
                         }
-                        setIsResult(true);
                 }
         };
 
         const handleMainButtonClick = () => {
-                if (!selectedAnswer) return;
+                if (selectedAnswer !== "") return;
 
                 if (!isResult) {
                         setIsResult(true);
