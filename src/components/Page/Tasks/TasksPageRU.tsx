@@ -147,14 +147,14 @@ export const TasksPageRU = () => {
         window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
 
         window.Telegram.WebApp.MainButton.show()
+        window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
         window.Telegram.WebApp.MainButton.setParams({
             text: "Выберите правильный ответ",
             color: '#2A2A2A',
             is_active: false
         });
 
-        if (isCorrect || selectedAnswer !== "") {
-            window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
+        if (isCorrect || isResult) {
             window.Telegram.WebApp.MainButton.setParams({
                 text: "Следующий вопрос",
                 color: '#4AB6ED',

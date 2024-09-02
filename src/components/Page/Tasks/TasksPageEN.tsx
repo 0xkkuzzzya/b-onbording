@@ -154,7 +154,7 @@ export const TasksPageEN = () => {
             is_active: false
         });
 
-        if (isCorrect || selectedAnswer !== "") {
+        if (isCorrect || isResult) {
             window.Telegram.WebApp.MainButton.setParams({
                 text: "Next question",
                 color: '#4AB6ED',
