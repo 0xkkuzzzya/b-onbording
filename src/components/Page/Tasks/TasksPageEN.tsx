@@ -132,71 +132,37 @@ const HomeButton = styled.button`
 
 export const TasksPageEN = () => {
         const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
-        const [tasks, setTasks] = useState<Task[]>([]);
         const [selectedAnswer, setSelectedAnswer] = useState("");
-        const [isCorrect, setIsCorrect] = useState(false);
         const [isResult, setIsResult] = useState(false);
-        const [checkedAnswer, setCheckedAnswer] = useState("");
+        const [isCorrect, setIsCorrect] = useState(false);
         const navigate = useNavigate();
-
-        useEffect(() => {
-                setTasks(TasksEN);
-
-                window.Telegram.WebApp.BackButton.show()
-                window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
-
-                window.Telegram.WebApp.MainButton.show()
-
-                window.Telegram.WebApp.MainButton.setParams({
-                        text: "Choose the correct answer",
-                        color: '#2A2A2A',
-                        is_active: false
-                });
-
-                if (selectedAnswer !== "") {
-                        window.Telegram.WebApp.MainButton.setParams({
-                                text: "Check answer",
-                                color: '#4AB6ED',
-                                is_active: false
-                        });
-                        window.Telegram.WebApp.MainButton.onClick(() => handleMainButtonClick())
-                }
-        }, [selectedAnswer, isResult, checkedAnswer, isCorrect]);
 
         let component;
 
-        const handleAnswerSelect = (response: string) => {
-                if (!isResult) {
-                        setSelectedAnswer(response);
-                }
-        };
+        useEffect(() => {
+                window.Telegram.WebApp.BackButton.show()
+                window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
+                window.Telegram.WebApp.MainButton.hide()
+        }, []);
 
-        const handleMainButtonClick = () => {
-                if (selectedAnswer !== "") return;
-
-                if (!isResult) {
-                        setIsResult(true);
-                        setCheckedAnswer(selectedAnswer);
-                        setIsCorrect(TasksEN[currentTaskIndex]?.correctAnswer === selectedAnswer);
-                        if (TasksEN[currentTaskIndex]?.correctAnswer === selectedAnswer) {
-                                handleNextQuestion();
-                        }
-                }
-        }
-
-        const handleNextQuestion = () => {
-                setCurrentTaskIndex(prevIndex => prevIndex + 1);
-                setSelectedAnswer("");
-                setCheckedAnswer("");
-                setIsCorrect(false);
-                setIsResult(false);
-
+        const handleAnswerSelect = (answer: string) => {
+                setIsResult(true);
+                setSelectedAnswer(answer);
+                setIsCorrect(TasksEN[currentTaskIndex].correctAnswer === answer);
+                window.Telegram.WebApp.MainButton.show()
                 window.Telegram.WebApp.MainButton.setParams({
-                        text: "Choose the correct answer",
-                        color: '#2A2A2A',
+                        text: "Next question",
+                        color: '#4AB6ED',
                         is_active: false
                 });
-        };
+                window.Telegram.WebApp.MainButton.onClick(() => {
+                        setCurrentTaskIndex(prevIndex => prevIndex + 1);
+                        setSelectedAnswer("");
+                        setIsCorrect(false);
+                        setIsResult(false);
+                })
+        }
+
 
         if (currentTaskIndex == TasksEN.length - 1) {
                 component = (
@@ -215,7 +181,7 @@ export const TasksPageEN = () => {
                 component = 
                         <Container>
                                 <ProgressBar>
-                                        <Progress width={((currentTaskIndex + 1) / tasks.length) * 100} />
+                                        <Progress width={((currentTaskIndex + 1) / TasksEN.length) * 100} />
                                 </ProgressBar>
 
                                 <Title>{TasksEN[currentTaskIndex].title}</Title>
@@ -223,7 +189,7 @@ export const TasksPageEN = () => {
                                         {TasksEN[currentTaskIndex].responses.map((response, index) => (
                                                 <RadioLabel key={index}>
                                                         <div style={{ width: "20px", height: "20px", marginRight: "10px" }}>
-                                                                {isResult && checkedAnswer === response ? (
+                                                                {isResult && selectedAnswer === response ? (
                                                                         <ResultImage
                                                                                 src={isCorrect ? Complete : Error}
                                                                                 alt={isCorrect ? "Correct" : "Incorrect"}
