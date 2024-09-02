@@ -145,7 +145,7 @@ export const TasksPageEN = () => {
         window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
 
         window.Telegram.WebApp.MainButton.show()
-        window.Telegram.WebApp.MainButton.setText("Следующий вопрос")
+        window.Telegram.WebApp.MainButton.setText("Next question")
         window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
         
         window.Telegram.WebApp.MainButton.setParams({
