@@ -112,6 +112,23 @@ const CompleteLogo = styled.img`
     margin-top: 50px;
 `;
 
+const HomeButton = styled.button`
+    width: 90%;
+    height: 40px;
+    background-color: #4AB6ED;
+    border-radius: 10px;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    position: fixed;
+    bottom: 15px;
+    &:active {
+        transform: scale(0.98);
+        transition: transform 0.2s ease;
+    }
+`
+
 
 export const TasksPageEN = () => {
     const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
@@ -137,22 +154,22 @@ export const TasksPageEN = () => {
             is_active: false
         });
 
-        if (currentTaskIndex >= tasks.length) {
-            window.Telegram.WebApp.MainButton.setParams({
-                text: "Go to main page",
-                color: '#4AB6ED',
-                is_active: true
-            });
-            window.Telegram.WebApp.MainButton.onClick(() => navigate('/'))
-        }
-
         if (isCorrect) {
             window.Telegram.WebApp.MainButton.setParams({
                 text: "Next question",
                 color: '#4AB6ED',
                 is_active: true
             });
-        } 
+        }
+        
+        // if (currentTaskIndex >= tasks.length) {
+        //     window.Telegram.WebApp.MainButton.setParams({
+        //         text: "Go to main page",
+        //         color: '#4AB6ED',
+        //         is_active: true
+        //     });
+        //     window.Telegram.WebApp.MainButton.onClick(() => navigate('/'))
+        // }
     }, [isCorrect, selectedAnswer, currentTaskIndex, tasks.length]);
 
     const handleAnswerSelect = (response: string) => {
@@ -188,6 +205,7 @@ export const TasksPageEN = () => {
             <Container>
                 <Title>All tasks completed!</Title>
                 <CompleteLogo src={CompleteLogoSticker} />
+                <HomeButton onClick={() => navigate('/')}>Go to main page</HomeButton>
             </Container>
         );
     }

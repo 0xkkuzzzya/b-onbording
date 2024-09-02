@@ -113,6 +113,22 @@ const CompleteLogo = styled.img`
     margin-top: 50px;
 `;
 
+const HomeButton = styled.button`
+    width: 90%;
+    height: 40px;
+    background-color: #4AB6ED;
+    border-radius: 10px;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    position: fixed;
+    bottom: 15px;
+    &:active {
+        transform: scale(0.98);
+        transition: transform 0.2s ease;
+    }
+`
 
 
 export const TasksPageRU = () => {
@@ -146,15 +162,15 @@ export const TasksPageRU = () => {
             console.log("Следующий вопрос")
         }
 
-        if (currentTaskIndex >= tasks.length) {
-            window.Telegram.WebApp.MainButton.onClick(() => navigate('/'))
-            window.Telegram.WebApp.MainButton.setParams({
-                text: "Вернуться на главную",
-                color: '#4AB6ED',
-                is_active: true
-            });
-            console.log("Вернуться на главную")
-        } 
+        // if (currentTaskIndex >= tasks.length) {
+        //     window.Telegram.WebApp.MainButton.onClick(() => navigate('/'))
+        //     window.Telegram.WebApp.MainButton.setParams({
+        //         text: "Вернуться на главную",
+        //         color: '#4AB6ED',
+        //         is_active: true
+        //     });
+        //     console.log("Вернуться на главную")
+        // } 
     }, [isCorrect, selectedAnswer, currentTaskIndex, tasks.length]);
 
     const handleAnswerSelect = (response: string) => {
@@ -190,6 +206,7 @@ export const TasksPageRU = () => {
             <Container>
                 <Title>Все задания выполнены!</Title>
                 <CompleteLogo src={CompleteLogoSticker} />
+                <HomeButton onClick={() => navigate('/')}>Вернуться на главную</HomeButton>
             </Container>
         );
     }
