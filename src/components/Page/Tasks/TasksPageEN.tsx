@@ -136,6 +136,7 @@ export const TasksPageEN = () => {
     const [selectedAnswer, setSelectedAnswer] = useState("");
     const [isCorrect, setIsCorrect] = useState(false);
     const [isResult, setIsResult] = useState(false);
+    const [checkedAnswer, setCheckedAnswer] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -146,7 +147,7 @@ export const TasksPageEN = () => {
 
         window.Telegram.WebApp.MainButton.show()
         window.Telegram.WebApp.MainButton.setText("Next answer")
-        window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
+        window.Telegram.WebApp.MainButton.onClick(handleMainButtonClick)
         
         window.Telegram.WebApp.MainButton.setParams({
             text: "Choose the correct answer",
@@ -173,15 +174,27 @@ export const TasksPageEN = () => {
     }, [isCorrect, selectedAnswer, currentTaskIndex, tasks.length]);
 
     const handleAnswerSelect = (response: string) => {
-        setIsResult(true);
-        if (tasks[currentTaskIndex]?.correctAnswer === response) {
-            setIsCorrect(true);
+        if (!isResult) {
+            setSelectedAnswer(response);
         }
     };
+
+    const handleMainButtonClick = () => {
+        if (!selectedAnswer) return;
+
+        if (!isResult) {
+            setIsResult(true);
+            setCheckedAnswer(selectedAnswer);
+            setIsCorrect(tasks[currentTaskIndex]?.correctAnswer === selectedAnswer);
+        } else if (isCorrect) {
+            handleNextQuestion();
+        }
+    }
 
     const handleNextQuestion = () => {
         setCurrentTaskIndex(prevIndex => prevIndex + 1);
         setSelectedAnswer("");
+        setCheckedAnswer("");
         setIsCorrect(false);
         setIsResult(false);
 
@@ -220,12 +233,11 @@ export const TasksPageEN = () => {
             {currentTask.responses.map((response, index) => (
                 <RadioLabel key={index}>
                     <div style={{width: "20px", height: "20px", marginRight: "10px"}}>
-                        {isResult ? (
-                            isCorrect ? (
-                                <ResultImage src={Complete} alt="Correct" />
-                            ) : (
-                                <ResultImage src={Error} alt="Incorrect" />
-                            )
+                        {isResult && checkedAnswer === response ? (
+                            <ResultImage 
+                                src={isCorrect ? Complete : Error} 
+                                alt={isCorrect ? "Correct" : "Incorrect"} 
+                            />
                         ) : (
                             <SelectCircle />
                         )}

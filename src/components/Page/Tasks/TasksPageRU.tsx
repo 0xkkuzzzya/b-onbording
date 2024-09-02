@@ -138,6 +138,7 @@ export const TasksPageRU = () => {
     const [selectedAnswer, setSelectedAnswer] = useState("");
     const [isCorrect, setIsCorrect] = useState(false);
     const [isResult, setIsResult] = useState(false);
+    const [checkedAnswer, setCheckedAnswer] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -147,40 +148,55 @@ export const TasksPageRU = () => {
         window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
 
         window.Telegram.WebApp.MainButton.show()
-        window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
+        window.Telegram.WebApp.MainButton.setText("Следующий вопрос")
+        window.Telegram.WebApp.MainButton.onClick(handleMainButtonClick)
+        
         window.Telegram.WebApp.MainButton.setParams({
             text: "Выберите правильный ответ",
             color: '#2A2A2A',
             is_active: false
         });
 
+        if (isCorrect || isResult) {
+            window.Telegram.WebApp.MainButton.setParams({
+                text: "Следующий вопрос",
+                color: '#4AB6ED',
+                is_active: true
+            });
+        }
+        
         // if (currentTaskIndex >= tasks.length) {
-        //     window.Telegram.WebApp.MainButton.onClick(() => navigate('/'))
         //     window.Telegram.WebApp.MainButton.setParams({
-        //         text: "Вернуться на главную",
+        //         text: "Go to main page",
         //         color: '#4AB6ED',
         //         is_active: true
         //     });
-        //     console.log("Вернуться на главную")
-        // } 
+        //     window.Telegram.WebApp.MainButton.onClick(() => navigate('/'))
+        // }
     }, [isCorrect, selectedAnswer, currentTaskIndex, tasks.length]);
 
     const handleAnswerSelect = (response: string) => {
-        setIsResult(true);
-        if (tasks[currentTaskIndex]?.correctAnswer === response) {
-            setIsCorrect(true);
+        if (!isResult) {
+            setSelectedAnswer(response);
         }
-
-        window.Telegram.WebApp.MainButton.setParams({
-            text: "Следующий вопрос",
-            color: '#4AB6ED',
-            is_active: true
-        });
     };
+
+    const handleMainButtonClick = () => {
+        if (!selectedAnswer) return;
+
+        if (!isResult) {
+            setIsResult(true);
+            setCheckedAnswer(selectedAnswer);
+            setIsCorrect(tasks[currentTaskIndex]?.correctAnswer === selectedAnswer);
+        } else if (isCorrect) {
+            handleNextQuestion();
+        }
+    }
 
     const handleNextQuestion = () => {
         setCurrentTaskIndex(prevIndex => prevIndex + 1);
         setSelectedAnswer("");
+        setCheckedAnswer("");
         setIsCorrect(false);
         setIsResult(false);
 
@@ -190,8 +206,8 @@ export const TasksPageRU = () => {
             is_active: false
         });
     };
-    
-    // console.log(currentTaskIndex, tasks.length)
+
+    console.log(tasks.length)
 
     if (currentTaskIndex >= tasks.length) {
         window.Telegram.WebApp.MainButton.hide();
@@ -199,7 +215,7 @@ export const TasksPageRU = () => {
             <Container>
                 <Title>Все задания выполнены!</Title>
                 <CompleteLogo src={CompleteLogoSticker} />
-                <HomeButton onClick={() => navigate('/')}>Вернуться на главную</HomeButton>
+                <HomeButton onClick={() => navigate('/')}>На главную</HomeButton>
             </Container>
         );
     }
@@ -210,38 +226,37 @@ export const TasksPageRU = () => {
 
     return (
         <Container>
-            <ProgressBar>
-                <Progress width={progress} /> 
-            </ProgressBar>
+        <ProgressBar>
+            <Progress width={progress} /> 
+        </ProgressBar>
 
-            <Title>{currentTask.title}</Title>
-            <AnswerContainer>
-                {currentTask.responses.map((response, index) => (
-                    <RadioLabel key={index}>
-                        <div style={{width: "20px", height: "20px", marginRight: "10px"}}>
-                            {isResult && currentTaskIndex == index ? (
-                                isCorrect ? (
-                                    <ResultImage src={Complete} alt="Correct" />
-                                ) : (
-                                    <ResultImage src={Error} alt="Incorrect" />
-                                )
-                            ) : (
-                                <SelectCircle />
-                            )}
-                        </div>
-                        <RadioInput
-                            type="radio"
-                            name="answer"
-                            value={response}
-                            checked={selectedAnswer === response}
-                            onChange={() => handleAnswerSelect(response)}
-                            disabled={isResult}
-                        />
+        <Title>{currentTask.title}</Title>
+        <AnswerContainer>
+            {currentTask.responses.map((response, index) => (
+                <RadioLabel key={index}>
+                    <div style={{width: "20px", height: "20px", marginRight: "10px"}}>
+                        {isResult && checkedAnswer === response ? (
+                            <ResultImage 
+                                src={isCorrect ? Complete : Error} 
+                                alt={isCorrect ? "Correct" : "Incorrect"} 
+                            />
+                        ) : (
+                            <SelectCircle />
+                        )}
+                    </div>
+                    <RadioInput
+                        type="radio"
+                        name="answer"
+                        value={response}
+                        checked={selectedAnswer === response}
+                        onChange={() => handleAnswerSelect(response)}
+                        disabled={isResult}
+                    />
 
-                        {response}
-                    </RadioLabel>
-                ))}
-            </AnswerContainer>
-        </Container>
+                    {response}
+                </RadioLabel>
+            ))}
+        </AnswerContainer>
+    </Container>
     );
 };
