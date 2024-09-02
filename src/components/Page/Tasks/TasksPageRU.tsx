@@ -130,8 +130,6 @@ export const TasksPageRU = () => {
         window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
 
         window.Telegram.WebApp.MainButton.show()
-        window.Telegram.WebApp.MainButton.setText("Следующий вопрос")
-
         window.Telegram.WebApp.MainButton.setParams({
             text: "Выберите правильный ответ",
             color: '#2A2A2A',
@@ -150,7 +148,7 @@ export const TasksPageRU = () => {
         if (isCorrect) {
             window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
             window.Telegram.WebApp.MainButton.setParams({
-                text: "Следующий вопрос",
+                text: "Следующий вопрос 5",
                 color: '#4AB6ED',
                 is_active: true
             });
