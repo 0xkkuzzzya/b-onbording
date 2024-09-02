@@ -137,6 +137,7 @@ export const TasksPageEN = () => {
     const [selectedAnswer, setSelectedAnswer] = useState("");
     const [checkedAnswers, setCheckedAnswers] = useState<string[]>([]);
     const [isCorrect, setIsCorrect] = useState(false);
+    const [showResult, setShowResult] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -146,58 +147,71 @@ export const TasksPageEN = () => {
         window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
 
         window.Telegram.WebApp.MainButton.show()
-        window.Telegram.WebApp.MainButton.setText("Следующий вопрос")
-        window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
+        window.Telegram.WebApp.MainButton.onClick(handleMainButtonClick)
         
-        window.Telegram.WebApp.MainButton.setParams({
-            text: "Choose the correct answer",
-            color: '#2A2A2A',
-            is_active: false
-        });
+        return () => {
+            window.Telegram.WebApp.MainButton.offClick(handleMainButtonClick)
+        }
+    }, []);
 
-        if (isCorrect) {
+    useEffect(() => {
+        if (currentTaskIndex >= tasks.length) {
             window.Telegram.WebApp.MainButton.setParams({
-                text: "Next question",
+                text: "Вернуться на главную",
                 color: '#4AB6ED',
                 is_active: true
             });
+        } else if (showResult && isCorrect) {
+            window.Telegram.WebApp.MainButton.setParams({
+                text: "Следующий вопрос",
+                color: '#4AB6ED',
+                is_active: true
+            });
+        } else if (selectedAnswer) {
+            window.Telegram.WebApp.MainButton.setParams({
+                text: "Проверить ответ",
+                color: '#4AB6ED',
+                is_active: true
+            });
+        } else {
+            window.Telegram.WebApp.MainButton.setParams({
+                text: "Выберите ответ",
+                color: '#2A2A2A',
+                is_active: false
+            });
         }
-        
-        // if (currentTaskIndex >= tasks.length) {
-        //     window.Telegram.WebApp.MainButton.setParams({
-        //         text: "Go to main page",
-        //         color: '#4AB6ED',
-        //         is_active: true
-        //     });
-        //     window.Telegram.WebApp.MainButton.onClick(() => navigate('/'))
-        // }
-    }, [isCorrect, selectedAnswer, currentTaskIndex, tasks.length]);
+    }, [isCorrect, selectedAnswer, showResult, currentTaskIndex, tasks.length]);
 
     const handleAnswerSelect = (response: string) => {
-        if (isCorrect) return;
-
         setSelectedAnswer(response);
-        if (!checkedAnswers.includes(response)) {
-            setCheckedAnswers(prev => [...prev, response]);
-        }
-
-        if (tasks[currentTaskIndex]?.correctAnswer === response) {
-            setIsCorrect(true);
-        }
+        setShowResult(false);
     };
 
-    const handleNextQuestion = () => {
-        setCurrentTaskIndex(prevIndex => prevIndex + 1);
-        setSelectedAnswer("");
-        setCheckedAnswers([]);
-        setIsCorrect(false);
+    const handleMainButtonClick = useCallback(() => {
+        if (!selectedAnswer) return;
 
-        window.Telegram.WebApp.MainButton.setParams({
-            text: "Choose the correct answer",
-            color: '#2A2A2A',
-            is_active: false
-        });
-    };
+        const currentTask = tasks[currentTaskIndex];
+        const correct = currentTask?.correctAnswer === selectedAnswer;
+        setIsCorrect(correct);
+        setShowResult(true);
+
+        if (correct) {
+            setTimeout(() => {
+                if (currentTaskIndex >= tasks.length - 1) {
+                    navigate('/');
+                } else {
+                    setCurrentTaskIndex(prevIndex => prevIndex + 1);
+                    setSelectedAnswer("");
+                    setIsCorrect(false);
+                    setShowResult(false);
+                }
+            }, 1000);
+        }
+    }, [selectedAnswer, currentTaskIndex, tasks.length, navigate]);
+
+    if (tasks.length === 0) {
+        return <Container>Загрузка...</Container>;
+    }
 
     console.log(tasks.length)
 
@@ -219,37 +233,28 @@ export const TasksPageEN = () => {
     return (
         <Container>
             <ProgressBar>
-                <Progress width={progress} /> 
+                <Progress width={progress} />
             </ProgressBar>
-
             <Title>{currentTask.title}</Title>
-            <AnswerContainer>
-                {currentTask.responses.map((response, index) => (
-                    <RadioLabel key={index}>
-                        <div style={{width: "20px", height: "20px", marginRight: "10px"}}>
-                            {checkedAnswers.includes(response) ? (
-                                response === currentTask.correctAnswer ? (
-                                    <ResultImage src={Complete} alt="Correct" />
-                                ) : (
-                                    <ResultImage src={Error} alt="Incorrect" />
-                                )
-                            ) : (
-                                <SelectCircle />
-                            )}
-                        </div>
-                        <RadioInput
-                            type="radio"
-                            name="answer"
-                            value={response}
-                            checked={selectedAnswer === response}
-                            onChange={() => handleAnswerSelect(response)}
-                            disabled={isCorrect}
+            {currentTask.responses.map((response, index) => (
+                <RadioLabel key={index}>
+                    <RadioInput
+                        type="radio"
+                        name="answer"
+                        value={response}
+                        checked={selectedAnswer === response}
+                        onChange={() => handleAnswerSelect(response)}
+                        disabled={showResult && isCorrect}
+                    />
+                    {showResult && selectedAnswer === response && (
+                        <ResultImage 
+                            src={response === currentTask.correctAnswer ? Complete : Error} 
+                            alt={response === currentTask.correctAnswer ? "Правильно" : "Неправильно"} 
                         />
-
-                        {response}
-                    </RadioLabel>
-                ))}
-            </AnswerContainer>
+                    )}
+                    {response}
+                </RadioLabel>
+            ))}
         </Container>
     );
 };
