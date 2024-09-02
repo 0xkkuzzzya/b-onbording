@@ -138,12 +138,13 @@ export const TasksPageEN = () => {
         const navigate = useNavigate();
 
         let component;
+        console.log(currentTaskIndex)
 
         useEffect(() => {
+                console.log("USE: " + currentTaskIndex)
                 window.Telegram.WebApp.BackButton.show()
                 window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
                 window.Telegram.WebApp.MainButton.hide()
-                console.log(currentTaskIndex)
         }, [currentTaskIndex]);
 
         const handleAnswerSelect = (answer: string) => {
@@ -151,17 +152,20 @@ export const TasksPageEN = () => {
                 setSelectedAnswer(answer);
                 setIsCorrect(TasksEN[currentTaskIndex].correctAnswer === answer);
                 window.Telegram.WebApp.MainButton.show()
-                window.Telegram.WebApp.MainButton.setParams({
-                        text: "Next question",
-                        color: '#4AB6ED',
-                        is_active: false
-                });
+
                 window.Telegram.WebApp.MainButton.onClick(() => {
+                        console.log("CLICK")
                         setCurrentTaskIndex(prevIndex => prevIndex + 1);
                         setSelectedAnswer("");
                         setIsCorrect(false);
                         setIsResult(false);
                 })
+
+                window.Telegram.WebApp.MainButton.setParams({
+                        text: "Next question",
+                        color: '#4AB6ED',
+                        is_active: false
+                });
         }
 
 
