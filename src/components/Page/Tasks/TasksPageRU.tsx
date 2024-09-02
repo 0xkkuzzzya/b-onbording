@@ -131,7 +131,6 @@ export const TasksPageRU = () => {
 
         window.Telegram.WebApp.MainButton.show()
         window.Telegram.WebApp.MainButton.setText("Следующий вопрос")
-        window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
 
         window.Telegram.WebApp.MainButton.setParams({
             text: "Выберите правильный ответ",
@@ -140,15 +139,16 @@ export const TasksPageRU = () => {
         });
 
         if (currentTaskIndex >= tasks.length) {
+            window.Telegram.WebApp.MainButton.onClick(() => navigate('/'))
             window.Telegram.WebApp.MainButton.setParams({
                 text: "Вернуться на главную",
                 color: '#4AB6ED',
                 is_active: true
             });
-            window.Telegram.WebApp.MainButton.onClick(() => navigate('/'))
         } 
 
         if (isCorrect) {
+            window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
             window.Telegram.WebApp.MainButton.setParams({
                 text: "Следующий вопрос",
                 color: '#4AB6ED',
