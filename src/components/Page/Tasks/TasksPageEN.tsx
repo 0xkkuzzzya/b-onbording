@@ -159,6 +159,7 @@ export const TasksPageEN = () => {
                                 if(allTasksComplete.amount == TasksEN.length) {
                                         CompleteTask(user.user_id, "task2")
                                 }
+                                setCurrentTaskIndex(0);
                                 navigate("/")
                         })
                 } else if (selectedAnswer == "") {
