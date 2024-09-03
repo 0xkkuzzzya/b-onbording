@@ -148,6 +148,7 @@ export const TasksPageEN = () => {
                 window.Telegram.WebApp.BackButton.show()
                 window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
                 window.Telegram.WebApp.MainButton.hide()
+                window.Telegram.WebApp.MainButton.onClick(() => {})
         }, []);
 
         useEffect(() => {
