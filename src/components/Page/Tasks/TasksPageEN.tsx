@@ -151,7 +151,7 @@ export const TasksPageEN = () => {
         }, []);
 
         useEffect(() => {
-                if (selectedAnswer != "" && currentTaskIndex != TasksEN.length - 1) {
+                if (selectedAnswer != "" && currentTaskIndex < TasksEN.length - 1) {
                         window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
                 } else if (selectedAnswer != "" && currentTaskIndex >= TasksEN.length - 1) {
                         window.Telegram.WebApp.MainButton.onClick(() => {
