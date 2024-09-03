@@ -153,9 +153,9 @@ export const TasksPageEN = () => {
                 if (selectedAnswer != "" && currentTaskIndex != TasksEN.length - 1) {
                         window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
                 } else if (selectedAnswer != "" && currentTaskIndex >= TasksEN.length - 1) {
-                        window.Telegram.WebApp.BackButton.onClick(() => {
+                        window.Telegram.WebApp.MainButton.onClick(() => {
+                                console.log("Complete task 2")
                                 if(allTasksComplete.amount == TasksEN.length) {
-                                        console.log("Complete task 2")
                                         CompleteTask(user.user_id, "task2")
                                 }
                                 navigate("/")
