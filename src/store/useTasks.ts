@@ -46,7 +46,7 @@ export const TasksEN: Task[] = [
             "By using real GPUs",
             "By staking",
         ],
-        correctAnswer: "by using NFT Miners",
+        correctAnswer: "By using NFT Miners",
     },
     {
         id: 4,
@@ -120,7 +120,7 @@ export const TasksRU: Task[] = [
             "С помощью реальных GPU",
             "Путем стейкинга",
         ],
-        correctAnswer: "с помощью NFT Майнеров",
+        correctAnswer: "С помощью NFT Майнеров",
     },
     {
         id: 4,
