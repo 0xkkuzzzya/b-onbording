@@ -158,7 +158,7 @@ export const TasksPageEN = () => {
                                         console.log("Complete task 2")
                                         CompleteTask(user.user_id, "task2")
                                 }
-                                navigate(-1)
+                                navigate("/")
                         })
                 } else if (selectedAnswer == "") {
                         window.Telegram.WebApp.MainButton.hide()
