@@ -6,12 +6,18 @@ import { LinksToPage } from "../Footer/LinksToPage"
 import { useWaitlistUser } from "../../../store/useUsers"
 import { TasksPageRU } from "./TasksPageRU"
 import { TasksPageEN } from "./TasksPageEN"
+import { useAllTasksComplete } from "../../../store/useTasks"
 
 
 
 export const TasksPage = () => {
     
     const [geoposition, setGeoposition] = useGeoposition()
+    const [allTasksComplete, setAllTasksComplete] = useAllTasksComplete();
+
+    useEffect(() => {
+        setAllTasksComplete({amount: 0})
+    }, []);
 
     /*return (
         <>

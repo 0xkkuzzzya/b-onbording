@@ -214,7 +214,7 @@ export const MainPageEN = () => {
     useEffect(() => {
         window.Telegram.WebApp.BackButton.hide()
         window.Telegram.WebApp.MainButton.hide()
-        window.Telegram.WebApp.MainButton.onClick(() => { })
+        window.Telegram.WebApp.MainButton.onClick(() => {})
     }, [])
 
     const copyTextToClipboard = async (referalLink: string) => {
@@ -229,7 +229,6 @@ export const MainPageEN = () => {
         const tg = window.Telegram.WebApp;
         tg.openTelegramLink('https://t.me/bytecoindev_bot/app');
         CompleteTask(user.user_id, "task6")
-
     };
 
     const [isLoading, setIsLoading] = useState(true);
