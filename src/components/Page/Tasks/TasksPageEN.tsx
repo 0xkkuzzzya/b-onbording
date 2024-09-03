@@ -150,15 +150,9 @@ export const TasksPageEN = () => {
         }, []);
 
         useEffect(() => {
-                if (selectedAnswer != "" && selectedAnswer != "complete") {
+                if (selectedAnswer != "" && currentTaskIndex != TasksEN.length - 1) {
                         window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
-                } else if (selectedAnswer == "") {
-                        window.Telegram.WebApp.MainButton.hide()
-                }
-        }, [selectedAnswer]);
-
-        useEffect(() => {
-                if (currentTaskIndex == TasksEN.length - 1) {
+                } else if (selectedAnswer != "" && currentTaskIndex == TasksEN.length - 1) {
                         window.Telegram.WebApp.BackButton.onClick(() => {
                                 if(allTasksComplete.amount == TasksEN.length) {
                                         console.log("Complete task 2")
@@ -166,8 +160,11 @@ export const TasksPageEN = () => {
                                 }
                                 navigate(-1)
                         })
+                } else if (selectedAnswer == "") {
+                        window.Telegram.WebApp.MainButton.hide()
                 }
-        }, [currentTaskIndex]);
+        }, [selectedAnswer, currentTaskIndex]);
+
 
         const handleAnswerSelect = (answer: string) => {
                 setIsResult(true);
@@ -179,7 +176,6 @@ export const TasksPageEN = () => {
                 window.Telegram.WebApp.MainButton.show()
 
                 if (currentTaskIndex == TasksEN.length - 1) {
-                        setSelectedAnswer("complete");
                         window.Telegram.WebApp.MainButton.setParams({
                                 text: "Complete",
                                 color: '#4AB6ED',
