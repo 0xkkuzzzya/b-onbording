@@ -140,6 +140,7 @@ export const TasksPageEN = () => {
         const navigate = useNavigate();
         const [allTasksComplete, setAllTasksComplete] = useAllTasksComplete();
         const [user, setUser] = useUser()
+        const [pbc, setPBC] = useState("#4AB6ED")
 
         let component;
 
@@ -173,6 +174,8 @@ export const TasksPageEN = () => {
 
                 if (TasksEN[currentTaskIndex].correctAnswer === answer) {
                         setAllTasksComplete({amount: allTasksComplete.amount + 1});
+                } else {
+                        setPBC("#ff081d")
                 }
 
                 window.Telegram.WebApp.MainButton.show()
@@ -200,7 +203,7 @@ export const TasksPageEN = () => {
         return (
                 <Container>
                         <ProgressBar>
-                                <Progress width={((currentTaskIndex) / TasksEN.length) * 100} color={"#4AB6ED"} />
+                                <Progress width={((currentTaskIndex) / TasksEN.length) * 100} color={pbc} />
                         </ProgressBar>
 
                         <Title>{TasksEN[currentTaskIndex].title}</Title>

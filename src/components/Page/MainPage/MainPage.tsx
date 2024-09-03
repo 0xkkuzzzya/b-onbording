@@ -33,10 +33,13 @@ export const MainPage = () => {
 
 	useEffect(() => {
 		Telegram.WebApp.ready();
+		window.Telegram.WebApp.MainButton.hide()
+		window.Telegram.WebApp.MainButton.onClick(() => {})
 
 		const initDataUnsafe: InitDataUnsafe = Telegram.WebApp.initDataUnsafe as InitDataUnsafe;
 		//main("765798766")
 		main(initDataUnsafe.user?.id.toString()!, initDataUnsafe.start_param?.slice(4))
+
 	}, [])
 
 	useEffect(() => {
