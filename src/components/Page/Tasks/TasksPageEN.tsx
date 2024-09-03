@@ -152,7 +152,7 @@ export const TasksPageEN = () => {
         useEffect(() => {
                 if (selectedAnswer != "" && currentTaskIndex != TasksEN.length - 1) {
                         window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
-                } else if (selectedAnswer != "" && currentTaskIndex == TasksEN.length - 1) {
+                } else if (selectedAnswer != "" && currentTaskIndex >= TasksEN.length - 1) {
                         window.Telegram.WebApp.BackButton.onClick(() => {
                                 if(allTasksComplete.amount == TasksEN.length) {
                                         console.log("Complete task 2")
@@ -175,7 +175,7 @@ export const TasksPageEN = () => {
                 }
                 window.Telegram.WebApp.MainButton.show()
 
-                if (currentTaskIndex == TasksEN.length - 1) {
+                if (currentTaskIndex >= TasksEN.length - 1) {
                         window.Telegram.WebApp.MainButton.setParams({
                                 text: "Complete",
                                 color: '#4AB6ED',
@@ -200,7 +200,7 @@ export const TasksPageEN = () => {
         return (
                 <Container>
                         <ProgressBar>
-                                <Progress width={((currentTaskIndex) / TasksEN.length) * 100} color={TasksEN.length - currentTaskIndex == TasksEN.length - allTasksComplete.amount ? "#4AB6ED" : "#ff081d"} />
+                                <Progress width={((currentTaskIndex) / TasksEN.length) * 100} color={"#4AB6ED"} />
                         </ProgressBar>
 
                         <Title>{TasksEN[currentTaskIndex].title}</Title>
