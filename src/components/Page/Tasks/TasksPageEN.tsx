@@ -170,9 +170,11 @@ export const TasksPageEN = () => {
                 setIsResult(true);
                 setSelectedAnswer(answer);
                 setIsCorrect(TasksEN[currentTaskIndex].correctAnswer === answer);
+
                 if (TasksEN[currentTaskIndex].correctAnswer === answer) {
                         setAllTasksComplete({amount: allTasksComplete.amount + 1});
                 }
+
                 window.Telegram.WebApp.MainButton.show()
 
                 if (currentTaskIndex >= TasksEN.length - 1) {
@@ -194,8 +196,6 @@ export const TasksPageEN = () => {
                 setIsCorrect(false);
                 setIsResult(false);
         }
-
-        console.log(currentTaskIndex)
 
         return (
                 <Container>
