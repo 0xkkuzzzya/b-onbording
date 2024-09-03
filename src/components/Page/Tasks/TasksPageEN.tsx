@@ -151,6 +151,7 @@ export const TasksPageEN = () => {
         }, []);
 
         useEffect(() => {
+                console.log("currentTaskIndex: ", currentTaskIndex)
                 if (selectedAnswer != "" && currentTaskIndex < TasksEN.length - 1) {
                         window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
                 } else if (selectedAnswer != "" && currentTaskIndex >= TasksEN.length - 1) {
