@@ -25,9 +25,6 @@ const routes = [
 
 
 export const MainIndex = () => {
-
-
-
     return (
         <Container>
             <Routes>

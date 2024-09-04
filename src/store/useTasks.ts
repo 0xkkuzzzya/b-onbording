@@ -1,3 +1,5 @@
+import { createStore } from "./store";
+
 export interface Task {
     id: number;
     title: string;
@@ -40,11 +42,11 @@ export const TasksEN: Task[] = [
         id: 3,
         title: "How do you mine BYTE?",
         responses: [
-            "by using NFT Miners",
-            "by using real GPUs",
-            "by staking",
+            "By using NFT Miners",
+            "By using real GPUs",
+            "By staking",
         ],
-        correctAnswer: "by using NFT Miners",
+        correctAnswer: "By using NFT Miners",
     },
     {
         id: 4,
@@ -114,11 +116,11 @@ export const TasksRU: Task[] = [
         id: 3,
         title: "Как добывать BYTE?",
         responses: [
-            "с помощью NFT Майнеров",
-            "с помощью реальных GPU",
-            "путем стейкинга",
+            "С помощью NFT Майнеров",
+            "С помощью реальных GPU",
+            "Путем стейкинга",
         ],
-        correctAnswer: "с помощью NFT Майнеров",
+        correctAnswer: "С помощью NFT Майнеров",
     },
     {
         id: 4,
@@ -151,3 +153,7 @@ export const TasksRU: Task[] = [
         correctAnswer: "80%",
     },
 ]
+
+export const [useAllTasksComplete] = createStore({
+    amount: 0
+});
