@@ -144,12 +144,20 @@ export const TasksPageEN = () => {
 
         let component;
 
+        const completeTask = () => {
+                console.log("Complete task 2")
+                if(allTasksComplete.amount == TasksEN.length) {
+                        CompleteTask(user.user_id, "task2")
+                }
+                setCurrentTaskIndex(0);
+                navigate("/")
+        }
+
         useEffect(() => {
                 window.Telegram.WebApp.BackButton.show()
                 window.Telegram.WebApp.BackButton.onClick(() => navigate(-1))
 
                 window.Telegram.WebApp.MainButton.hide()
-                window.Telegram.WebApp.MainButton.onClick(() => {console.log("MainButton Press")})
         }, []);
 
         useEffect(() => {
@@ -158,16 +166,15 @@ export const TasksPageEN = () => {
                 console.log("curr check: ", currentTaskIndex >= TasksEN.length - 1)
                 if (selectedAnswer != "" && currentTaskIndex < TasksEN.length - 1) {
                         window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
+                        return () => {
+                                window.Telegram.WebApp.MainButton.offClick(handleNextQuestion);
+                        } 
                 } else if (selectedAnswer != "" && currentTaskIndex >= TasksEN.length - 1) {
                         console.log("DEBUG: yep")
-                        window.Telegram.WebApp.MainButton.onClick(() => {
-                                console.log("Complete task 2")
-                                if(allTasksComplete.amount == TasksEN.length) {
-                                        CompleteTask(user.user_id, "task2")
-                                }
-                                setCurrentTaskIndex(0);
-                                navigate("/")
-                        })
+                        window.Telegram.WebApp.MainButton.onClick(completeTask)
+                        return () => {
+                                window.Telegram.WebApp.MainButton.offClick(completeTask);
+                        }
                 } else if (selectedAnswer == "") {
                         window.Telegram.WebApp.MainButton.hide()
                 }
