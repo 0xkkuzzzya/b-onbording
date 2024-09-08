@@ -104,8 +104,6 @@ export const BuyMinerRU = () => {
         window.Telegram.WebApp.MainButton.hide()
     }, [])
 
-    let text = wallet ? "Присоединиться к списку ожидания" : "Подключить кошелек"
-
     return (
         <Container>
             <Logo src={Gif} />
@@ -123,7 +121,7 @@ export const BuyMinerRU = () => {
                             open()
                         }
                     }
-                }>{text}</JoinWaitlistButton>
+                }>{"Присоединиться к списку ожидания"}</JoinWaitlistButton>
             }
             <Link to="https://t.me/bytecoin_ru"
                 style={{ width: "100%", textDecoration: "none", display: "flex", justifyContent: "center", marginTop: "20px" }}>
