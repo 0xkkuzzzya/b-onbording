@@ -19,10 +19,9 @@ export const TasksPage = () => {
         setAllTasksComplete({amount: 0})
     }, []);
 
-    /*return (
+    return (
         <>
             {geoposition.country == "ru" || geoposition.country == "kz" || geoposition.country == "by" ? <TasksPageRU /> : <TasksPageEN /> }
         </>
-    )*/
-    return (<><TasksPageEN /></>)
+    )
 }

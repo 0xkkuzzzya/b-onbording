@@ -142,11 +142,9 @@ export const TasksPageEN = () => {
         const [user, setUser] = useUser()
         const [pbc, setPBC] = useState("#4AB6ED")
 
-        let component;
-
         const completeTask = () => {
-                console.log("Complete task 2")
-                if(allTasksComplete.amount == TasksEN.length) {
+                if(allTasksComplete.amount == TasksEN.length - 1) {
+                        console.log("Complete task 2")
                         CompleteTask(user.user_id, "task2")
                 }
                 setCurrentTaskIndex(0);
@@ -161,16 +159,12 @@ export const TasksPageEN = () => {
         }, []);
 
         useEffect(() => {
-                console.log("currentTaskIndex: ", currentTaskIndex)
-                console.log("curr check: ", currentTaskIndex < TasksEN.length - 1)
-                console.log("curr check: ", currentTaskIndex >= TasksEN.length - 1)
                 if (selectedAnswer != "" && currentTaskIndex < TasksEN.length - 1) {
                         window.Telegram.WebApp.MainButton.onClick(handleNextQuestion)
                         return () => {
                                 window.Telegram.WebApp.MainButton.offClick(handleNextQuestion);
                         } 
                 } else if (selectedAnswer != "" && currentTaskIndex >= TasksEN.length - 1) {
-                        console.log("DEBUG: yep")
                         window.Telegram.WebApp.MainButton.onClick(completeTask)
                         return () => {
                                 window.Telegram.WebApp.MainButton.offClick(completeTask);

@@ -25,7 +25,7 @@ function App() {
 
 		const initDataUnsafe: InitDataUnsafe = Telegram.WebApp.initDataUnsafe as InitDataUnsafe;
 
-		let countryCode = initDataUnsafe.user?.country || initDataUnsafe.user?.language_code;
+		let countryCode = initDataUnsafe.user?.language_code; //initDataUnsafe.user?.country || initDataUnsafe.user?.language_code;
 
 		if (countryCode != undefined && countryCode != "") {
 			setGeoposition({ country: countryCode! })

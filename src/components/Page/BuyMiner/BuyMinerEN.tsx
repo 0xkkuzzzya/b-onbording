@@ -104,8 +104,6 @@ export const BuyMinerEN = () => {
         window.Telegram.WebApp.MainButton.hide()
     }, [])
 
-    let text = wallet ? "Join waitlist" : "Connect wallet"
-
     return (
         <Container>
             <Logo src={Gif} />
@@ -122,7 +120,7 @@ export const BuyMinerEN = () => {
                             open()
                         }
                     }
-                }>{text}</JoinWaitlistButton>
+                }>{"Join waitlist"}</JoinWaitlistButton>
             }
             
             <Link to="https://t.me/bytecoin_news"

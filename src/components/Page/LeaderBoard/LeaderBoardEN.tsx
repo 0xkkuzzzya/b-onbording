@@ -307,6 +307,7 @@ export const LeaderBoardEN = () => {
 
     const [user, setUser] = useUser()
     const [leaderboard, setLeaderboard] = useLeaderboard()
+    const [isLoading, setIsLoading] = useState(true);
 
     const referalText = `${BOT}?startapp=ref_${user.user_id}`
 
@@ -340,8 +341,6 @@ export const LeaderBoardEN = () => {
             <PlaceinField>{index + 4}</PlaceinField>
         </FieldsOtherLeaders>
     )
-
-    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         setTimeout(() => {
