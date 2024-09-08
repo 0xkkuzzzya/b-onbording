@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import Onboarding from '../../../assets/OnBoarding.svg'
-import BuyMiner from '../../../assets/BuyMiner.svg'
-import Leaderboard from '../../../assets/LeaderBoard.svg'
+import Onboarding from '../../../assets/OnBoarding.png'
+import BuyMiner from '../../../assets/BuyMiner.png'
+import Leaderboard from '../../../assets/Leaderboard.png'
 import { Link } from "react-router-dom";
 
 const Container = styled.div`
@@ -25,9 +25,23 @@ const LogoBlock = styled(LinkBlock)`
     text-decoration: none;
 `
 
+const ImgBlock = styled.div`
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .1s ease-in-out;
+    &:active {
+         transform: scale(0.85);
+    }
+`
+
 const Logo = styled.img`
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
 `
 
 const Name = styled.a`
@@ -42,13 +56,19 @@ export const LinksToPage = () => {
     return (
         <Container>
             <LogoBlock to="/">
-                <Logo src={Onboarding} />
+                <ImgBlock>
+                    <Logo src={Onboarding} />
+                </ImgBlock>
             </LogoBlock>
             <LogoBlock to="/buyminer">
-                <Logo src={BuyMiner} />
+                <ImgBlock>
+                    <Logo src={BuyMiner} />
+                </ImgBlock>
             </LogoBlock>
             <LogoBlock to="/leaderboard">
-                <Logo src={Leaderboard} />
+                <ImgBlock>
+                    <Logo src={Leaderboard} />
+                </ImgBlock>
             </LogoBlock>
         </Container>
     )
