@@ -211,15 +211,17 @@ export const MainPageEN = () => {
 
     const referalText = `${BOT}?startapp=ref_${user.user_id}`
 
+
     useEffect(() => {
         window.Telegram.WebApp.BackButton.hide()
         window.Telegram.WebApp.MainButton.hide()
-        window.Telegram.WebApp.MainButton.onClick(() => {})
+        window.Telegram.WebApp.MainButton.onClick(() => { })
     }, [])
 
     const copyTextToClipboard = async (referalLink: string) => {
         try {
             await navigator.clipboard.writeText(referalLink);
+            window.navigator.vibrate(200); // Вибрация на 200 миллисекунд
         } catch (err) {
             console.error(err);
         }
