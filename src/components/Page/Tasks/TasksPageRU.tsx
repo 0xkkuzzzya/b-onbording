@@ -143,9 +143,7 @@ export const TasksPageRU = () => {
         const [pbc, setPBC] = useState("#4AB6ED")
 
         const completeTask = () => {
-                console.log("allTasksComplete.amount", allTasksComplete.amount)
-                console.log("TasksRU.length", TasksRU.length)
-                if(allTasksComplete.amount == TasksRU.length - 1) {
+                if(allTasksComplete.amount == TasksRU.length) {
                         console.log("Complete task 2")
                         CompleteTask(user.user_id, "task2")
                 }

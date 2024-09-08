@@ -143,7 +143,7 @@ export const TasksPageEN = () => {
         const [pbc, setPBC] = useState("#4AB6ED")
 
         const completeTask = () => {
-                if(allTasksComplete.amount == TasksEN.length - 1) {
+                if(allTasksComplete.amount == TasksEN.length) {
                         console.log("Complete task 2")
                         CompleteTask(user.user_id, "task2")
                 }
