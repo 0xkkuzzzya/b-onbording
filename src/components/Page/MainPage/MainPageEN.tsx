@@ -218,10 +218,18 @@ export const MainPageEN = () => {
         window.Telegram.WebApp.MainButton.onClick(() => { })
     }, [])
 
+    const vibrate = () => {
+        if (window.Telegram && window.Telegram.WebApp) {
+          window.Telegram.WebApp.HapticFeedback.impactOccurred('medium');
+        } else if (navigator.vibrate) {
+          navigator.vibrate(200);
+        }
+      };
+
     const copyTextToClipboard = async (referalLink: string) => {
         try {
             await navigator.clipboard.writeText(referalLink);
-            window.navigator.vibrate(200); // Вибрация на 200 миллисекунд
+            vibrate();
         } catch (err) {
             console.error(err);
         }
