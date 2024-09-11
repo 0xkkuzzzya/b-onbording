@@ -206,8 +206,10 @@ const LogoLoading = styled.img`
 export const MainPageEN = () => {
 
     const [referal, setReferal] = useState()
-    const [geoposition, setGeoposition] = useState("")
     const [user, setUser] = useUser()
+    const [shouldShowLoading] = useState(() => {
+        return !localStorage.getItem('hasVisitedTasksPage');
+    });
 
     const referalText = `${BOT}?startapp=ref_${user.user_id}`
 
@@ -220,11 +222,11 @@ export const MainPageEN = () => {
 
     const vibrate = () => {
         if (window.Telegram && window.Telegram.WebApp) {
-          window.Telegram.WebApp.HapticFeedback.impactOccurred('medium');
+            window.Telegram.WebApp.HapticFeedback.impactOccurred('medium');
         } else if (navigator.vibrate) {
-          navigator.vibrate(200);
+            navigator.vibrate(200);
         }
-      };
+    };
 
     const copyTextToClipboard = async (referalLink: string) => {
         try {
@@ -241,113 +243,115 @@ export const MainPageEN = () => {
         CompleteTask(user.user_id, "task6")
     };
 
-    const [isLoading, setIsLoading] = useState(true);
-
     useEffect(() => {
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 2200);
-    }, []);
+        if (shouldShowLoading) {
+            const timer = setTimeout(() => {
+                localStorage.setItem('hasVisitedTasksPage', 'true');
+            }, 2000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [shouldShowLoading]);
+
+    if (shouldShowLoading) {
+        return (
+            <ContainerLoading>
+                <LogoLoading src={LoadingGif} alt="Loading..." />
+            </ContainerLoading>
+        );
+    }
 
 
     return (
-        <>
-            {isLoading ? (
-                <ContainerLoading>
-                    <LogoLoading loading="lazy" src={LoadingGif} />
-                </ContainerLoading>
-            ) : (
-                <Container>
-                    <HeaderBlock>
-                        <HeaderMainText>Bytecoin Onboarding</HeaderMainText>
-                        <HeaderDescriptionText>Learn about Bytecoin & earn 10 <TicketLogo src={Ticket} /></HeaderDescriptionText>
-                    </HeaderBlock>
+        <Container>
+            <HeaderBlock>
+                <HeaderMainText>Bytecoin Onboarding</HeaderMainText>
+                <HeaderDescriptionText>Learn about Bytecoin & earn 10 <TicketLogo src={Ticket} /></HeaderDescriptionText>
+            </HeaderBlock>
 
-                    <div style={{ width: "100%", marginTop: "20px" }}>
-                        <SectionText>Intro</SectionText>
-                    </div>
-                    <Link to="/StoriesEN"
-                        style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
-                        <IntroBlock>
-                            <Logoblock>
+            <div style={{ width: "100%", marginTop: "20px" }}>
+                <SectionText>Intro</SectionText>
+            </div>
+            <Link to="/StoriesEN"
+                style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
+                <IntroBlock>
+                    <Logoblock>
 
-                                <IntroLogo src={user.task.task1 ? CompleteLogo : BytecoinLogo} />
+                        <IntroLogo src={user.task.task1 ? CompleteLogo : BytecoinLogo} />
 
-                            </Logoblock>
-                            <TextinsideBlock>Whats is Bytecoin?</TextinsideBlock>
-                        </IntroBlock>
-                    </Link>
+                    </Logoblock>
+                    <TextinsideBlock>Whats is Bytecoin?</TextinsideBlock>
+                </IntroBlock>
+            </Link>
 
-                    <div style={{ width: "100%", marginTop: "20px" }}>
-                        <SectionText>Tasks</SectionText>
-                    </div>
-                    <Link to="/testtime"
-                        style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
-                        <TasksBlock>
-                            <Logoblock>
-                                <IntroLogo src={user.task.task2 ? CompleteLogo : Teacher} />
-                            </Logoblock>
-                            <TextinsideBlock>Test Time</TextinsideBlock>
-                        </TasksBlock>
-                    </Link>
+            <div style={{ width: "100%", marginTop: "20px" }}>
+                <SectionText>Tasks</SectionText>
+            </div>
+            <Link to="/testtime"
+                style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
+                <TasksBlock>
+                    <Logoblock>
+                        <IntroLogo src={user.task.task2 ? CompleteLogo : Teacher} />
+                    </Logoblock>
+                    <TextinsideBlock>Test Time</TextinsideBlock>
+                </TasksBlock>
+            </Link>
 
-                    <Link to="https://t.me/bytecoin_news"
-                        style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
-                        <TasksBlock>
-                            <Logoblock>
-                                <IntroLogo src={user.task.task3 ? CompleteLogo : Megaphone} />
-                            </Logoblock>
-                            <TextinsideBlock>Subscribe to channel</TextinsideBlock>
-                        </TasksBlock>
-                    </Link>
+            <Link to="https://t.me/bytecoin_news"
+                style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
+                <TasksBlock>
+                    <Logoblock>
+                        <IntroLogo src={user.task.task3 ? CompleteLogo : Megaphone} />
+                    </Logoblock>
+                    <TextinsideBlock>Subscribe to channel</TextinsideBlock>
+                </TasksBlock>
+            </Link>
 
-                    <Link to="https://t.me/bytecoin_forum"
-                        style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
-                        <TasksBlock>
-                            <Logoblock>
-                                <IntroLogo src={user.task.task4 ? CompleteLogo : Speacker} />
-                            </Logoblock>
-                            <TextinsideBlock>Join forum</TextinsideBlock>
-                        </TasksBlock>
-                    </Link>
+            <Link to="https://t.me/bytecoin_forum"
+                style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
+                <TasksBlock>
+                    <Logoblock>
+                        <IntroLogo src={user.task.task4 ? CompleteLogo : Speacker} />
+                    </Logoblock>
+                    <TextinsideBlock>Join forum</TextinsideBlock>
+                </TasksBlock>
+            </Link>
 
-                    <Link to="https://x.com/bytecoin_ton" onClick={() => { CompleteTask(user.user_id, "task5") }} style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
-                        <TasksBlock>
-                            <Logoblock>
-                                <IntroLogo src={user.task.task5 ? CompleteLogo : Twitter} />
-                            </Logoblock>
-                            <TextinsideBlock>Follow our X</TextinsideBlock>
-                        </TasksBlock>
-                    </Link>
+            <Link to="https://x.com/bytecoin_ton" onClick={() => { CompleteTask(user.user_id, "task5") }} style={{ width: "100%", textDecoration: "none", marginTop: "10px" }}>
+                <TasksBlock>
+                    <Logoblock>
+                        <IntroLogo src={user.task.task5 ? CompleteLogo : Twitter} />
+                    </Logoblock>
+                    <TextinsideBlock>Follow our X</TextinsideBlock>
+                </TasksBlock>
+            </Link>
 
-                    <TasksBlock style={{ marginTop: "20px" }} onClick={openAnotherBot}>
-                        <Logoblock>
-                            <IntroLogo src={user.task.task6 ? CompleteLogo : Diamond} />
-                        </Logoblock>
-                        <div style={{ display: "flex", flexDirection: "column" }}>
-                            <TextinsideBlock>Try demo</TextinsideBlock>
-                            <TasksDescription>Mine Bytecoin in TON testnet</TasksDescription>
-                        </div>
-                    </TasksBlock>
+            <TasksBlock style={{ marginTop: "20px" }} onClick={openAnotherBot}>
+                <Logoblock>
+                    <IntroLogo src={user.task.task6 ? CompleteLogo : Diamond} />
+                </Logoblock>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                    <TextinsideBlock>Try demo</TextinsideBlock>
+                    <TasksDescription>Mine Bytecoin in TON testnet</TasksDescription>
+                </div>
+            </TasksBlock>
 
-                    <div style={{ width: "100%", marginTop: "20px" }}>
-                        <SectionText>Your referral link</SectionText>
-                    </div>
-                    <ReferalBlock>
-                        <ReferalText>{referalText}</ReferalText>
-                        <CopiedBlock onClick={() => copyTextToClipboard(referalText)}>
-                            <IntroLogo src={Copy} />
-                        </CopiedBlock>
-                    </ReferalBlock>
-                    <a href={`https://t.me/share/url?url=${referalText}`} target="_blank" style={{ width: "100%", marginTop: "20px" }}>
-                        <ShareButton >Share</ShareButton>
-                    </a>
-                    <div style={{ width: "100%" }}>
-                        <Text>You will earn 5<TicketLogo style={{ margin: "0px 3px" }} src={Ticket} /> for a premium user.</Text>
-                    </div>
-                    <LinksToPage />
-                </Container>
-            )}
-        </>
+            <div style={{ width: "100%", marginTop: "20px" }}>
+                <SectionText>Your referral link</SectionText>
+            </div>
+            <ReferalBlock>
+                <ReferalText>{referalText}</ReferalText>
+                <CopiedBlock onClick={() => copyTextToClipboard(referalText)}>
+                    <IntroLogo src={Copy} />
+                </CopiedBlock>
+            </ReferalBlock>
+            <a href={`https://t.me/share/url?url=${referalText}`} target="_blank" style={{ width: "100%", marginTop: "20px" }}>
+                <ShareButton >Share</ShareButton>
+            </a>
+            <div style={{ width: "100%" }}>
+                <Text>You will earn 5<TicketLogo style={{ margin: "0px 3px" }} src={Ticket} /> for a premium user.</Text>
+            </div>
+            <LinksToPage />
+        </Container>
     )
-}
+}   
