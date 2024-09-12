@@ -201,9 +201,7 @@ export const MainPageRU = () => {
 
     const [referal, setReferal] = useState()
     const [user, setUser] = useUser()
-    const [shouldShowLoading] = useState(() => {
-        return !localStorage.getItem('hasVisitedTasksPage');
-    });
+    const [isLoading, setIsLoading] = useState(true);
 
     const referalText = `${BOT}?startapp=ref_${user.user_id}`
 
@@ -237,24 +235,18 @@ export const MainPageRU = () => {
     };
 
     useEffect(() => {
-        if (shouldShowLoading) {
-            const timer = setTimeout(() => {
-                localStorage.setItem('hasVisitedTasksPage', 'true');
-            }, 2000);
-
-            return () => clearTimeout(timer);
-        }
-    }, [shouldShowLoading]);
-
-    if (shouldShowLoading) {
-        return (
-            <ContainerLoading>
-                <LogoLoading src={LoadingGif} alt="Loading..." />
-            </ContainerLoading>
-        );
-    }
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 2200);
+    }, []);
 
     return (
+        <>
+            {isLoading ? (
+                <ContainerLoading>
+                    <LogoLoading loading="lazy" src={LoadingGif} />
+                </ContainerLoading>
+            ) : (
         <Container>
             <HeaderBlock>
                 <HeaderMainText>Bytecoin Onboarding</HeaderMainText>
@@ -339,6 +331,8 @@ export const MainPageRU = () => {
                 <Text>Вы заработаете 5<TicketLogo style={{ marginLeft: "0px" }} src={Ticket} /> за премиум-пользователя.</Text>
             </div>
             <LinksToPage />
-        </Container>
+                </Container>
+            )}
+        </>
     )
 }
