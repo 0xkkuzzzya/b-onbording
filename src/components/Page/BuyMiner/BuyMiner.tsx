@@ -6,6 +6,8 @@ import { LinksToPage } from "../Footer/LinksToPage"
 import { BuyMinerEN } from "./BuyMinerEN"
 import { BuyMinerRU } from "./BuyMinerRU"
 import { useWaitlistUser } from "../../../store/useUsers"
+import { SuccessfullJoinedEN } from "./SuccessfullJoined/SuccessullJoinedEN"
+import { SuccessfullJoinedRU } from "./SuccessfullJoined/SuccessullJoinedRU"
 
 
 
@@ -27,7 +29,12 @@ export const BuyMiner = () => {
 
     return (
         <>
-            {geoposition.country == "ru" || geoposition.country == "kz" || geoposition.country == "by" ? <BuyMinerRU /> : <BuyMinerEN /> }
+        {
+        waitlist.exist ?
+            geoposition.country == "ru" || geoposition.country == "kz" || geoposition.country == "by" ? <SuccessfullJoinedRU /> : <SuccessfullJoinedEN />  
+            :
+            geoposition.country == "ru" || geoposition.country == "kz" || geoposition.country == "by" ? <BuyMinerRU /> : <BuyMinerEN />
+        }
             <LinksToPage />
         </>
     )
