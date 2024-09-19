@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import TelegamLogo from '../../../assets/TelegramLogo.png'
 import Gif from '../../../assets/BuyMinerGif.gif'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useTonConnectModal, useTonWallet } from '@tonconnect/ui-react';
 import { useUser, useWaitlistUser } from "../../../store/useUsers";
@@ -98,6 +98,7 @@ export const BuyMinerRU = () => {
     const wallet = useTonWallet();
     const [waitlist, setWaitlist] = useWaitlistUser()
     const [user, setUser] = useUser()
+    const navigate = useNavigate();
 
     useEffect(() => {
         window.Telegram.WebApp.BackButton.hide()
@@ -117,6 +118,7 @@ export const BuyMinerRU = () => {
                         if (wallet && !waitlist.exist) {
                             JoinWaitlist(user.user_id, wallet.account.address)
                             setWaitlist({exist: true})
+                            navigate('/successfulljoined')
                         } else {
                             open()
                         }
